@@ -3,50 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Auth Mastery Checklist | JWT, Refresh Tokens, Password Hashing, and Auth Security</title>
-<meta name="description" content="Interactive authentication checklist covering JWT fundamentals, password hashing, refresh token flows, protected routes, and production auth security edge cases.">
-<meta name="robots" content="index,follow">
-<meta name="theme-color" content="#080808">
+<meta name="text-scale" content="scale">
+<title>Auth Mastery Checklist | JWT, Refresh Token Rotation, Password Hashing &amp; API Security</title>
+<meta name="description" content="Interactive authentication engineering checklist covering stateless JWT vs sessions, bcrypt and Argon2 password hashing, refresh token rotation, httpOnly cookies, CSRF/XSS defenses, and FastAPI auth security.">
+<meta name="keywords" content="authentication checklist, JWT security, refresh token rotation, password hashing bcrypt argon2, httpOnly cookies SameSite CSRF XSS, FastAPI get_current_user OAuth2 RBAC, stateless JWT vs stateful sessions, JWT alg none attack, auth interview questions, how to implement JWT authentication from scratch">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0e0f14">
+<link rel="canonical" href="https://os.pawel.in/auth.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Auth Mastery Checklist">
-<meta property="og:description" content="Study authentication from first principles with sectioned coverage of JWT, password hashing, refresh flows, and auth failure modes.">
+<meta property="og:site_name" content="Pawel's Trackers Hub">
+<meta property="og:url" content="https://os.pawel.in/auth.html">
+<meta property="og:title" content="Auth Mastery Checklist | JWT, Refresh Tokens &amp; Auth Security">
+<meta property="og:description" content="Study web authentication from first principles: JWT signing (HS256/RS256), Argon2/bcrypt hashing, refresh token rotation, httpOnly cookies, and production security edge cases.">
 <meta property="og:image" content="https://dummyimage.com/1200x630/080808/ddd8cf&amp;text=Auth+Mastery+Checklist">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://os.pawel.in/auth.html">
 <meta name="twitter:title" content="Auth Mastery Checklist">
-<meta name="twitter:description" content="An interactive auth study roadmap for JWT, sessions, refresh tokens, cookies, and production security edge cases.">
+<meta name="twitter:description" content="Interactive auth study roadmap for JWT, sessions, refresh token rotation, httpOnly cookies, CSRF/XSS, and production security edge cases.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Auth Mastery Checklist",
-  "description": "Interactive authentication checklist for JWT, password hashing, refresh tokens, protected routes, and auth security interviews.",
+  "url": "https://os.pawel.in/auth.html",
+  "description": "Interactive authentication checklist for JWT internals, bcrypt and Argon2 password hashing, refresh token rotation, httpOnly cookies, FastAPI protected routes, and auth security interviews.",
+  "keywords": [
+    "JWT authentication",
+    "refresh token rotation",
+    "bcrypt argon2 password hashing",
+    "httpOnly cookies CSRF XSS",
+    "FastAPI auth security interview"
+  ],
   "about": [
     "Authentication",
-    "JWT",
-    "Refresh tokens",
-    "Password hashing",
-    "Auth security"
+    "JSON Web Tokens (JWT)",
+    "HS256 and RS256",
+    "Refresh token rotation",
+    "Password hashing with bcrypt and Argon2",
+    "httpOnly cookies and SameSite CSRF protection",
+    "FastAPI authentication dependencies",
+    "Role-based access control (RBAC)"
   ],
   "hasPart": [
     {
       "@type": "WebPageElement",
       "name": "Foundational Concepts",
-      "description": "Core authentication tradeoffs covering sessions versus JWTs, token internals, and password hashing."
+      "description": "Core authentication tradeoffs covering stateful sessions versus stateless JWTs, token claims (exp, iat, sub, jti), HS256 vs RS256, and bcrypt/Argon2 password hashing."
     },
     {
       "@type": "WebPageElement",
       "name": "Build It From Scratch",
-      "description": "Practical implementation work for signup, login, refresh tokens, protected routes, and frontend token storage."
+      "description": "Practical implementation of signup, login, refresh token rotation in database, FastAPI get_current_user dependency, RBAC, and httpOnly cookie storage."
     },
     {
       "@type": "WebPageElement",
       "name": "What Breaks It",
-      "description": "Security failures, broken implementations, and production auth edge cases."
+      "description": "Security failure modes including alg:none attacks, log leakage, XSS token theft, CSRF mitigation, rate limiting, and refresh reuse detection."
     },
     {
       "@type": "WebPageElement",
       "name": "Explain It Cold",
-      "description": "Interview-focused explanation prompts for articulating the full auth system with confidence."
+      "description": "Interview pressure questions for scaling auth to 1M users with Redis blocklists, session tradeoffs, and production hardening."
     }
   ]
 }
@@ -58,474 +75,37 @@
   :root {
     --type-scale: 1.25;
     --bg: #0e0f14;
-    --surface: rgba(127, 108, 84, 0.24);
-    --surface2: rgba(32, 36, 47, 0.78);
-    --border: rgba(255, 255, 255, 0.12);
-    --border2: rgba(255, 255, 255, 0.18);
+    --surface: rgba(26, 30, 40, 0.62);
+    --surface2: rgba(31, 36, 48, 0.78);
+    --border: rgba(255, 255, 255, 0.14);
+    --border2: rgba(255, 255, 255, 0.2);
     --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.58);
+    --muted: rgba(248, 244, 238, 0.68);
     --dim: rgba(255, 255, 255, 0.08);
     --accent: #77d7f8;
     --warn: #ffbd67;
     --blue: #94abff;
-    --done-text: rgba(248, 244, 238, 0.38);
+    --danger: #ff8a8a;
+    --done-text: rgba(248, 244, 238, 0.42);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    min-height: 100vh;
-    padding: 40px 20px 80px;
-  }
-
-  .container { max-width: 740px; margin: 0 auto; }
-
-  .skip-link {
-    position: absolute;
-    left: 20px;
-    top: -40px;
-    padding: 8px 12px;
-    background: var(--accent);
-    color: #02110d;
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    z-index: 10;
-  }
-
-  .skip-link:focus { top: 12px; }
-
-  .top-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-
-  .top-link {
-    color: var(--muted);
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .top-link:hover { color: var(--text); }
-
-  .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 36px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .header-left { flex: 1; min-width: 200px; }
-
-  .eyebrow {
-    font-size: calc(9px * var(--type-scale));
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  h1 {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(calc(20px * var(--type-scale)), calc(3.5vw * var(--type-scale)), calc(30px * var(--type-scale)));
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  h1 em { font-style: italic; color: var(--accent); }
-
-  .header-sub {
-    font-size: calc(10px * var(--type-scale));
-    color: var(--muted);
-    margin-top: 10px;
-    line-height: 1.8;
-  }
-
-  .overall-progress {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    padding: 14px 18px;
-    min-width: 150px;
-    text-align: right;
-    flex-shrink: 0;
-  }
-
-  .overall-pct {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(34px * var(--type-scale));
-    line-height: 1;
-    color: var(--accent);
-    transition: color 0.4s;
-  }
-
-  .overall-label {
-    font-size: calc(9px * var(--type-scale));
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .overall-bar {
-    margin-top: 10px;
-    height: 3px;
-    background: var(--dim);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .overall-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.5s ease, background 0.4s;
-    width: 0%;
-    background: var(--accent);
-  }
-
-  /* confidence badge */
-  .confidence-banner {
-    display: none;
-    border: 1px solid rgba(0,196,154,0.25);
-    background: rgba(0,196,154,0.04);
-    border-radius: 3px;
-    padding: 12px 16px;
-    margin-bottom: 28px;
-    font-size: calc(11px * var(--type-scale));
-    color: var(--accent);
-    text-align: center;
-    letter-spacing: 0.05em;
-  }
-
-  .confidence-banner.show { display: block; }
-
-  .intro-card {
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    background: var(--surface);
-    padding: 16px 18px;
-    margin-bottom: 18px;
-  }
-
-  .intro-title {
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 10px;
-  }
-
-  .intro-copy {
-    font-size: calc(11px * var(--type-scale));
-    line-height: 1.8;
-    color: #8a867e;
-  }
-
-  .section-nav {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .section-link {
-    display: block;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    padding: 12px 14px;
-    text-decoration: none;
-    background: rgba(255,255,255,0.015);
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .section-link:hover {
-    border-color: rgba(0,196,154,0.25);
-    background: rgba(0,196,154,0.03);
-  }
-
-  .section-link-kicker {
-    display: block;
-    font-size: calc(8px * var(--type-scale));
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .section-link-title {
-    display: block;
-    color: var(--text);
-    font-size: calc(11px * var(--type-scale));
-    line-height: 1.5;
-    margin-bottom: 5px;
-  }
-
-  .section-link-meta {
-    display: block;
-    color: #666059;
-    font-size: calc(9px * var(--type-scale));
-    line-height: 1.6;
-  }
-
-  /* section */
-  .section { margin-bottom: 32px; }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 9px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2px;
-  }
-
-  .section-num { font-size: calc(9px * var(--type-scale)); color: var(--muted); letter-spacing: 0.2em; }
-
-  .section-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(15px * var(--type-scale));
-    font-weight: 700;
-    color: var(--text);
-    margin: 0;
-    line-height: 1.2;
-  }
-
-  .section-range { font-size: calc(9px * var(--type-scale)); color: var(--muted); margin-left: auto; }
-
-  .section-summary {
-    margin: 0 0 14px;
-    color: #777169;
-    font-size: calc(10px * var(--type-scale));
-    line-height: 1.8;
-  }
-
-  .section-bar {
-    height: 2px;
-    background: var(--dim);
-    margin-bottom: 14px;
-    border-radius: 1px;
-    overflow: hidden;
-  }
-
-  .section-bar-fill {
-    height: 100%;
-    border-radius: 1px;
-    background: var(--accent);
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  /* group */
-  .group {
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    margin-bottom: 6px;
-    overflow: hidden;
-  }
-
-  .group.all-done { border-color: #161616; }
-
-  .group-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 14px;
-    cursor: pointer;
-    user-select: none;
-    background: var(--surface);
-    transition: background 0.15s;
-  }
-
-  .group-header:hover { background: var(--surface2); }
-
-  .group-title {
-    font-size: calc(11px * var(--type-scale));
-    font-weight: 500;
-    color: var(--text);
-    flex: 1;
-    line-height: 1.3;
-  }
-
-  .group.all-done .group-title { color: var(--done-text); }
-
-  .group-stats { font-size: calc(10px * var(--type-scale)); color: var(--muted); white-space: nowrap; }
-
-  .group-chevron {
-    font-size: calc(8px * var(--type-scale));
-    color: var(--muted);
-    transition: transform 0.2s;
-    margin-left: 4px;
-  }
-
-  .group.open .group-chevron { transform: rotate(180deg); }
-
-  .mini-bar {
-    width: 40px;
-    height: 2px;
-    background: var(--dim);
-    border-radius: 1px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .mini-fill {
-    height: 100%;
-    border-radius: 1px;
-    background: var(--accent);
-    transition: width 0.35s ease;
-    width: 0%;
-  }
-
-  .group-body {
-    display: none;
-    padding: 4px 14px 12px;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-  }
-
-  .group.open .group-body { display: block; }
-
-  /* task */
-  .task {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 7px 0;
-    border-bottom: 1px solid #111;
-    cursor: pointer;
-  }
-
-  .task:last-child { border-bottom: none; }
-
-  .task-cb {
-    width: 13px;
-    height: 13px;
-    border-radius: 2px;
-    border: 1px solid var(--border2);
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(8px * var(--type-scale));
-    font-weight: 700;
-    color: transparent;
-    transition: all 0.15s;
-  }
-
-  .task.checked .task-cb { background: var(--accent); border-color: var(--accent); color: #000; }
-  .task.checked .task-cb::after { content: '✓'; }
-
-  .task-content { flex: 1; }
-
-  .task-text {
-    font-size: calc(11px * var(--type-scale));
-    color: #545454;
-    line-height: 1.55;
-    transition: color 0.15s;
-    display: block;
-  }
-
-  .task:hover .task-text { color: #888; }
-  .task.checked .task-text { color: var(--done-text); text-decoration: line-through; text-decoration-color: #222; }
-
-  .task-note {
-    font-size: calc(9.5px * var(--type-scale));
-    color: #343434;
-    margin-top: 3px;
-    line-height: 1.5;
-    font-style: italic;
-    display: block;
-  }
-
-  .task.checked .task-note { color: #252525; }
-
-  .badge {
-    font-size: calc(8px * var(--type-scale));
-    padding: 2px 5px;
-    border-radius: 2px;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-    text-transform: uppercase;
-  }
-
-  .badge-understand { color: var(--blue); border: 1px solid rgba(74,143,212,0.2); background: rgba(74,143,212,0.04); }
-  .badge-build { color: var(--accent); border: 1px solid rgba(0,196,154,0.2); background: rgba(0,196,154,0.04); }
-  .badge-explain { color: var(--warn); border: 1px solid rgba(232,151,30,0.2); background: rgba(232,151,30,0.04); }
-  .badge-danger { color: #d45a5a; border: 1px solid rgba(212,90,90,0.2); background: rgba(212,90,90,0.04); }
-
-  .reset-btn {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(9px * var(--type-scale));
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: block;
-    margin: 0 auto 44px;
-  }
-
-  .reset-btn:hover { color: #888; border-color: var(--border2); }
-
-  .footer {
-    border-top: 1px solid var(--border);
-    padding-top: 18px;
-    font-size: calc(9px * var(--type-scale));
-    color: var(--dim);
-    letter-spacing: 0.04em;
-    line-height: 2.2;
-    text-align: center;
-  }
-
-  .legend {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 28px;
-  }
-
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: calc(9px * var(--type-scale));
-    color: var(--muted);
-  }
-
-  .legend-dot {
-    width: 6px; height: 6px;
-    border-radius: 1px;
-  }
-
-  /* Glass Theme Overrides */
   body {
     position: relative;
     isolation: isolate;
-    font-family: 'Outfit', sans-serif;
     background:
       radial-gradient(circle at 18% 18%, rgba(255, 216, 155, 0.36), transparent 22%),
       radial-gradient(circle at 82% 16%, rgba(238, 120, 78, 0.26), transparent 18%),
       radial-gradient(circle at 50% 78%, rgba(100, 129, 188, 0.24), transparent 24%),
       linear-gradient(180deg, #8f9ca3 0%, #52564f 32%, #1a2024 100%);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-wrap: break-word;
+    padding: 2.25rem 1.25rem max(4rem, env(safe-area-inset-bottom, 0px));
   }
 
   body::before {
@@ -539,14 +119,21 @@
     pointer-events: none;
   }
 
-  body::after {
-    content: none;
+  :where(a, code) { overflow-wrap: anywhere; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   .container {
     position: relative;
     z-index: 1;
-    padding: 30px;
+    max-width: 48rem;
+    margin-inline: auto;
+    padding: clamp(1.25rem, 3.5vw, 1.875rem);
     border-radius: 34px;
     background: linear-gradient(180deg, rgba(118, 100, 80, 0.46), rgba(46, 43, 45, 0.44));
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -557,157 +144,502 @@
     -webkit-backdrop-filter: blur(26px) saturate(130%);
   }
 
-  .top-links { margin-bottom: 24px; }
-
-  .top-link,
   .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    padding: 0.55rem 0.9rem;
+    background: var(--accent);
+    color: #02110d;
+    font-size: calc(0.625rem * var(--type-scale));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(24, 28, 38, 0.66);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 20;
+  }
+  .skip-link:focus { top: 0.75rem; }
+
+  .top-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .top-link {
     display: inline-flex;
     align-items: center;
-    padding: 9px 14px;
-    color: rgba(248, 244, 238, 0.72);
+    min-block-size: 2.25rem;
+    padding: 0.45rem 0.875rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(24, 28, 38, 0.66);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    color: rgba(248, 244, 238, 0.75);
+    font-size: calc(0.58rem * var(--type-scale));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
 
-  .top-link:hover { color: var(--text); border-color: rgba(255,255,255,0.24); }
+  .top-link:hover,
+  .top-link[aria-current="page"] {
+    color: var(--text);
+    border-color: rgba(119, 215, 248, 0.48);
+    background: rgba(31, 36, 48, 0.86);
+  }
 
-  .eyebrow,
-  .header-sub,
-  .overall-label,
-  .legend-item,
-  .section-num,
-  .section-range,
-  .group-stats,
-  .group-chevron,
-  .footer,
-  .top-link {
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .header-left { flex: 1 1 14rem; min-width: 0; }
+
+  .eyebrow {
+    font-size: calc(0.5625rem * var(--type-scale));
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
     color: var(--muted);
+    margin-bottom: 0.5rem;
   }
 
-  h1,
-  .section-title,
-  .group-title {
+  h1 {
     font-family: 'Outfit', sans-serif;
     letter-spacing: -0.03em;
+    font-size: clamp(1.75rem, 1.15rem + 2.5vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.15;
   }
 
-  .header { margin-bottom: 32px; }
+  h1 em { font-style: italic; color: var(--accent); }
 
-  .overall-progress,
-  .intro-card,
-  .section-link,
-  .group,
-  .confidence-banner {
+  .header-sub {
+    font-size: calc(0.625rem * var(--type-scale));
+    color: var(--muted);
+    margin-top: 0.625rem;
+    line-height: 1.75;
+  }
+
+  .overall-progress {
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 26px;
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.12),
-      0 18px 40px rgba(0,0,0,0.2);
-  }
-
-  .overall-progress,
-  .intro-card,
-  .confidence-banner,
-  .section-link,
-  .group,
-  .group-header,
-  .group-body {
-    background: rgba(26, 30, 40, 0.62);
+    padding: 0.9rem 1.125rem;
+    min-width: 9.5rem;
+    text-align: right;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
 
-  .section-link:hover,
-  .group-header:hover {
-    background: rgba(31, 36, 48, 0.76);
-    border-color: rgba(255, 255, 255, 0.2);
+  .overall-pct {
+    font-family: 'Outfit', sans-serif;
+    font-size: calc(2.125rem * var(--type-scale));
+    line-height: 1;
+    color: var(--accent);
+    transition: color 0.4s;
+  }
+
+  .overall-label {
+    font-size: calc(0.5625rem * var(--type-scale));
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  .overall-bar,
+  .section-bar,
+  .mini-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--dim);
+    overflow: hidden;
+  }
+
+  .overall-bar { margin-top: 0.625rem; }
+  .section-bar { margin-bottom: 0.875rem; }
+  .mini-bar { width: 2.75rem; flex-shrink: 0; }
+
+  .overall-bar-fill,
+  .section-bar-fill,
+  .mini-fill {
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #86daf9, #9ba2ff);
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .confidence-banner {
+    display: none;
+    border: 1px solid rgba(119, 215, 248, 0.35);
+    background: var(--surface);
+    border-radius: 26px;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.5rem;
+    font-size: calc(0.6875rem * var(--type-scale));
+    color: var(--accent);
+    text-align: center;
+    letter-spacing: 0.04em;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+  }
+
+  .confidence-banner.show { display: block; }
+
+  .intro-card {
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    background: var(--surface);
+    padding: 1rem 1.125rem;
+    margin-bottom: 1.125rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .intro-title {
+    font-size: calc(0.625rem * var(--type-scale));
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.625rem;
+  }
+
+  .intro-copy {
+    font-size: calc(0.6875rem * var(--type-scale));
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tech-pill {
+    font-size: calc(0.55rem * var(--type-scale));
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(14, 15, 20, 0.45);
+    color: rgba(248, 244, 238, 0.78);
+  }
+
+  .legend {
+    display: flex;
+    gap: 0.875rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: calc(0.5625rem * var(--type-scale));
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .section-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 0.625rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .section-link {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 0.875rem 1rem;
+    text-decoration: none;
+    background: var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    min-width: 0;
+  }
+
+  .section-link:hover {
+    background: var(--surface2);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .section-link-kicker {
+    display: block;
+    font-size: calc(0.5rem * var(--type-scale));
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .section-link-title {
+    display: block;
+    color: var(--text);
+    font-size: calc(0.6875rem * var(--type-scale));
+    font-weight: 600;
+    line-height: 1.45;
+    margin-bottom: 0.3rem;
+  }
+
+  .section-link-meta {
+    display: block;
+    color: var(--muted);
+    font-size: calc(0.5625rem * var(--type-scale));
+    line-height: 1.6;
+  }
+
+  .section {
+    margin-bottom: 2rem;
+    scroll-margin-top: 1rem;
   }
 
   .section-header {
-    padding: 0 4px 12px;
-    border-bottom-color: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0 0.25rem 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 0.35rem;
   }
 
-  .section-summary,
-  .intro-copy,
-  .section-link-meta,
-  .task-note {
-    color: rgba(248, 244, 238, 0.68);
+  .section-num { font-size: calc(0.5625rem * var(--type-scale)); color: var(--muted); letter-spacing: 0.2em; }
+
+  .section-title {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.03em;
+    font-size: calc(0.9375rem * var(--type-scale));
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
   }
+
+  .section-range { font-size: calc(0.5625rem * var(--type-scale)); color: var(--muted); margin-left: auto; }
+
+  .section-summary {
+    margin: 0.4rem 0 0.875rem;
+    color: var(--muted);
+    font-size: calc(0.625rem * var(--type-scale));
+    line-height: 1.75;
+  }
+
+  .group {
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .group.all-done { border-color: rgba(119, 215, 248, 0.28); }
+
+  .group-header {
+    width: 100%;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 0.95rem;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.15s ease;
+  }
+
+  .group-header:hover { background: var(--surface2); }
+
+  .group-title {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+    font-size: calc(0.6875rem * var(--type-scale));
+    font-weight: 500;
+    color: var(--text);
+    flex: 1 1 0;
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .group.all-done .group-title { color: var(--done-text); }
+
+  .group-stats { font-size: calc(0.625rem * var(--type-scale)); color: var(--muted); white-space: nowrap; }
+
+  .group-chevron {
+    font-size: calc(0.5rem * var(--type-scale));
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    margin-left: 0.25rem;
+  }
+
+  .group.open .group-chevron { transform: rotate(180deg); }
+
+  .group-body {
+    display: none;
+    padding: 0.25rem 0.95rem 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .group.open .group-body { display: block; }
 
   .task {
-    padding: 12px 0;
-    border-bottom-color: rgba(255, 255, 255, 0.06);
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    cursor: pointer;
   }
 
-  .task-text { color: rgba(248, 244, 238, 0.9); }
-  .task:hover .task-text { color: #ffffff; }
-  .task.checked .task-text { color: var(--done-text); text-decoration-color: rgba(248, 244, 238, 0.16); }
-  .task.checked .task-note { color: rgba(248, 244, 238, 0.32); }
+  .task:last-child { border-bottom: none; }
 
   .task-cb {
+    width: 1.125rem;
+    height: 1.125rem;
     border-radius: 999px;
-    border-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.28);
     background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(0.55rem * var(--type-scale));
+    font-weight: 700;
+    color: transparent;
+    transition: all 0.15s ease;
   }
 
-  .mini-bar,
-  .section-bar,
-  .overall-bar {
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.08);
+  .task.checked .task-cb { background: var(--accent); border-color: var(--accent); color: #000; }
+  .task.checked .task-cb::after { content: '✓'; }
+
+  .task-content { flex: 1 1 0; min-width: 0; }
+
+  .task-text {
+    font-size: calc(0.6875rem * var(--type-scale));
+    color: rgba(248, 244, 238, 0.92);
+    line-height: 1.55;
+    transition: color 0.15s ease;
+    display: block;
   }
 
-  .mini-fill,
-  .section-bar-fill,
-  .overall-bar-fill {
-    border-radius: 999px;
-    background: linear-gradient(90deg, #86daf9, #9ba2ff);
+  .task:hover .task-text { color: #ffffff; }
+  .task.checked .task-text { color: var(--done-text); text-decoration: line-through; text-decoration-color: rgba(248, 244, 238, 0.22); }
+
+  .task-note {
+    font-size: calc(0.59375rem * var(--type-scale));
+    color: var(--muted);
+    margin-top: 0.25rem;
+    line-height: 1.5;
+    font-style: italic;
+    display: block;
   }
+
+  .task.checked .task-note { color: rgba(248, 244, 238, 0.34); }
+
+  .badge {
+    font-size: calc(0.5rem * var(--type-scale));
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    text-transform: uppercase;
+  }
+
+  .badge-understand { color: var(--blue); border: 1px solid rgba(148,171,255,0.3); background: rgba(148,171,255,0.08); }
+  .badge-build { color: var(--accent); border: 1px solid rgba(119,215,248,0.3); background: rgba(119,215,248,0.08); }
+  .badge-explain { color: var(--warn); border: 1px solid rgba(255,189,103,0.3); background: rgba(255,189,103,0.08); }
+  .badge-danger { color: var(--danger); border: 1px solid rgba(255,138,138,0.3); background: rgba(255,138,138,0.08); }
 
   .reset-btn {
-    padding: 11px 18px;
+    font-family: 'Outfit', sans-serif;
+    font-size: calc(0.5625rem * var(--type-scale));
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.15rem;
     border-radius: 999px;
     background: rgba(24, 28, 38, 0.72);
-    border-color: rgba(255, 255, 255, 0.16);
-    color: rgba(248, 244, 238, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(248, 244, 238, 0.8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block;
+    margin: 0 auto 2.5rem;
   }
 
   .reset-btn:hover {
     color: var(--text);
-    border-color: rgba(255,255,255,0.24);
-    background: rgba(30, 35, 46, 0.82);
+    border-color: rgba(255,255,255,0.28);
+    background: rgba(30, 35, 46, 0.88);
   }
 
   .footer {
-    border-top-color: rgba(255,255,255,0.08);
-    color: rgba(248, 244, 238, 0.45);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.125rem;
+    font-size: calc(0.5625rem * var(--type-scale));
+    color: rgba(248, 244, 238, 0.56);
+    letter-spacing: 0.04em;
+    line-height: 2;
+    text-align: center;
   }
 
-  @media (max-width: 640px) {
-    body { padding: 24px 14px 56px; }
-    .container { padding: 22px 18px; border-radius: 28px; }
-    .top-links { flex-wrap: wrap; }
-    .header { margin-bottom: 28px; gap: 16px; }
-    .header-left { min-width: 0; }
+  @media (pointer: coarse) {
+    .top-link, .group-header, .task, .reset-btn { min-block-size: 44px; }
+  }
+
+  @media (max-width: 40em) {
+    body { padding: 1.25rem 0.625rem max(3rem, env(safe-area-inset-bottom, 0px)); }
+    .container { padding: 1.125rem 0.9rem; border-radius: 26px; }
+    .header { margin-bottom: 1.5rem; gap: 1rem; }
     .overall-progress { width: 100%; min-width: 0; text-align: left; }
-    .overall-pct { font-size: calc(30px * var(--type-scale)); }
-    .legend { gap: 8px; }
-    .legend-item { flex: 1 1 160px; }
-    .section-nav { grid-template-columns: 1fr; }
-    .section-header { align-items: flex-start; flex-wrap: wrap; }
+    .overall-pct { font-size: calc(1.875rem * var(--type-scale)); }
     .section-range { margin-left: 0; }
-    .group-header { align-items: flex-start; flex-wrap: wrap; }
-    .group-stats { width: 100%; }
+    .group-header { flex-wrap: wrap; }
     .mini-bar { width: 100%; order: 4; }
-    .group-body { padding: 6px 12px 12px; }
-    .task { gap: 12px; }
+    .group-body { padding: 0.35rem 0.75rem 0.75rem; }
+  }
+
+  @media (max-width: 28em) {
+    .task { flex-wrap: wrap; }
+    .badge { margin-left: 1.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-link, .group-header, .task-cb, .reset-btn, .overall-bar-fill, .section-bar-fill, .mini-fill { transition: none; }
   }
 </style>
 </head>
@@ -715,9 +647,14 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="container">
 
-  <div class="top-links">
+  <nav class="top-links" aria-label="Primary">
     <a class="top-link" href="./index.html">All Trackers</a>
-  </div>
+    <a class="top-link" href="./interview-questions.html">Interview Questions</a>
+    <a class="top-link" href="./ai-product-engineer.html">AI Engineer Roadmap</a>
+    <a class="top-link" href="./backend.html">Backend Stack</a>
+    <a class="top-link" href="./auth.html" aria-current="page">Auth Mastery</a>
+    <a class="top-link" href="./workout.html">Workout</a>
+  </nav>
 
   <header class="header">
     <div class="header-left">
@@ -736,8 +673,16 @@
 
   <main id="main-content">
     <section class="intro-card" aria-labelledby="auth-overview-title">
-      <div class="intro-title" id="auth-overview-title">Auth roadmap overview</div>
-      <p class="intro-copy">This page is organized as an authentication learning path: start with JWT and password-hashing fundamentals, implement the full login and refresh flow, study the attack surface, then practice explaining the architecture like you would in an interview or code review.</p>
+      <div class="intro-title" id="auth-overview-title">Authentication &amp; API Security Roadmap Overview</div>
+      <p class="intro-copy">Master web authentication from first principles: compare stateful sessions with stateless JWTs (HS256/RS256, exp/iat/sub/jti claims), implement bcrypt or Argon2 password hashing with constant-time comparison, build refresh token rotation with httpOnly SameSite cookies, protect FastAPI routes with RBAC, and defend against alg:none, XSS, CSRF, and token-reuse attacks.</p>
+      <div class="tech-pills" aria-label="Authentication technologies and topics">
+        <span class="tech-pill">JWT (HS256 / RS256)</span>
+        <span class="tech-pill">bcrypt &amp; Argon2</span>
+        <span class="tech-pill">Refresh Token Rotation</span>
+        <span class="tech-pill">httpOnly &amp; SameSite Cookies</span>
+        <span class="tech-pill">FastAPI OAuth2 &amp; RBAC</span>
+        <span class="tech-pill">XSS, CSRF &amp; Redis Blocklist</span>
+      </div>
     </section>
 
     <div class="confidence-banner" id="confidence-banner">
@@ -745,17 +690,24 @@
     </div>
 
     <div class="legend" aria-label="Checklist legend">
-    <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> understand</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> build</div>
-    <div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div> explain cold</div>
-    <div class="legend-item"><div class="legend-dot" style="background:#d45a5a"></div> know what breaks it</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> understand</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> build</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--warn)"></div> explain cold</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--danger)"></div> know what breaks it</div>
     </div>
 
     <nav class="section-nav" id="section-nav" aria-label="Jump to auth sections"></nav>
 
-    <div id="checklist"></div>
+    <div id="checklist">
+      <noscript>
+        <section class="intro-card">
+          <div class="intro-title">Authentication Curriculum Sections</div>
+          <p class="intro-copy">Section 01 covers stateful sessions vs stateless JWTs, JWT structure, and bcrypt/Argon2 password hashing. Section 02 builds signup, login, refresh token rotation, FastAPI get_current_user, and httpOnly cookie storage. Section 03 examines alg:none attacks, log leakage, XSS/CSRF, rate limiting, and compromised refresh tokens. Section 04 practices scaling auth to 1M users in system design interviews.</p>
+        </section>
+      </noscript>
+    </div>
 
-    <button class="reset-btn" onclick="resetAll()">↺ reset all</button>
+    <button type="button" class="reset-btn" onclick="resetAll()">↺ reset all</button>
   </main>
 
   <div class="footer">
@@ -925,8 +877,19 @@ function allIds() {
 
 function countDone(ids) { return ids.filter(id => checked[id]).length; }
 
-function toggle(id) { checked[id] = !checked[id]; save(); render(); }
-function toggleGroup(id) { open[id] = !open[id]; save(); render(); }
+function toggle(id) {
+  checked[id] = !checked[id];
+  save();
+  render();
+  document.querySelector(`[data-task-id="${id}"]`)?.focus({ preventScroll: true });
+}
+
+function toggleGroup(id) {
+  open[id] = !open[id];
+  save();
+  render();
+  document.querySelector(`[data-group-id="${id}"]`)?.focus({ preventScroll: true });
+}
 
 function resetAll() {
   if (!confirm('Reset all progress?')) return;
@@ -976,23 +939,23 @@ function render() {
         const ic = !!checked[t.id];
         const b = t.badge ? `<span class="badge badge-${t.badge}">${t.badge}</span>` : '';
         const note = t.note ? `<span class="task-note">${t.note}</span>` : '';
-        return `<div class="task ${ic ? 'checked' : ''}" onclick="toggle('${t.id}')">
-          <div class="task-cb"></div>
-          <div class="task-content">
+        return `<button type="button" class="task ${ic ? 'checked' : ''}" data-task-id="${t.id}" aria-pressed="${ic}" onclick="toggle('${t.id}')">
+          <span class="task-cb" aria-hidden="true"></span>
+          <span class="task-content">
             <span class="task-text">${t.text}</span>
             ${note}
-          </div>
+          </span>
           ${b}
-        </div>`;
+        </button>`;
       }).join('');
 
       return `<div class="group ${allDone ? 'all-done' : ''} ${isOpen ? 'open' : ''}">
-        <div class="group-header" onclick="toggleGroup('${group.id}')">
+        <button type="button" class="group-header" data-group-id="${group.id}" aria-expanded="${isOpen}" onclick="toggleGroup('${group.id}')">
           <h3 class="group-title">${group.title}</h3>
-          <div class="mini-bar"><div class="mini-fill" style="width:${gPct}%"></div></div>
+          <span class="mini-bar" aria-hidden="true"><span class="mini-fill" style="width:${gPct}%;display:block"></span></span>
           <span class="group-stats">${gDone}/${gIds.length}</span>
-          <span class="group-chevron">▼</span>
-        </div>
+          <span class="group-chevron" aria-hidden="true">▼</span>
+        </button>
         <div class="group-body">${tasksHtml}</div>
       </div>`;
     }).join('');

@@ -3,45 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Backend Stack Mastery Roadmap | FastAPI, PostgreSQL, SQL, and Interview Prep</title>
-<meta name="description" content="Ten-week backend roadmap covering FastAPI production patterns, PostgreSQL fundamentals, SQL performance, deployment, and a capstone integration project.">
-<meta name="robots" content="index,follow">
-<meta name="theme-color" content="#080808">
+<meta name="text-scale" content="scale">
+<title>Backend Stack Mastery Roadmap | FastAPI, PostgreSQL, SQLAlchemy 2.0, Docker &amp; SQL</title>
+<meta name="description" content="Ten-week backend engineering roadmap covering FastAPI production patterns, PostgreSQL SQL fluency, EXPLAIN ANALYZE indexing, SQLAlchemy 2.0, Alembic migrations, asyncpg, Docker, and Next.js integration.">
+<meta name="keywords" content="backend roadmap, FastAPI roadmap, PostgreSQL roadmap, SQLAlchemy 2.0 Alembic migrations, PostgreSQL EXPLAIN ANALYZE indexing, asyncpg connection pooling cursor pagination, FastAPI Docker Compose pytest httpx, N+1 query optimization joinedload selectinload, Next.js FastAPI full stack capstone, backend interview preparation">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#0e0f14">
+<link rel="canonical" href="https://os.pawel.in/backend.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Backend Stack Mastery Roadmap">
-<meta property="og:description" content="A structured backend interview prep roadmap across FastAPI, PostgreSQL, SQL, testing, deployment, and project delivery.">
+<meta property="og:site_name" content="Pawel's Trackers Hub">
+<meta property="og:url" content="https://os.pawel.in/backend.html">
+<meta property="og:title" content="Backend Stack Mastery Roadmap | FastAPI, PostgreSQL &amp; SQL">
+<meta property="og:description" content="Structured 10-week backend interview roadmap across FastAPI, PostgreSQL, SQL optimization, SQLAlchemy 2.0, Docker, testing, and DevPulse capstone delivery.">
 <meta property="og:image" content="https://dummyimage.com/1200x630/080808/ddd8cf&amp;text=Backend+Stack+Mastery">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://os.pawel.in/backend.html">
 <meta name="twitter:title" content="Backend Stack Mastery Roadmap">
-<meta name="twitter:description" content="Ten-week plan for FastAPI, PostgreSQL, SQL, testing, deployment, and a realistic capstone project.">
+<meta name="twitter:description" content="Ten-week plan for FastAPI, PostgreSQL, SQL performance, SQLAlchemy 2.0, asyncpg, Docker, and a realistic capstone project.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Backend Stack Mastery Roadmap",
-  "description": "Ten-week backend roadmap for interview-ready FastAPI, PostgreSQL, SQL optimization, and capstone project delivery.",
+  "url": "https://os.pawel.in/backend.html",
+  "description": "Ten-week backend roadmap for interview-ready FastAPI, PostgreSQL, SQL optimization, SQLAlchemy 2.0, Docker deployment, and DevPulse capstone delivery.",
+  "keywords": [
+    "FastAPI production patterns",
+    "PostgreSQL SQL optimization",
+    "SQLAlchemy 2.0 Alembic",
+    "EXPLAIN ANALYZE indexing",
+    "backend interview roadmap"
+  ],
   "about": [
     "FastAPI",
+    "Pydantic v2",
     "PostgreSQL",
     "SQL",
-    "Backend interview preparation",
-    "Deployment"
+    "SQLAlchemy 2.0",
+    "Alembic",
+    "asyncpg",
+    "Docker and docker-compose",
+    "pytest and httpx",
+    "Next.js",
+    "Backend interview preparation"
   ],
   "hasPart": [
     {
       "@type": "WebPageElement",
       "name": "FastAPI — Production Patterns",
-      "description": "FastAPI structure, authentication, async patterns, testing, and deployment."
+      "description": "FastAPI folder structure, JWT authentication, Pydantic v2, async dependency injection, pytest/httpx testing, Docker Compose, and Railway/Render deployment."
     },
     {
       "@type": "WebPageElement",
       "name": "PostgreSQL — SQL First, Then Depth",
-      "description": "SQL fluency, schema design, indexing, query plans, async database patterns, and connection pooling."
+      "description": "Raw SQL joins, CTEs, window functions, SQLAlchemy 2.0, Alembic migrations, B-tree/composite/partial indexes, EXPLAIN ANALYZE, N+1 fixes, asyncpg pooling, and cursor pagination."
     },
     {
       "@type": "WebPageElement",
       "name": "DevPulse — Integration Project",
-      "description": "Capstone backend and frontend integration work for an AI-powered developer activity summarizer."
+      "description": "Full-stack capstone combining FastAPI, PostgreSQL, GitHub API, Claude/OpenAI summarization, Next.js frontend, and Railway/Vercel deployment."
     }
   ]
 }
@@ -53,450 +73,36 @@
   :root {
     --type-scale: 1.25;
     --bg: #0e0f14;
-    --surface: rgba(127, 108, 84, 0.24);
-    --surface2: rgba(32, 36, 47, 0.78);
-    --border: rgba(255, 255, 255, 0.12);
-    --border2: rgba(255, 255, 255, 0.18);
+    --surface: rgba(26, 30, 40, 0.62);
+    --surface2: rgba(31, 36, 48, 0.78);
+    --border: rgba(255, 255, 255, 0.14);
+    --border2: rgba(255, 255, 255, 0.2);
     --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.58);
+    --muted: rgba(248, 244, 238, 0.68);
     --dim: rgba(255, 255, 255, 0.08);
     --fastapi: #79d9f7;
     --postgres: #9ba8ff;
     --devpulse: #ffbe6f;
-    --done-text: rgba(248, 244, 238, 0.38);
+    --done-text: rgba(248, 244, 238, 0.42);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    min-height: 100vh;
-    padding: 40px 20px 80px;
-  }
-
-  .container { max-width: 780px; margin: 0 auto; }
-
-  .skip-link {
-    position: absolute;
-    left: 20px;
-    top: -40px;
-    padding: 8px 12px;
-    background: var(--fastapi);
-    color: #04110d;
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    z-index: 10;
-  }
-
-  .skip-link:focus { top: 12px; }
-
-  .top-links {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
-  }
-
-  .top-link {
-    color: var(--muted);
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    text-decoration: none;
-  }
-
-  .top-link:hover { color: var(--text); }
-
-  .header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .header-left { flex: 1; min-width: 200px; }
-
-  .header-eyebrow {
-    font-size: calc(9px * var(--type-scale));
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .header h1 {
-    font-family: 'Outfit', sans-serif;
-    font-size: clamp(calc(22px * var(--type-scale)), calc(4vw * var(--type-scale)), calc(34px * var(--type-scale)));
-    font-weight: 700;
-    line-height: 1.15;
-  }
-
-  .header h1 em { font-style: italic; color: var(--fastapi); }
-
-  .overall-progress {
-    background: var(--surface);
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    padding: 16px 20px;
-    min-width: 160px;
-    text-align: right;
-  }
-
-  .overall-pct {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(36px * var(--type-scale));
-    line-height: 1;
-    color: var(--fastapi);
-    transition: color 0.4s;
-  }
-
-  .overall-label {
-    font-size: calc(9px * var(--type-scale));
-    color: var(--muted);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
-
-  .overall-bar {
-    margin-top: 10px;
-    height: 3px;
-    background: var(--dim);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .overall-bar-fill {
-    height: 100%;
-    border-radius: 2px;
-    transition: width 0.5s ease, background 0.4s;
-    width: 0%;
-    background: var(--fastapi);
-  }
-
-  .intro-card {
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    background: var(--surface);
-    padding: 16px 18px;
-    margin-bottom: 18px;
-  }
-
-  .intro-title {
-    font-size: calc(10px * var(--type-scale));
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--fastapi);
-    margin-bottom: 10px;
-  }
-
-  .intro-copy {
-    font-size: calc(11px * var(--type-scale));
-    line-height: 1.8;
-    color: #8a867e;
-  }
-
-  .phase-nav {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .phase-link {
-    display: block;
-    padding: 12px 14px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,0.015);
-    text-decoration: none;
-    transition: border-color 0.15s, background 0.15s;
-  }
-
-  .phase-link:hover {
-    border-color: rgba(0,196,154,0.25);
-    background: rgba(0,196,154,0.03);
-  }
-
-  .phase-link-kicker {
-    display: block;
-    font-size: calc(8px * var(--type-scale));
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-  }
-
-  .phase-link-title {
-    display: block;
-    font-size: calc(11px * var(--type-scale));
-    color: var(--text);
-    line-height: 1.45;
-    margin-bottom: 5px;
-  }
-
-  .phase-link-meta {
-    display: block;
-    color: #666059;
-    font-size: calc(9px * var(--type-scale));
-    line-height: 1.6;
-  }
-
-  .phase { margin-bottom: 36px; }
-
-  .phase-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2px;
-  }
-
-  .phase-num { font-size: calc(9px * var(--type-scale)); color: var(--muted); letter-spacing: 0.2em; }
-
-  .phase-title {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(16px * var(--type-scale));
-    font-weight: 700;
-    margin: 0;
-  }
-
-  .c-fastapi { color: var(--fastapi); }
-  .c-postgres { color: var(--postgres); }
-  .c-devpulse { color: var(--devpulse); }
-
-  .phase-wks { font-size: calc(9px * var(--type-scale)); color: var(--muted); margin-left: auto; }
-
-  .phase-summary {
-    margin: 0 0 14px;
-    color: #777169;
-    font-size: calc(10px * var(--type-scale));
-    line-height: 1.8;
-  }
-
-  .phase-progress-bar {
-    height: 2px;
-    background: var(--dim);
-    margin-bottom: 16px;
-    border-radius: 1px;
-    overflow: hidden;
-  }
-
-  .phase-progress-fill {
-    height: 100%;
-    border-radius: 1px;
-    transition: width 0.4s ease;
-    width: 0%;
-  }
-
-  .fill-fastapi { background: var(--fastapi); }
-  .fill-postgres { background: var(--postgres); }
-  .fill-devpulse { background: var(--devpulse); }
-
-  .week {
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    margin-bottom: 6px;
-    overflow: hidden;
-    transition: border-color 0.3s;
-  }
-
-  .week.all-done { border-color: #181818; }
-
-  .week-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 14px;
-    cursor: pointer;
-    user-select: none;
-    background: var(--surface);
-    transition: background 0.15s;
-  }
-
-  .week-header:hover { background: var(--surface2); }
-
-  .week-tag { font-size: calc(9px * var(--type-scale)); letter-spacing: 0.1em; color: var(--muted); min-width: 30px; }
-
-  .week-title {
-    font-size: calc(11.5px * var(--type-scale));
-    font-weight: 500;
-    color: var(--text);
-    flex: 1;
-    line-height: 1.3;
-  }
-
-  .week.all-done .week-title { color: var(--done-text); }
-
-  .week-stats { font-size: calc(10px * var(--type-scale)); color: var(--muted); white-space: nowrap; }
-
-  .week-chevron {
-    font-size: calc(8px * var(--type-scale));
-    color: var(--muted);
-    transition: transform 0.2s;
-    margin-left: 4px;
-  }
-
-  .week.open .week-chevron { transform: rotate(180deg); }
-
-  .week-mini-bar {
-    width: 44px;
-    height: 2px;
-    background: var(--dim);
-    border-radius: 1px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .week-mini-fill {
-    height: 100%;
-    border-radius: 1px;
-    transition: width 0.35s ease;
-    width: 0%;
-  }
-
-  .week-body {
-    display: none;
-    padding: 4px 14px 12px;
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-  }
-
-  .week.open .week-body { display: block; }
-
-  .task {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 7px 0;
-    border-bottom: 1px solid #131313;
-    cursor: pointer;
-  }
-
-  .task:last-child { border-bottom: none; }
-
-  .task-cb {
-    width: 13px;
-    height: 13px;
-    border-radius: 2px;
-    border: 1px solid var(--border2);
-    background: transparent;
-    flex-shrink: 0;
-    margin-top: 1px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(8px * var(--type-scale));
-    font-weight: 700;
-    color: transparent;
-    transition: all 0.15s;
-  }
-
-  .task.checked .task-cb {
-    background: var(--fastapi);
-    border-color: var(--fastapi);
-    color: #000;
-  }
-
-  .task.checked .task-cb::after { content: '✓'; }
-
-  .task-text {
-    font-size: calc(11px * var(--type-scale));
-    color: #545454;
-    line-height: 1.55;
-    flex: 1;
-    transition: color 0.15s;
-  }
-
-  .task:hover .task-text { color: #888; }
-  .task.checked .task-text { color: var(--done-text); text-decoration: line-through; text-decoration-color: #222; }
-
-  .badge {
-    font-size: calc(8px * var(--type-scale));
-    padding: 2px 5px;
-    border-radius: 2px;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 2px;
-    text-transform: uppercase;
-  }
-
-  .badge-output { color: var(--devpulse); border: 1px solid rgba(232,151,30,0.2); background: rgba(232,151,30,0.04); }
-  .badge-resource { color: var(--postgres); border: 1px solid rgba(74,143,212,0.2); background: rgba(74,143,212,0.04); }
-  .badge-exit { color: var(--fastapi); border: 1px solid rgba(0,196,154,0.2); background: rgba(0,196,154,0.04); }
-
-  .apply-banner {
-    border: 1px solid rgba(232,151,30,0.15);
-    border-radius: 3px;
-    padding: 13px 16px;
-    margin: 28px 0 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(232,151,30,0.02);
-  }
-
-  .apply-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--devpulse);
-    flex-shrink: 0;
-    animation: pulse 2.2s infinite;
-  }
-
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
-
-  .apply-text { font-size: calc(10.5px * var(--type-scale)); color: #555; line-height: 1.6; }
-  .apply-text strong { color: var(--devpulse); font-weight: 500; }
-
-  .reset-btn {
-    font-family: 'Outfit', sans-serif;
-    font-size: calc(9px * var(--type-scale));
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    background: transparent;
-    border: 1px solid var(--border);
-    padding: 5px 12px;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: block;
-    margin: 0 auto 44px;
-  }
-
-  .reset-btn:hover { color: #888; border-color: var(--border2); }
-
-  .footer {
-    border-top: 1px solid var(--border);
-    padding-top: 18px;
-    font-size: calc(9px * var(--type-scale));
-    color: var(--dim);
-    letter-spacing: 0.04em;
-    line-height: 2.2;
-    text-align: center;
-  }
-
-  /* Glass Theme Overrides */
   body {
     position: relative;
     isolation: isolate;
-    font-family: 'Outfit', sans-serif;
     background:
       radial-gradient(circle at 18% 18%, rgba(255, 216, 155, 0.36), transparent 22%),
       radial-gradient(circle at 82% 16%, rgba(238, 120, 78, 0.26), transparent 18%),
       radial-gradient(circle at 50% 78%, rgba(100, 129, 188, 0.24), transparent 24%),
       linear-gradient(180deg, #8f9ca3 0%, #52564f 32%, #1a2024 100%);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    line-height: 1.5;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-wrap: break-word;
+    padding: 2.25rem 1.25rem max(4rem, env(safe-area-inset-bottom, 0px));
   }
 
   body::before {
@@ -510,14 +116,21 @@
     pointer-events: none;
   }
 
-  body::after {
-    content: none;
+  :where(a, code) { overflow-wrap: anywhere; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--fastapi);
+    outline-offset: 2px;
   }
 
   .container {
     position: relative;
     z-index: 1;
-    padding: 30px;
+    max-width: 50rem;
+    margin-inline: auto;
+    padding: clamp(1.25rem, 3.5vw, 1.875rem);
     border-radius: 34px;
     background: linear-gradient(180deg, rgba(118, 100, 80, 0.46), rgba(46, 43, 45, 0.44));
     border: 1px solid rgba(255, 255, 255, 0.14);
@@ -528,151 +141,486 @@
     -webkit-backdrop-filter: blur(26px) saturate(130%);
   }
 
-  .top-links { margin-bottom: 24px; }
-
-  .top-link,
   .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    padding: 0.55rem 0.9rem;
+    background: var(--fastapi);
+    color: #04110d;
+    font-size: calc(0.625rem * var(--type-scale));
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: rgba(24, 28, 38, 0.66);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    z-index: 20;
+  }
+  .skip-link:focus { top: 0.75rem; }
+
+  .top-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .top-link {
     display: inline-flex;
     align-items: center;
-    padding: 9px 14px;
-    color: rgba(248, 244, 238, 0.72);
+    min-block-size: 2.25rem;
+    padding: 0.45rem 0.875rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(24, 28, 38, 0.66);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+    color: rgba(248, 244, 238, 0.75);
+    font-size: calc(0.58rem * var(--type-scale));
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
 
-  .top-link:hover { color: var(--text); border-color: rgba(255,255,255,0.24); }
+  .top-link:hover,
+  .top-link[aria-current="page"] {
+    color: var(--text);
+    border-color: rgba(121, 217, 247, 0.48);
+    background: rgba(31, 36, 48, 0.86);
+  }
 
-  .header-eyebrow,
-  .overall-label,
-  .phase-num,
-  .phase-wks,
-  .week-tag,
-  .week-stats,
-  .week-chevron,
-  .top-link,
-  .footer {
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .header-left { flex: 1 1 14rem; min-width: 0; }
+
+  .header-eyebrow {
+    font-size: calc(0.5625rem * var(--type-scale));
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
     color: var(--muted);
+    margin-bottom: 0.5rem;
   }
 
-  .header h1,
-  .phase-title,
-  .week-title {
+  .header h1 {
     font-family: 'Outfit', sans-serif;
     letter-spacing: -0.03em;
+    font-size: clamp(1.85rem, 1.2rem + 2.8vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
   }
 
-  .overall-progress,
-  .intro-card,
-  .phase-link,
-  .week,
-  .apply-banner {
+  .header h1 em { font-style: italic; color: var(--fastapi); }
+
+  .overall-progress {
+    background: var(--surface);
+    border: 1px solid var(--border);
     border-radius: 26px;
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.12),
-      0 18px 40px rgba(0,0,0,0.2);
-  }
-
-  .overall-progress,
-  .intro-card,
-  .phase-link,
-  .week,
-  .week-header,
-  .week-body,
-  .apply-banner {
-    background: rgba(26, 30, 40, 0.62);
+    padding: 0.9rem 1.15rem;
+    min-width: 9.5rem;
+    text-align: right;
+    flex-shrink: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
   }
 
-  .phase-link:hover,
-  .week-header:hover {
-    background: rgba(31, 36, 48, 0.76);
-    border-color: rgba(255, 255, 255, 0.2);
+  .overall-pct {
+    font-family: 'Outfit', sans-serif;
+    font-size: calc(2.25rem * var(--type-scale));
+    line-height: 1;
+    color: var(--fastapi);
+    transition: color 0.4s;
+  }
+
+  .overall-label {
+    font-size: calc(0.5625rem * var(--type-scale));
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0.25rem;
+  }
+
+  .overall-bar,
+  .phase-progress-bar,
+  .week-mini-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--dim);
+    overflow: hidden;
+  }
+
+  .overall-bar { margin-top: 0.625rem; }
+  .phase-progress-bar { margin-bottom: 1rem; }
+  .week-mini-bar { width: 2.75rem; flex-shrink: 0; }
+
+  .overall-bar-fill,
+  .phase-progress-fill,
+  .week-mini-fill {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  .fill-fastapi { background: var(--fastapi); }
+  .fill-postgres { background: var(--postgres); }
+  .fill-devpulse { background: var(--devpulse); }
+
+  .intro-card {
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    background: var(--surface);
+    padding: 1rem 1.125rem;
+    margin-bottom: 1.125rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .intro-title {
+    font-size: calc(0.625rem * var(--type-scale));
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fastapi);
+    margin-bottom: 0.625rem;
+  }
+
+  .intro-copy {
+    font-size: calc(0.6875rem * var(--type-scale));
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .tech-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+  }
+
+  .tech-pill {
+    font-size: calc(0.55rem * var(--type-scale));
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(14, 15, 20, 0.45);
+    color: rgba(248, 244, 238, 0.78);
+  }
+
+  .phase-nav {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13.5rem), 1fr));
+    gap: 0.625rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .phase-link {
+    display: block;
+    padding: 0.875rem 1rem;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    text-decoration: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: border-color 0.15s ease, background 0.15s ease;
+    min-width: 0;
+  }
+
+  .phase-link:hover {
+    background: var(--surface2);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .phase-link-kicker {
+    display: block;
+    font-size: calc(0.5rem * var(--type-scale));
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+
+  .phase-link-title {
+    display: block;
+    font-size: calc(0.6875rem * var(--type-scale));
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 0.3rem;
+  }
+
+  .phase-link-meta {
+    display: block;
+    color: var(--muted);
+    font-size: calc(0.5625rem * var(--type-scale));
+    line-height: 1.6;
+  }
+
+  .phase {
+    margin-bottom: 2.25rem;
+    scroll-margin-top: 1rem;
   }
 
   .phase-header {
-    padding: 0 4px 12px;
-    border-bottom-color: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0 0.25rem 0.75rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 0.35rem;
   }
 
-  .intro-copy,
-  .phase-summary,
-  .phase-link-meta,
-  .apply-text {
-    color: rgba(248, 244, 238, 0.68);
+  .phase-num { font-size: calc(0.5625rem * var(--type-scale)); color: var(--muted); letter-spacing: 0.2em; }
+
+  .phase-title {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.03em;
+    font-size: calc(1rem * var(--type-scale));
+    font-weight: 700;
   }
+
+  .c-fastapi { color: var(--fastapi); }
+  .c-postgres { color: var(--postgres); }
+  .c-devpulse { color: var(--devpulse); }
+
+  .phase-wks { font-size: calc(0.5625rem * var(--type-scale)); color: var(--muted); margin-left: auto; }
+
+  .phase-summary {
+    margin: 0.4rem 0 0.875rem;
+    color: var(--muted);
+    font-size: calc(0.625rem * var(--type-scale));
+    line-height: 1.75;
+  }
+
+  .week {
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    margin-bottom: 0.5rem;
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    transition: border-color 0.3s ease;
+  }
+
+  .week.all-done { border-color: rgba(121, 217, 247, 0.28); }
+
+  .week-header {
+    width: 100%;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    padding: 0.75rem 0.95rem;
+    cursor: pointer;
+    background: transparent;
+    transition: background 0.15s ease;
+  }
+
+  .week-header:hover { background: var(--surface2); }
+
+  .week-tag { font-size: calc(0.5625rem * var(--type-scale)); letter-spacing: 0.1em; color: var(--muted); min-width: 2.3rem; flex-shrink: 0; }
+
+  .week-title {
+    font-family: 'Outfit', sans-serif;
+    letter-spacing: -0.02em;
+    font-size: calc(0.71875rem * var(--type-scale));
+    font-weight: 500;
+    color: var(--text);
+    flex: 1 1 0;
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .week.all-done .week-title { color: var(--done-text); }
+
+  .week-stats { font-size: calc(0.625rem * var(--type-scale)); color: var(--muted); white-space: nowrap; }
+
+  .week-chevron {
+    font-size: calc(0.5rem * var(--type-scale));
+    color: var(--muted);
+    transition: transform 0.2s ease;
+    margin-left: 0.25rem;
+  }
+
+  .week.open .week-chevron { transform: rotate(180deg); }
+
+  .week-body {
+    display: none;
+    padding: 0.25rem 0.95rem 0.75rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .week.open .week-body { display: block; }
 
   .task {
-    padding: 12px 0;
-    border-bottom-color: rgba(255, 255, 255, 0.06);
+    width: 100%;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    cursor: pointer;
   }
 
-  .task-text { color: rgba(248, 244, 238, 0.9); }
-  .task:hover .task-text { color: #ffffff; }
-  .task.checked .task-text { color: var(--done-text); text-decoration-color: rgba(248, 244, 238, 0.16); }
+  .task:last-child { border-bottom: none; }
 
   .task-cb {
+    width: 1.125rem;
+    height: 1.125rem;
     border-radius: 999px;
-    border-color: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.28);
     background: rgba(255,255,255,0.04);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(0.55rem * var(--type-scale));
+    font-weight: 700;
+    color: transparent;
+    transition: all 0.15s ease;
   }
 
-  .week-mini-bar,
-  .phase-progress-bar,
-  .overall-bar {
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.08);
+  .task.checked .task-cb {
+    background: var(--fastapi);
+    border-color: var(--fastapi);
+    color: #000;
   }
 
-  .week-mini-fill,
-  .phase-progress-fill,
-  .overall-bar-fill {
-    border-radius: 999px;
+  .task.checked .task-cb::after { content: '✓'; }
+
+  .task-text {
+    font-size: calc(0.6875rem * var(--type-scale));
+    color: rgba(248, 244, 238, 0.92);
+    line-height: 1.55;
+    flex: 1 1 0;
+    min-width: 0;
+    transition: color 0.15s ease;
   }
+
+  .task:hover .task-text { color: #ffffff; }
+  .task.checked .task-text { color: var(--done-text); text-decoration: line-through; text-decoration-color: rgba(248, 244, 238, 0.22); }
+
+  .badge {
+    font-size: calc(0.5rem * var(--type-scale));
+    padding: 0.15rem 0.45rem;
+    border-radius: 999px;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    text-transform: uppercase;
+  }
+
+  .badge-output { color: var(--devpulse); border: 1px solid rgba(255,190,111,0.3); background: rgba(255,190,111,0.08); }
+  .badge-resource { color: var(--postgres); border: 1px solid rgba(155,168,255,0.3); background: rgba(155,168,255,0.08); }
+  .badge-exit { color: var(--fastapi); border: 1px solid rgba(121,217,247,0.3); background: rgba(121,217,247,0.08); }
+
+  .apply-banner {
+    border: 1px solid var(--border);
+    border-radius: 26px;
+    padding: 0.9rem 1rem;
+    margin: 1.75rem 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--surface);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 18px 40px rgba(0,0,0,0.2);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+  }
+
+  .apply-dot {
+    width: 0.5rem; height: 0.5rem;
+    border-radius: 50%;
+    background: var(--devpulse);
+    flex-shrink: 0;
+    animation: pulse 2.2s infinite;
+  }
+
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+  .apply-text { font-size: calc(0.65625rem * var(--type-scale)); color: var(--muted); line-height: 1.65; }
+  .apply-text strong { color: var(--devpulse); font-weight: 600; }
 
   .reset-btn {
-    padding: 11px 18px;
+    font-family: 'Outfit', sans-serif;
+    font-size: calc(0.5625rem * var(--type-scale));
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.7rem 1.15rem;
     border-radius: 999px;
     background: rgba(24, 28, 38, 0.72);
-    border-color: rgba(255, 255, 255, 0.16);
-    color: rgba(248, 244, 238, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    color: rgba(248, 244, 238, 0.8);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: block;
+    margin: 0 auto 2.5rem;
   }
 
   .reset-btn:hover {
     color: var(--text);
-    border-color: rgba(255,255,255,0.24);
-    background: rgba(30, 35, 46, 0.82);
+    border-color: rgba(255,255,255,0.28);
+    background: rgba(30, 35, 46, 0.88);
   }
 
   .footer {
-    border-top-color: rgba(255,255,255,0.08);
-    color: rgba(248, 244, 238, 0.45);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.125rem;
+    font-size: calc(0.5625rem * var(--type-scale));
+    color: rgba(248, 244, 238, 0.56);
+    letter-spacing: 0.04em;
+    line-height: 2;
+    text-align: center;
   }
 
-  @media (max-width: 680px) {
-    body { padding: 24px 14px 56px; }
-    .container { padding: 22px 18px; border-radius: 28px; }
-    .top-links { flex-wrap: wrap; }
-    .header { margin-bottom: 28px; gap: 16px; }
-    .header-left { min-width: 0; }
+  @media (pointer: coarse) {
+    .top-link, .week-header, .task, .reset-btn { min-block-size: 44px; }
+  }
+
+  @media (max-width: 42.5em) {
+    body { padding: 1.25rem 0.625rem max(3rem, env(safe-area-inset-bottom, 0px)); }
+    .container { padding: 1.125rem 0.9rem; border-radius: 26px; }
+    .header { margin-bottom: 1.5rem; gap: 1rem; }
     .overall-progress { width: 100%; min-width: 0; text-align: left; }
-    .overall-pct { font-size: calc(31px * var(--type-scale)); }
-    .phase-nav { grid-template-columns: 1fr; }
-    .phase-header { align-items: flex-start; flex-wrap: wrap; }
+    .overall-pct { font-size: calc(1.9375rem * var(--type-scale)); }
     .phase-wks { margin-left: 0; }
-    .week-header { align-items: flex-start; flex-wrap: wrap; }
-    .week-stats { width: 100%; }
+    .week-header { flex-wrap: wrap; }
     .week-mini-bar { width: 100%; order: 4; }
-    .week-body { padding: 6px 12px 12px; }
+    .week-body { padding: 0.35rem 0.75rem 0.75rem; }
     .apply-banner { align-items: flex-start; }
-    .task { gap: 12px; }
+  }
+
+  @media (max-width: 28em) {
+    .task { flex-wrap: wrap; }
+    .badge { margin-left: 1.75rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .apply-dot { animation: none; }
+    .phase-link, .week-header, .task-cb, .reset-btn, .overall-bar-fill, .phase-progress-fill, .week-mini-fill { transition: none; }
   }
 </style>
 </head>
@@ -680,9 +628,14 @@
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="container">
 
-  <div class="top-links">
+  <nav class="top-links" aria-label="Primary">
     <a class="top-link" href="./index.html">All Trackers</a>
-  </div>
+    <a class="top-link" href="./interview-questions.html">Interview Questions</a>
+    <a class="top-link" href="./ai-product-engineer.html">AI Engineer Roadmap</a>
+    <a class="top-link" href="./backend.html" aria-current="page">Backend Stack</a>
+    <a class="top-link" href="./auth.html">Auth Mastery</a>
+    <a class="top-link" href="./workout.html">Workout</a>
+  </nav>
 
   <header class="header">
     <div class="header-left">
@@ -698,13 +651,29 @@
 
   <main id="main-content">
     <section class="intro-card" aria-labelledby="backend-overview-title">
-      <div class="intro-title" id="backend-overview-title">Backend roadmap overview</div>
-      <p class="intro-copy">This backend study plan is grouped into three major sections: production FastAPI patterns, deep PostgreSQL and SQL fluency, and a capstone project that proves you can connect backend architecture to a real product outcome.</p>
+      <div class="intro-title" id="backend-overview-title">Backend Stack Mastery &amp; Tech Overview</div>
+      <p class="intro-copy">This ten-week backend engineering roadmap builds interview-ready mastery across FastAPI production patterns (Pydantic v2, dependency injection, pytest/httpx, Docker Compose), PostgreSQL depth (SQL joins, CTEs, window functions, SQLAlchemy 2.0, Alembic migrations, EXPLAIN ANALYZE indexing, N+1 fixes, asyncpg pooling, cursor pagination), and full-stack Next.js + Railway/Vercel capstone delivery.</p>
+      <div class="tech-pills" aria-label="Backend technologies covered">
+        <span class="tech-pill">FastAPI &amp; Pydantic v2</span>
+        <span class="tech-pill">PostgreSQL &amp; Raw SQL</span>
+        <span class="tech-pill">EXPLAIN ANALYZE &amp; B-Tree Indexes</span>
+        <span class="tech-pill">SQLAlchemy 2.0 &amp; Alembic</span>
+        <span class="tech-pill">asyncpg &amp; Cursor Pagination</span>
+        <span class="tech-pill">Docker, pytest &amp; httpx</span>
+        <span class="tech-pill">Next.js, Railway &amp; Vercel</span>
+      </div>
     </section>
 
     <nav class="phase-nav" id="phase-nav" aria-label="Jump to backend roadmap phases"></nav>
 
-    <div id="roadmap"></div>
+    <div id="roadmap">
+      <noscript>
+        <section class="intro-card">
+          <div class="intro-title">Ten-Week Backend Engineering Curriculum</div>
+          <p class="intro-copy">Phase 01 (Weeks 1–3) covers FastAPI project structure, JWT auth, Pydantic v2, async dependency injection, BackgroundTasks vs Celery, pytest/httpx testing, and Docker Compose deployment. Phase 02 (Weeks 4–7) masters raw SQL JOINs, CTEs, window functions, SQLAlchemy 2.0, Alembic migrations, EXPLAIN ANALYZE, indexing, N+1 query elimination, asyncpg pooling, and full-text search. Phase 03 (Weeks 8–10) ships DevPulse with FastAPI, PostgreSQL, Next.js, and slowapi rate limiting.</p>
+        </section>
+      </noscript>
+    </div>
 
     <div class="apply-banner">
       <div class="apply-dot"></div>
@@ -713,7 +682,7 @@
       </div>
     </div>
 
-    <button class="reset-btn" onclick="resetAll()">↺ reset all progress</button>
+    <button type="button" class="reset-btn" onclick="resetAll()">↺ reset all progress</button>
   </main>
 
   <div class="footer">
@@ -876,8 +845,19 @@ function allIds() {
 
 function countDone(ids) { return ids.filter(id => checked[id]).length; }
 
-function toggle(id) { checked[id] = !checked[id]; save(); render(); }
-function toggleWeek(id) { open[id] = !open[id]; save(); render(); }
+function toggle(id) {
+  checked[id] = !checked[id];
+  save();
+  render();
+  document.querySelector(`[data-task-id="${id}"]`)?.focus({ preventScroll: true });
+}
+
+function toggleWeek(id) {
+  open[id] = !open[id];
+  save();
+  render();
+  document.querySelector(`[data-week-id="${id}"]`)?.focus({ preventScroll: true });
+}
 
 function resetAll() {
   if (!confirm('Reset all progress?')) return;
@@ -923,20 +903,20 @@ function render() {
       const tasksHtml = week.tasks.map(t => {
         const ic = !!checked[t.id];
         const b = t.badge ? `<span class="badge badge-${t.badge}">${t.badge}</span>` : '';
-        return `<div class="task ${ic ? 'checked' : ''}" onclick="toggle('${t.id}')">
-          <div class="task-cb"></div>
+        return `<button type="button" class="task ${ic ? 'checked' : ''}" data-task-id="${t.id}" aria-pressed="${ic}" onclick="toggle('${t.id}')">
+          <span class="task-cb" aria-hidden="true"></span>
           <span class="task-text">${t.text}</span>${b}
-        </div>`;
+        </button>`;
       }).join('');
 
       return `<div class="week ${allDone ? 'all-done' : ''} ${isOpen ? 'open' : ''}">
-        <div class="week-header" onclick="toggleWeek('${week.id}')">
+        <button type="button" class="week-header" data-week-id="${week.id}" aria-expanded="${isOpen}" onclick="toggleWeek('${week.id}')">
           <span class="week-tag">${week.tag}</span>
           <h3 class="week-title">${week.title}</h3>
-          <div class="week-mini-bar"><div class="week-mini-fill fill-${phase.color}" style="width:${wPct}%"></div></div>
+          <span class="week-mini-bar" aria-hidden="true"><span class="week-mini-fill fill-${phase.color}" style="width:${wPct}%;display:block"></span></span>
           <span class="week-stats">${wDone}/${wIds.length}</span>
-          <span class="week-chevron">▼</span>
-        </div>
+          <span class="week-chevron" aria-hidden="true">▼</span>
+        </button>
         <div class="week-body">${tasksHtml}</div>
       </div>`;
     }).join('');

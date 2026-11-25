@@ -3,55 +3,76 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Product Engineer Roadmap | Startup Job Search, DevPulse Build Plan, and Interview Prep</title>
-<meta name="description" content="Six-week AI product engineer roadmap covering startup job search preparation, DevPulse build milestones, applications, outreach, and interview prep.">
-<meta name="robots" content="index,follow">
+<meta name="text-scale" content="scale">
+<title>AI Product Engineer Roadmap | FastAPI, Claude/OpenAI, React, SvelteKit &amp; Startup Job Search</title>
+<meta name="description" content="Six-week AI product engineer roadmap covering FastAPI backend architecture, GitHub REST API, Claude and OpenAI LLM integration, React/SvelteKit deployment, DSA, and startup job search.">
+<meta name="keywords" content="AI product engineer roadmap, startup job search plan, DevPulse project roadmap, FastAPI Claude API project, OpenAI API Python summarizer, GitHub REST API Python httpx, React SvelteKit Railway Render Vercel deployment, startup DSA system design prep, founder cold outreach roadmap, indie dev to hired">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://os.pawel.in/ai-product-engineer.html">
 <meta property="og:type" content="website">
-<meta property="og:title" content="AI Product Engineer Roadmap">
-<meta property="og:description" content="A six-week roadmap for becoming job-ready through product shipping, backend skill-building, outreach, and interview preparation.">
+<meta property="og:site_name" content="Pawel's Trackers Hub">
+<meta property="og:url" content="https://os.pawel.in/ai-product-engineer.html">
+<meta property="og:title" content="AI Product Engineer Roadmap | Startup Job Search &amp; DevPulse Build Plan">
+<meta property="og:description" content="A six-week roadmap for becoming job-ready through product shipping with FastAPI, LLMs, React/SvelteKit, founder outreach, and interview preparation.">
 <meta property="og:image" content="https://dummyimage.com/1200x630/0d1117/f0f0f0&amp;text=AI+Product+Engineer+Roadmap">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://os.pawel.in/ai-product-engineer.html">
 <meta name="twitter:title" content="AI Product Engineer Roadmap">
-<meta name="twitter:description" content="Interactive startup job search roadmap covering DevPulse, outreach, applications, and interview prep.">
+<meta name="twitter:description" content="Interactive 6-week startup job search roadmap covering FastAPI, Claude/OpenAI APIs, React/SvelteKit, outreach, DSA, and system design.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "AI Product Engineer Roadmap",
-  "description": "Six-week roadmap for closing skill gaps, shipping DevPulse, applying to startup roles, and preparing for interviews.",
+  "url": "https://os.pawel.in/ai-product-engineer.html",
+  "description": "Six-week roadmap for closing skill gaps, shipping DevPulse with FastAPI and LLMs, applying to startup roles, and preparing for interviews.",
+  "keywords": [
+    "AI product engineer roadmap",
+    "startup job search",
+    "FastAPI Claude API",
+    "React SvelteKit deployment",
+    "DSA and system design prep"
+  ],
   "about": [
     "AI product engineer",
+    "FastAPI",
+    "Python",
+    "Pydantic",
+    "GitHub REST API",
+    "Anthropic Claude API",
+    "OpenAI API",
+    "React",
+    "SvelteKit",
+    "Railway and Render deployment",
     "Startup job search",
-    "FastAPI roadmap",
-    "Interview preparation",
-    "Project roadmap"
+    "DSA and System Design"
   ],
   "hasPart": [
     {
       "@type": "WebPageElement",
       "name": "Foundation & Legitimacy",
-      "description": "Set up business credibility, refresh FastAPI knowledge, and define the DevPulse architecture."
+      "description": "Set up business credibility, refresh FastAPI, OAuth2, CORS, and Pydantic knowledge, and define the DevPulse architecture."
     },
     {
       "@type": "WebPageElement",
       "name": "Build DevPulse Backend",
-      "description": "Implement GitHub ingestion, LLM summarization, FastAPI routes, and local backend testing."
+      "description": "Implement GitHub REST API ingestion, LLM summarization with Claude or OpenAI, FastAPI routes, caching, rate limiting, and pytest tests."
     },
     {
       "@type": "WebPageElement",
       "name": "Frontend + Deploy + Ship",
-      "description": "Build the frontend, connect the full stack, deploy the app, and publish the work."
+      "description": "Build the React or SvelteKit frontend, deploy FastAPI on Railway/Render and frontend on Vercel, and publish the work."
     },
     {
       "@type": "WebPageElement",
       "name": "Applications + Interview Prep",
-      "description": "Research companies, apply, practice DSA and system design, and sharpen your founder outreach."
+      "description": "Research companies on YC Work at a Startup and Wellfound, send founder outreach, and practice DSA and system design."
     },
     {
       "@type": "WebPageElement",
       "name": "Interviews + Keep Shipping",
-      "description": "Continue applications, prepare for take-homes, review pipeline performance, and stay in motion."
+      "description": "Continue applications, prepare for 2-hour CRUD take-homes, launch on Product Hunt, and iterate on response rates."
     }
   ]
 }
@@ -61,57 +82,108 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; }
+
   body {
+    margin: 0;
     font-family: 'Outfit', sans-serif;
     background: #0d1117;
     min-height: 100vh;
-    overflow-x: hidden;
+    min-height: 100dvh;
+    overflow-wrap: break-word;
+    line-height: 1.5;
+  }
+
+  :where(a, code) { overflow-wrap: anywhere; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+
+  :where(a, button, select):focus-visible {
+    outline: 2px solid #c8f135;
+    outline-offset: 2px;
   }
 
   .skip-link {
     position: absolute;
-    left: 20px;
-    top: -40px;
-    padding: 8px 12px;
+    left: 1rem;
+    top: -4rem;
+    padding: 0.5rem 0.875rem;
     background: #c8f135;
     color: #0d1117;
-    font-size: 11px;
+    font-size: 0.75rem;
+    font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     text-decoration: none;
-    border-radius: 8px;
-    z-index: 20;
+    border-radius: 0.5rem;
+    z-index: 30;
   }
-
-  .skip-link:focus { top: 12px; }
+  .skip-link:focus { top: 0.75rem; }
 
   .top-links {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .top-link {
-    color: rgba(255,255,255,0.45);
-    font-size: 11px;
-    letter-spacing: 0.12em;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.25rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.68);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
   }
 
-  .top-link:hover { color: rgba(255,255,255,0.82); }
+  .top-link:hover,
+  .top-link[aria-current="page"] {
+    color: #f0f0f0;
+    border-color: rgba(200,241,53,0.45);
+    background: rgba(200,241,53,0.08);
+  }
 
-  /* Animated background */
-  .bg-orb {
+  .page-shell {
+    position: relative;
+    z-index: 10;
+    max-width: 56rem;
+    margin-inline: auto;
+    padding: 1.75rem 1.25rem max(3rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .hero-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.1rem, 1.3rem + 4vw, 3.25rem);
+    line-height: 1.08;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #f0f0f0;
+    margin: 0 0 1rem;
+  }
+
+  /* Decorative ambient layer clipped locally instead of hiding overflow on body */
+  .bg-ambient {
     position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-orb {
+    position: absolute;
     border-radius: 50%;
     filter: blur(80px);
     opacity: 0.18;
     pointer-events: none;
-    z-index: 0;
   }
 
   .glass {
@@ -121,19 +193,12 @@
     border: 1px solid rgba(255,255,255,0.10);
   }
 
-  .glass-dark {
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.08);
-  }
-
   .glass-row {
     background: rgba(255,255,255,0.035);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255,255,255,0.07);
-    transition: all 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
 
   .glass-row:hover {
@@ -148,7 +213,7 @@
 
   .glass-row.done .task-text {
     text-decoration: line-through;
-    opacity: 0.45;
+    opacity: 0.5;
   }
 
   .phase-header {
@@ -159,20 +224,27 @@
     border-left: 2px solid rgba(200, 241, 53, 0.7);
   }
 
-  /* Custom checkbox */
   .custom-check {
-    width: 18px;
-    height: 18px;
-    min-width: 18px;
-    border-radius: 4px;
-    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.28);
     background: rgba(255,255,255,0.05);
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     transition: all 0.15s ease;
     flex-shrink: 0;
+  }
+
+  .custom-check::before {
+    content: "";
+    position: absolute;
+    inset: -11px;
   }
 
   .custom-check.checked {
@@ -182,72 +254,91 @@
 
   .custom-check.checked::after {
     content: '';
-    width: 9px;
-    height: 5px;
-    border-left: 1.5px solid #c8f135;
-    border-bottom: 1.5px solid #c8f135;
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid #c8f135;
+    border-bottom: 2px solid #c8f135;
     transform: rotate(-45deg) translateY(-1px);
     display: block;
   }
 
-  /* Status select */
+  .day-col {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex: 0 0 9.5rem;
+    min-width: 0;
+  }
+
+  .status-col {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
   .status-select {
     background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.7);
-    border-radius: 6px;
-    padding: 3px 8px;
+    border: 1px solid rgba(255,255,255,0.14);
+    color: rgba(255,255,255,0.8);
+    border-radius: 8px;
+    padding: 0.35rem 0.65rem;
     font-family: 'Outfit', sans-serif;
-    font-size: 11.5px;
+    font-size: 0.8125rem;
     cursor: pointer;
     outline: none;
     transition: all 0.15s ease;
     appearance: none;
     -webkit-appearance: none;
-    min-width: 110px;
+    min-width: 6.75rem;
+    min-block-size: 2.25rem;
     backdrop-filter: blur(8px);
   }
 
-  .status-select:focus {
-    border-color: rgba(200,241,53,0.4);
-    background: rgba(200,241,53,0.06);
+  .status-select:focus-visible {
+    border-color: rgba(200,241,53,0.6);
+    background: rgba(200,241,53,0.08);
   }
 
   .status-select option { background: #1a1f2e; color: #e8e8e8; }
 
-  /* Status colors applied via JS */
-  .status-todo    { border-color: rgba(255,255,255,0.12) !important; color: rgba(255,255,255,0.45) !important; }
+  .status-todo    { border-color: rgba(255,255,255,0.16) !important; color: rgba(255,255,255,0.65) !important; }
   .status-inprog  { border-color: rgba(241,193,53,0.5) !important; color: #f1c135 !important; background: rgba(241,193,53,0.08) !important; }
   .status-done2   { border-color: rgba(200,241,53,0.5) !important; color: #c8f135 !important; background: rgba(200,241,53,0.08) !important; }
-  .status-skip    { border-color: rgba(255,100,100,0.4) !important; color: rgba(255,130,130,0.8) !important; background: rgba(255,80,80,0.06) !important; }
+  .status-skip    { border-color: rgba(255,100,100,0.4) !important; color: rgba(255,130,130,0.85) !important; background: rgba(255,80,80,0.06) !important; }
 
-  /* Tag badges */
-  .tag { font-size: 10.35px; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+  .tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    border-radius: 6px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
   .tag-build    { background: rgba(200,241,53,0.1);  border: 1px solid rgba(200,241,53,0.25); color: #c8f135; }
   .tag-learn    { background: rgba(53,200,241,0.1);  border: 1px solid rgba(53,200,241,0.25); color: #35c8f1; }
   .tag-ship     { background: rgba(241,193,53,0.1);  border: 1px solid rgba(241,193,53,0.25); color: #f1c135; }
   .tag-apply    { background: rgba(241,53,200,0.1);  border: 1px solid rgba(241,53,200,0.25); color: #f135c8; }
-  .tag-off      { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
+  .tag-off      { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: rgba(255,255,255,0.45); }
   .tag-prep     { background: rgba(241,136,53,0.1);  border: 1px solid rgba(241,136,53,0.25); color: #f18835; }
   .tag-milestone{ background: rgba(200,241,53,0.08); border: 1px solid rgba(200,241,53,0.2);  color: #c8f135; }
 
-  /* Off day rows */
-  .off-row { opacity: 0.4; }
-  .off-row:hover { opacity: 0.55; }
+  .off-row { opacity: 0.52; }
+  .off-row:hover { opacity: 0.68; }
 
-  /* Summary stat cards */
   .stat-card {
     background: rgba(255,255,255,0.05);
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.09);
     border-radius: 12px;
   }
 
-  /* Progress bar */
   .progress-track {
     background: rgba(255,255,255,0.07);
     border-radius: 99px;
-    height: 4px;
+    height: 5px;
     overflow: hidden;
   }
 
@@ -258,22 +349,20 @@
     transition: width 0.5s ease;
   }
 
-  /* Milestone row */
   .milestone-row {
     background: rgba(200,241,53,0.04);
-    border: 1px solid rgba(200,241,53,0.15);
-    border-radius: 8px;
-    margin: 6px 0 16px;
+    border: 1px solid rgba(200,241,53,0.18);
+    border-radius: 10px;
+    margin: 0.5rem 0 1rem;
+    flex-wrap: wrap;
   }
 
   .syne { font-family: 'Outfit', sans-serif; letter-spacing: -0.03em; }
 
-  /* Scrollbar */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
 
-  /* Fade in animation */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(12px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -286,6 +375,7 @@
     border-top: 2px solid rgba(53,200,241,0.5);
     border-radius: 12px;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .intro-card {
@@ -293,150 +383,179 @@
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 12px;
     backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .phase-nav {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+    gap: 0.75rem;
   }
 
   .phase-link {
     display: block;
     text-decoration: none;
-    padding: 16px 18px;
+    padding: 1rem 1.125rem;
     border-radius: 12px;
     border: 1px solid rgba(255,255,255,0.08);
     background: rgba(255,255,255,0.025);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    min-width: 0;
   }
 
   .phase-link:hover {
     transform: translateY(-2px);
-    border-color: rgba(200,241,53,0.22);
+    border-color: rgba(200,241,53,0.25);
     background: rgba(200,241,53,0.04);
   }
 
   .phase-link-kicker {
     display: block;
-    color: rgba(255,255,255,0.35);
-    font-size: 10px;
+    color: rgba(255,255,255,0.48);
+    font-size: 0.68rem;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 7px;
+    margin-bottom: 0.4rem;
   }
 
   .phase-link-title {
     display: block;
     color: #f0f0f0;
-    font-size: 15px;
-    line-height: 1.45;
-    margin-bottom: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 0.35rem;
   }
 
   .phase-link-meta {
     display: block;
-    color: rgba(255,255,255,0.45);
-    font-size: 11px;
-    line-height: 1.7;
+    color: rgba(255,255,255,0.58);
+    font-size: 0.78rem;
+    line-height: 1.65;
   }
 
   .phase-section {
-    margin-bottom: 26px;
+    margin-bottom: 1.75rem;
+    scroll-margin-top: 1rem;
   }
 
   .phase-summary {
-    margin: 10px 0 16px;
-    color: rgba(255,255,255,0.48);
-    font-size: 12px;
-    line-height: 1.8;
+    margin: 0.625rem 0 1rem;
+    color: rgba(255,255,255,0.62);
+    font-size: 0.875rem;
+    line-height: 1.7;
   }
 
-  @media (max-width: 768px) {
-    .phase-nav { grid-template-columns: 1fr; }
-    .phase-header { align-items: flex-start; }
+  .seo-topics {
+    margin-top: 1.25rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
   }
 
-  @media (max-width: 640px) {
-    .top-links { margin-bottom: 16px; }
-    .phase-link { padding: 14px 16px; }
-    .phase-summary { font-size: 13px; line-height: 1.7; }
-    .glass-row { padding: 14px; }
-    .status-select { min-width: 0; width: 100%; }
+  .seo-pill {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.72);
   }
 
-  @media (max-width: 560px) {
+  @media (pointer: coarse) {
+    .top-link { min-block-size: 44px; }
+    .status-select { min-block-size: 44px; font-size: 1rem; }
+  }
+
+  @media (max-width: 44em) {
+    .day-col { flex: 0 0 7.75rem; }
+  }
+
+  @media (max-width: 38em) {
+    .page-shell { padding: 1.25rem 0.75rem max(2.5rem, env(safe-area-inset-bottom, 0px)); }
     .glass-row {
       flex-direction: column;
       align-items: stretch;
-      gap: 12px;
+      gap: 0.75rem;
+      padding: 0.9rem;
     }
-
-    .glass-row > div:first-child {
-      width: auto !important;
-      padding-top: 0;
+    .day-col {
+      flex: none;
+      width: 100%;
     }
-
-    .glass-row > div:last-child {
+    .status-col {
       width: 100%;
       justify-content: space-between;
       flex-wrap: wrap;
     }
+    .status-select {
+      flex: 1 1 8rem;
+      font-size: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fade-up { animation: none; }
+    .phase-link, .glass-row, .progress-fill { transition: none; }
   }
 </style>
 </head>
 <body class="relative">
 <a class="skip-link" href="#main-content">Skip to main content</a>
 
-<!-- BG orbs -->
-<div class="bg-orb w-96 h-96 bg-lime-400" style="top:-80px;left:-60px;"></div>
-<div class="bg-orb w-80 h-80 bg-cyan-400" style="top:30%;right:-40px;"></div>
-<div class="bg-orb w-64 h-64 bg-purple-500" style="bottom:20%;left:30%;"></div>
+<div class="bg-ambient" aria-hidden="true">
+  <div class="bg-orb w-96 h-96 bg-lime-400" style="top:-80px;left:-60px;"></div>
+  <div class="bg-orb w-80 h-80 bg-cyan-400" style="top:30%;right:-40px;"></div>
+  <div class="bg-orb w-64 h-64 bg-purple-500" style="bottom:20%;left:30%;"></div>
+</div>
 
-<div class="relative z-10 max-w-4xl mx-auto px-5 py-10">
+<div class="page-shell">
 
-  <div class="top-links">
+  <nav class="top-links" aria-label="Primary">
     <a class="top-link" href="./index.html">All Trackers</a>
-  </div>
+    <a class="top-link" href="./interview-questions.html">Interview Questions</a>
+    <a class="top-link" href="./ai-product-engineer.html" aria-current="page">AI Engineer Roadmap</a>
+    <a class="top-link" href="./backend.html">Backend Stack</a>
+    <a class="top-link" href="./auth.html">Auth Mastery</a>
+    <a class="top-link" href="./workout.html">Workout</a>
+  </nav>
 
-  <!-- Header -->
-  <header class="mb-10 fade-up">
-    <p class="text-xs tracking-widest uppercase mb-3" style="color:#c8f135;letter-spacing:0.18em;">// job-ready roadmap · 2026</p>
-    <h1 class="syne text-5xl font-extrabold leading-tight mb-4" style="color:#f0f0f0;">From indie dev<br>to <span style="color:#c8f135;">hired.</span></h1>
-    <p class="max-w-2xl text-sm leading-7" style="color:rgba(255,255,255,0.52);">This roadmap turns a scattered startup job search into a structured six-week plan: establish credibility, build and ship DevPulse, create public proof of work, then convert that momentum into applications and interview-ready stories.</p>
+  <header class="mb-8 fade-up">
+    <p class="text-xs tracking-widest uppercase mb-3" style="color:#c8f135;letter-spacing:0.18em;">// AI Product Engineer Roadmap · 2026</p>
+    <h1 class="hero-title">From indie dev<br>to <span style="color:#c8f135;">hired.</span></h1>
+    <p class="max-w-2xl text-sm leading-7" style="color:rgba(255,255,255,0.68);">This six-week AI product engineer roadmap turns a scattered startup job search into a structured execution plan: establish credibility, build and deploy DevPulse with FastAPI and Claude/OpenAI APIs, ship a React or SvelteKit frontend, and convert live proof of work into startup interviews.</p>
     <div class="flex flex-wrap gap-2 mt-4">
-      <span class="glass text-xs px-3 py-1 rounded-full" style="color:rgba(255,255,255,0.5);">2–3 hrs/day</span>
-      <span class="glass text-xs px-3 py-1 rounded-full" style="color:rgba(255,255,255,0.5);">Off: Mon &amp; Thu</span>
-      <span class="glass text-xs px-3 py-1 rounded-full" style="color:rgba(255,255,255,0.5);">6 weeks</span>
-      <span class="glass text-xs px-3 py-1 rounded-full" style="color:rgba(255,255,255,0.5);">&lt;50 person product startup</span>
+      <span class="glass text-xs px-3 py-1.5 rounded-full" style="color:rgba(255,255,255,0.7);">2–3 hrs/day</span>
+      <span class="glass text-xs px-3 py-1.5 rounded-full" style="color:rgba(255,255,255,0.7);">Off: Mon &amp; Thu</span>
+      <span class="glass text-xs px-3 py-1.5 rounded-full" style="color:rgba(255,255,255,0.7);">6 weeks · 42 days</span>
+      <span class="glass text-xs px-3 py-1.5 rounded-full" style="color:rgba(255,255,255,0.7);">&lt;50 person product startup</span>
     </div>
   </header>
 
-  <!-- Stats -->
   <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8 fade-up">
     <div class="stat-card p-4 text-center">
       <div class="syne text-3xl font-bold mb-1" style="color:#c8f135;" id="stat-done">0</div>
-      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.35);">Days done</div>
+      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.5);">Days done</div>
     </div>
     <div class="stat-card p-4 text-center">
       <div class="syne text-3xl font-bold mb-1" style="color:#f0f0f0;">42</div>
-      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.35);">Total days</div>
+      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.5);">Total days</div>
     </div>
     <div class="stat-card p-4 text-center">
       <div class="syne text-3xl font-bold mb-1" style="color:#35c8f1;" id="stat-inprog">0</div>
-      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.35);">In progress</div>
+      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.5);">In progress</div>
     </div>
     <div class="stat-card p-4 text-center">
       <div class="syne text-3xl font-bold mb-1" style="color:#f1c135;" id="stat-pct">0%</div>
-      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.35);">Complete</div>
+      <div class="text-xs tracking-widest uppercase" style="color:rgba(255,255,255,0.5);">Complete</div>
     </div>
   </div>
 
-  <!-- Progress -->
   <div class="mb-10 fade-up">
-    <div class="flex justify-between items-center mb-2">
-      <span class="text-xs" style="color:rgba(255,255,255,0.35);">Overall progress</span>
+    <div class="flex justify-between items-center gap-2 flex-wrap mb-2">
+      <span class="text-xs" style="color:rgba(255,255,255,0.55);">Overall progress</span>
       <span class="text-xs" style="color:#c8f135;" id="prog-label">0 / 30 active days</span>
     </div>
     <div class="progress-track">
@@ -445,19 +564,27 @@
   </div>
 
   <main id="main-content">
-    <section class="intro-card p-5 mb-10 fade-up" aria-labelledby="roadmap-overview-title">
-      <div class="flex items-center gap-3 mb-4">
+    <section class="intro-card p-5 mb-8 fade-up" aria-labelledby="roadmap-overview-title">
+      <div class="flex items-center flex-wrap gap-3 mb-3">
         <span class="tag tag-learn">Roadmap Guide</span>
-        <h2 class="text-base font-bold m-0" id="roadmap-overview-title" style="color:#f0f0f0;">Section overview for the full startup job-search plan</h2>
+        <h2 class="text-base font-bold m-0" id="roadmap-overview-title" style="color:#f0f0f0;">Tech stack &amp; phase overview for startup product engineering</h2>
       </div>
-      <p class="text-sm leading-7 mb-0" style="color:rgba(255,255,255,0.5);">Each section below groups the roadmap by outcome: credibility setup, DevPulse backend build, full-stack launch, applications, and interview preparation. Use the quick links to jump straight into the phase you want to focus on.</p>
+      <p class="text-sm leading-7 m-0" style="color:rgba(255,255,255,0.68);">Each phase connects practical engineering execution with hiring outcomes: FastAPI routing, Pydantic models, OAuth2, GitHub REST API ingestion, LLM prompt summarization, React or SvelteKit UI delivery, Railway/Render/Vercel deployment, DSA patterns, system design, and direct founder outreach.</p>
+      <div class="seo-topics" aria-label="Technologies and skills covered">
+        <span class="seo-pill">FastAPI &amp; Pydantic</span>
+        <span class="seo-pill">Claude &amp; OpenAI APIs</span>
+        <span class="seo-pill">GitHub REST API &amp; httpx</span>
+        <span class="seo-pill">React &amp; SvelteKit</span>
+        <span class="seo-pill">Railway, Render &amp; Vercel</span>
+        <span class="seo-pill">pytest &amp; Rate Limiting</span>
+        <span class="seo-pill">DSA &amp; System Design</span>
+      </div>
     </section>
 
-    <nav class="phase-nav mb-10 fade-up" id="phase-nav" aria-label="Jump to roadmap phases"></nav>
+    <nav class="phase-nav mb-8 fade-up" id="phase-nav" aria-label="Jump to roadmap phases"></nav>
 
-    <!-- Project brief -->
-    <section class="project-card p-5 mb-10 fade-up" aria-labelledby="project-brief-title">
-      <div class="flex items-center gap-3 mb-4">
+    <section class="project-card p-5 mb-8 fade-up" aria-labelledby="project-brief-title">
+      <div class="flex items-center flex-wrap gap-3 mb-4">
         <span class="tag tag-build">The Project</span>
         <h2 class="syne text-base font-bold m-0" id="project-brief-title" style="color:#f0f0f0;">DevPulse — AI-powered Developer Activity Summarizer</h2>
       </div>
@@ -465,41 +592,47 @@
         <div>
           <p class="text-xs tracking-widest uppercase mb-3" style="color:#35c8f1;">What you'll build</p>
           <ul class="space-y-2">
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ FastAPI backend with GitHub OAuth</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Fetches commits, PRs, activity</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Sends to Claude/OpenAI for summary</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Weekly "what did I build" digest</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ React or SvelteKit frontend</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Deployed live (Railway / Render)</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ FastAPI backend with GitHub OAuth &amp; REST API ingestion</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Fetches commits, pull requests, and repository activity</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Summarizes activity via Anthropic Claude / OpenAI APIs</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Weekly "what did I build" AI engineering digest</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ React or SvelteKit responsive web frontend</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Deployed live on Railway, Render, and Vercel</li>
           </ul>
         </div>
         <div>
           <p class="text-xs tracking-widest uppercase mb-3" style="color:#35c8f1;">Why this project</p>
           <ul class="space-y-2">
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Closes FastAPI gap — built from scratch</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Closes AI gap — LLM in production</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Genuinely useful — you'll use it</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Relevant to devtools startups</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Small enough to finish in 2 weeks</li>
-            <li class="text-sm" style="color:rgba(255,255,255,0.6);">→ Live URL — interviewers can verify</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Proves FastAPI &amp; Python backend engineering from scratch</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Demonstrates production LLM integration, caching &amp; rate limiting</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Genuinely useful developer productivity workflow</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Directly relevant to AI and devtools startups</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Scoped to build and ship cleanly in two weeks</li>
+            <li class="text-sm" style="color:rgba(255,255,255,0.72);">→ Live production URL that hiring founders can verify</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- DAYS -->
-    <div id="days-container"></div>
+    <div id="days-container">
+      <noscript>
+        <section class="intro-card p-5 mb-6">
+          <h2 class="text-base font-bold mb-2" style="color:#f0f0f0;">Six-Week AI Product Engineer Curriculum</h2>
+          <p class="text-sm leading-7" style="color:rgba(255,255,255,0.72);">Week 1 covers Udyam registration, LinkedIn/GitHub cleanup, FastAPI fundamentals, OAuth2, CORS, GitHub REST API, and Claude/OpenAI API exploration. Week 2 builds DevPulse backend modules, caching, rate limiting, and pytest tests. Week 3 ships the React or SvelteKit UI to Railway, Render, and Vercel. Weeks 4–6 focus on YC Work at a Startup, Wellfound applications, cold founder outreach, DSA arrays/two pointers/sliding window, system design, and take-home interview prep.</p>
+        </section>
+      </noscript>
+    </div>
   </main>
 
 </div>
 
 <script>
 const PHASE_SUMMARIES = {
-  1: 'Establish legitimacy, tighten your LinkedIn and GitHub presence, and get clear on the FastAPI and API foundations behind DevPulse.',
-  2: 'Build the FastAPI backend core by fetching GitHub activity, creating the LLM summarization flow, and validating the whole backend locally.',
-  3: 'Ship the user-facing layer by building the frontend, deploying the stack, and publishing the project so it becomes proof of work.',
-  4: 'Turn the shipped work into pipeline momentum through targeted applications, outreach, DSA refreshers, system design basics, and mock interviews.',
-  5: 'Stay active during interviews with continued outreach, take-home readiness, strategy reviews, and ongoing shipping so the pipeline does not stall.'
+  1: 'Establish legitimacy, tighten your LinkedIn and GitHub presence, and get clear on the FastAPI, OAuth2, and LLM API foundations behind DevPulse.',
+  2: 'Build the FastAPI backend core by fetching GitHub activity, creating the Claude/OpenAI summarization flow, adding caching and rate limits, and validating with pytest.',
+  3: 'Ship the user-facing layer by building the React or SvelteKit frontend, deploying the full stack to Railway/Render and Vercel, and publishing proof of work.',
+  4: 'Turn the shipped work into pipeline momentum through targeted startup applications, founder outreach, DSA patterns, system design basics, and mock interviews.',
+  5: 'Stay active during interviews with continued outreach, 2-hour CRUD take-home readiness, Product Hunt launch execution, and strategy iteration.'
 };
 
 const DAYS = [
@@ -571,10 +704,11 @@ const TAG_LABELS = {
   apply: 'APPLY', off: 'OFF', prep: 'PREP'
 };
 
-let state = JSON.parse(localStorage.getItem('roadmap-state') || '{}');
+let state = {};
+try { state = JSON.parse(localStorage.getItem('roadmap-state') || '{}'); } catch (e) { state = {}; }
 
 function saveState() {
-  localStorage.setItem('roadmap-state', JSON.stringify(state));
+  try { localStorage.setItem('roadmap-state', JSON.stringify(state)); } catch (e) {}
 }
 
 function applyStatusClass(sel, val) {
@@ -623,7 +757,7 @@ function renderEntry(day) {
   if (day.milestone) {
     return `<div class="milestone-row flex items-center gap-3 px-4 py-3 mb-4">
       <span class="tag tag-milestone">✦ milestone</span>
-      <span class="text-sm" style="color:#c8f135;opacity:0.8;">${day.milestone}</span>
+      <span class="text-sm" style="color:#c8f135;opacity:0.88;">${day.milestone}</span>
     </div>`;
   }
 
@@ -631,23 +765,23 @@ function renderEntry(day) {
   const isDone = st.status === 'done' || st.checked;
   const isOff = day.off;
 
-  return `<div class="glass-row rounded-lg px-4 py-3 mb-1 flex items-start gap-3 ${isOff ? 'off-row' : ''} ${isDone && !isOff ? 'done' : ''}" id="row-${day.id}">
-    <div class="flex items-center gap-3 pt-0.5 flex-shrink-0" style="width:160px;">
-      ${!isOff ? `<div class="custom-check ${isDone ? 'checked' : ''}" id="chk-${day.id}" onclick="toggleCheck(${day.id})"></div>` : `<div style="width:18px;"></div>`}
+  return `<div class="glass-row rounded-lg px-4 py-3 mb-2 flex items-start gap-3 ${isOff ? 'off-row' : ''} ${isDone && !isOff ? 'done' : ''}" id="row-${day.id}">
+    <div class="day-col pt-0.5">
+      ${!isOff ? `<button type="button" class="custom-check ${isDone ? 'checked' : ''}" id="chk-${day.id}" aria-pressed="${isDone}" aria-label="Mark ${day.num} ${day.task} complete" onclick="toggleCheck(${day.id})"></button>` : `<div style="width:22px;flex-shrink:0;"></div>`}
       <div>
-        <div class="text-sm font-medium" style="color:rgba(255,255,255,${isOff ? '0.3' : '0.8'});">${day.name}</div>
-        <div class="text-xs" style="color:rgba(255,255,255,0.25);">${day.num}</div>
+        <div class="text-sm font-medium" style="color:rgba(255,255,255,${isOff ? '0.45' : '0.88'});">${day.name}</div>
+        <div class="text-xs" style="color:rgba(255,255,255,0.45);">${day.num}</div>
       </div>
     </div>
 
     <div class="flex-1 min-w-0">
-      <div class="text-sm task-text mb-1" style="color:rgba(255,255,255,${isOff ? '0.25' : '0.75'});">${day.task}</div>
-      ${day.sub ? `<div class="text-xs task-text leading-relaxed" style="color:rgba(255,255,255,0.35);">${day.sub}</div>` : ''}
+      <div class="text-sm task-text mb-1" style="color:rgba(255,255,255,${isOff ? '0.42' : '0.86'});">${day.task}</div>
+      ${day.sub ? `<div class="text-xs task-text leading-relaxed" style="color:rgba(255,255,255,0.52);">${day.sub}</div>` : ''}
     </div>
 
-    <div class="flex items-center gap-2 flex-shrink-0 pt-0.5">
+    <div class="status-col pt-0.5">
       <span class="tag ${TAG_MAP[day.tag]}">${TAG_LABELS[day.tag]}</span>
-      ${!isOff ? `<select class="status-select" id="sel-${day.id}" onchange="changeStatus(${day.id}, this)">
+      ${!isOff ? `<select class="status-select" id="sel-${day.id}" aria-label="Status for ${day.num}" onchange="changeStatus(${day.id}, this)">
         <option value="todo" ${st.status === 'todo' ? 'selected' : ''}>To do</option>
         <option value="inprog" ${st.status === 'inprog' ? 'selected' : ''}>In progress</option>
         <option value="done" ${st.status === 'done' ? 'selected' : ''}>Done</option>
@@ -678,7 +812,7 @@ function render() {
       <div class="phase-header rounded-lg px-4 py-3 mb-1 flex items-center gap-3 flex-wrap mt-4">
         <span class="text-xs tracking-widest uppercase px-2 py-1 rounded" style="background:rgba(200,241,53,0.1);border:1px solid rgba(200,241,53,0.2);color:#c8f135;">Phase 0${phase.phase}</span>
         <h2 class="syne font-bold text-base m-0" id="phase-title-${phase.phase}" style="color:#f0f0f0;">${phase.title}</h2>
-        <span class="ml-auto text-xs" style="color:rgba(255,255,255,0.35);">${phase.goal}</span>
+        <span class="ml-auto text-xs" style="color:rgba(255,255,255,0.52);">${phase.goal}</span>
       </div>
       <p class="phase-summary">${phase.summary}</p>
       ${phaseContent}
@@ -687,7 +821,6 @@ function render() {
 
   container.innerHTML = html;
 
-  // Apply status colors
   DAYS.filter(d => d.id && !d.off).forEach(day => {
     const sel = document.getElementById('sel-' + day.id);
     if (sel) {
@@ -706,6 +839,7 @@ function toggleCheck(id) {
   else if (state[id].status === 'done') state[id].status = 'todo';
   saveState();
   render();
+  document.getElementById('chk-' + id)?.focus({ preventScroll: true });
 }
 
 function changeStatus(id, sel) {
@@ -715,6 +849,7 @@ function changeStatus(id, sel) {
   applyStatusClass(sel, sel.value);
   saveState();
   render();
+  document.getElementById('sel-' + id)?.focus({ preventScroll: true });
 }
 
 render();

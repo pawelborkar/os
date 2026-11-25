@@ -3,17 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pawel's Trackers Hub | Roadmaps, Auth, Backend, and Workout Plans</title>
-<meta name="description" content="Browse Pawel's interactive HTML trackers for product engineering, authentication mastery, backend interview prep, and workout programming.">
-<meta name="robots" content="index,follow">
+<meta name="text-scale" content="scale">
+<title>Pawel's Engineering Roadmaps &amp; Interview Trackers | FastAPI, React, JS, PostgreSQL, Auth &amp; AI</title>
+<meta name="description" content="Interactive mobile-friendly engineering roadmaps, interview question banks, JWT auth checklists, FastAPI &amp; PostgreSQL backend study plans, and workout logs.">
+<meta name="keywords" content="engineering roadmaps, developer interview prep, JavaScript interview questions, React hooks interview prep, frontend machine coding problems, Python FastAPI roadmap, PostgreSQL SQL optimization guide, JWT refresh token authentication checklist, AI product engineer roadmap, RAG LLM interview questions, body recomposition workout tracker">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#10141f">
+<link rel="canonical" href="https://os.pawel.in/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Pawel's Trackers Hub">
-<meta property="og:description" content="A single landing page with quick-link cards to every interactive roadmap and training tracker.">
+<meta property="og:site_name" content="Pawel's Trackers Hub">
+<meta property="og:url" content="https://os.pawel.in/">
+<meta property="og:title" content="Pawel's Engineering Roadmaps &amp; Interview Trackers">
+<meta property="og:description" content="Interactive roadmaps and study trackers for JavaScript, React, Python, FastAPI, PostgreSQL, JWT authentication, Applied AI, and strength training.">
 <meta property="og:image" content="https://dummyimage.com/1200x630/10141f/e8eef9&amp;text=Pawel%27s+Trackers+Hub">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Pawel's Trackers Hub">
-<meta name="twitter:description" content="Quick links to roadmap, auth, backend, and workout HTML trackers.">
+<meta name="twitter:url" content="https://os.pawel.in/">
+<meta name="twitter:title" content="Pawel's Engineering Roadmaps &amp; Interview Trackers">
+<meta name="twitter:description" content="Quick links to JavaScript, React, FastAPI, PostgreSQL, JWT auth, AI product engineering, and workout HTML trackers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&amp;display=swap" rel="stylesheet">
@@ -21,28 +27,59 @@
 {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  "name": "Pawel's Trackers Hub",
-  "description": "Landing page linking to interactive HTML trackers for product engineering, auth, backend interview preparation, and workout programming.",
+  "name": "Pawel's Engineering Roadmaps & Interview Trackers",
+  "url": "https://os.pawel.in/",
+  "description": "Landing hub linking to interactive, mobile-responsive HTML trackers for JavaScript, React, machine coding, DSA, Python, FastAPI, PostgreSQL, authentication security, applied AI, and workout programming.",
+  "keywords": [
+    "engineering roadmaps",
+    "JavaScript interview questions",
+    "React interview questions",
+    "FastAPI PostgreSQL backend roadmap",
+    "JWT authentication security checklist",
+    "AI product engineer roadmap",
+    "recomposition workout tracker"
+  ],
+  "about": [
+    "JavaScript",
+    "React",
+    "Python",
+    "FastAPI",
+    "PostgreSQL",
+    "JWT Authentication",
+    "Applied AI and RAG",
+    "System Design",
+    "Strength Training"
+  ],
   "hasPart": [
     {
       "@type": "WebPage",
+      "name": "JavaScript, React, Python, PostgreSQL & AI Interview Questions",
+      "url": "https://os.pawel.in/interview-questions.html",
+      "description": "Interactive practice library covering JavaScript theory and output quizzes, React hooks, frontend machine coding, Blind 75 DSA patterns, Python, FastAPI, PostgreSQL, RAG, and system design."
+    },
+    {
+      "@type": "WebPage",
       "name": "AI Product Engineer Roadmap",
-      "description": "A six-week product engineering plan for shipping DevPulse and applying to startup roles."
+      "url": "https://os.pawel.in/ai-product-engineer.html",
+      "description": "Six-week startup job search and shipping roadmap for building DevPulse with FastAPI, Claude/OpenAI APIs, and React or SvelteKit."
     },
     {
       "@type": "WebPage",
       "name": "Auth Mastery Checklist",
-      "description": "An authentication study checklist covering JWT, password hashing, refresh tokens, and production edge cases."
+      "url": "https://os.pawel.in/auth.html",
+      "description": "Authentication study checklist covering JWT internals, bcrypt/argon2 password hashing, refresh token rotation, httpOnly cookies, CSRF/XSS defenses, and production edge cases."
     },
     {
       "@type": "WebPage",
       "name": "Backend Stack Mastery",
-      "description": "A ten-week backend interview roadmap focused on FastAPI, PostgreSQL, and a capstone integration project."
+      "url": "https://os.pawel.in/backend.html",
+      "description": "Ten-week backend interview roadmap focused on FastAPI production patterns, PostgreSQL indexing and EXPLAIN ANALYZE, SQLAlchemy 2.0, Alembic, Docker, and DevPulse integration."
     },
     {
       "@type": "WebPage",
-      "name": "Workout Program",
-      "description": "A weekly workout tracker for recomposition with exercise timers, rest timers, and history."
+      "name": "Workout Program Tracker",
+      "url": "https://os.pawel.in/workout.html",
+      "description": "Seven-day recomposition workout tracker with exercise stopwatches, rest countdown timers, RIR progression rules, and weekly history."
     }
   ]
 }
@@ -55,21 +92,24 @@
     --surface-strong: rgba(30, 35, 46, 0.84);
     --border: rgba(255, 255, 255, 0.14);
     --text: #f8f4ee;
-    --muted: rgba(248, 244, 238, 0.68);
+    --muted: rgba(248, 244, 238, 0.72);
     --lime: #7fd7f8;
     --cyan: #9ba8ff;
     --orange: #ffbe6f;
     --rose: #d28cff;
+    --emerald: #6ee7b7;
   }
 
-  * { box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; }
 
   body {
     margin: 0;
     min-height: 100vh;
+    min-height: 100dvh;
     font-family: 'Outfit', sans-serif;
+    line-height: 1.5;
     color: var(--text);
-    overflow-x: hidden;
+    overflow-wrap: break-word;
     background:
       radial-gradient(circle at 18% 18%, rgba(255, 216, 155, 0.36), transparent 22%),
       radial-gradient(circle at 82% 16%, rgba(238, 120, 78, 0.26), transparent 18%),
@@ -78,17 +118,72 @@
   }
 
   a { color: inherit; }
+  :where(a, code) { overflow-wrap: anywhere; }
+  h1, h2, h3 { text-wrap: balance; }
+  p, li { text-wrap: pretty; }
+
+  :where(a, button):focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 3px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 20;
+    padding: 0.625rem 1rem;
+    border-radius: 999px;
+    background: var(--lime);
+    color: #0e0f14;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 1rem; }
 
   .shell {
-    width: min(1120px, calc(100% - 32px));
-    margin: 0 auto;
-    padding: 36px 0 56px;
+    width: min(1120px, calc(100% - 2rem));
+    margin-inline: auto;
+    padding-block: 2.25rem max(3.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
+  .top-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .nav-pill {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.25rem;
+    padding: 0.45rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(24, 28, 38, 0.66);
+    color: var(--muted);
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  .nav-pill:hover,
+  .nav-pill[aria-current="page"] {
+    color: var(--text);
+    border-color: rgba(127, 215, 248, 0.45);
+    background: rgba(30, 35, 46, 0.88);
   }
 
   .hero {
     position: relative;
     overflow: hidden;
-    padding: 32px;
+    padding: clamp(1.25rem, 3.5vw, 2rem);
     border: 1px solid var(--border);
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(118, 100, 80, 0.46), rgba(46, 43, 45, 0.44));
@@ -111,10 +206,10 @@
   .eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 7px 12px;
+    gap: 0.625rem;
+    padding: 0.45rem 0.75rem;
     border-radius: 999px;
-    border: 1px solid rgba(200, 241, 53, 0.24);
+    border: 1px solid rgba(127, 215, 248, 0.28);
     background: rgba(24, 28, 38, 0.66);
     color: var(--lime);
     font-size: 0.78rem;
@@ -123,11 +218,11 @@
   }
 
   h1 {
-    margin: 18px 0 14px;
-    max-width: 700px;
+    margin: 1.125rem 0 0.875rem;
+    max-width: 740px;
     font-family: 'Outfit', sans-serif;
-    font-size: clamp(2.7rem, 7vw, 5rem);
-    line-height: 0.95;
+    font-size: clamp(2.1rem, 1.3rem + 4vw, 4.4rem);
+    line-height: 0.98;
     font-weight: 700;
     letter-spacing: -0.03em;
   }
@@ -137,18 +232,18 @@
     margin: 0;
     color: var(--muted);
     font-size: 1.02rem;
-    line-height: 1.8;
+    line-height: 1.75;
   }
 
   .hero-stats {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 22px;
+    gap: 0.75rem;
+    margin-top: 1.375rem;
   }
 
   .hero-stat {
-    padding: 10px 14px;
+    padding: 0.625rem 0.875rem;
     border-radius: 16px;
     background: rgba(24, 28, 38, 0.58);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -158,18 +253,18 @@
 
   .cards {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: 1.125rem;
+    margin-top: 1.625rem;
   }
 
   .card {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    min-height: 250px;
-    padding: 22px;
+    gap: 0.875rem;
+    min-height: 14.5rem;
+    padding: 1.375rem;
     border-radius: 24px;
     border: 1px solid var(--border);
     text-decoration: none;
@@ -178,11 +273,19 @@
     -webkit-backdrop-filter: blur(20px);
     transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    min-width: 0;
+  }
+
+  @media (min-width: 48em) {
+    .card-featured {
+      grid-column: 1 / -1;
+      min-height: 0;
+    }
   }
 
   .card:hover {
     transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.24);
     background: var(--surface-strong);
   }
 
@@ -197,42 +300,44 @@
 
   .card-tag {
     width: fit-content;
-    padding: 6px 10px;
+    max-width: 100%;
+    padding: 0.375rem 0.625rem;
     border-radius: 999px;
     font-size: 0.74rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
 
-  .tone-lime .card-tag { background: rgba(200, 241, 53, 0.1); color: var(--lime); }
-  .tone-cyan .card-tag { background: rgba(89, 215, 255, 0.1); color: var(--cyan); }
-  .tone-orange .card-tag { background: rgba(255, 180, 84, 0.1); color: var(--orange); }
-  .tone-rose .card-tag { background: rgba(255, 117, 151, 0.1); color: var(--rose); }
+  .tone-emerald .card-tag { background: rgba(110, 231, 183, 0.12); color: var(--emerald); }
+  .tone-lime .card-tag { background: rgba(127, 215, 248, 0.12); color: var(--lime); }
+  .tone-cyan .card-tag { background: rgba(155, 168, 255, 0.12); color: var(--cyan); }
+  .tone-orange .card-tag { background: rgba(255, 190, 111, 0.12); color: var(--orange); }
+  .tone-rose .card-tag { background: rgba(210, 140, 255, 0.12); color: var(--rose); }
 
   .card h2 {
     margin: 0;
-    font-size: 1.55rem;
-    line-height: 1.15;
+    font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.55rem);
+    line-height: 1.18;
   }
 
   .card p {
     margin: 0;
     color: var(--muted);
-    line-height: 1.7;
+    line-height: 1.68;
     font-size: 0.98rem;
   }
 
   .card-meta {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 0.5rem;
     margin-top: auto;
   }
 
   .chip {
     display: inline-flex;
     align-items: center;
-    padding: 7px 10px;
+    padding: 0.4rem 0.65rem;
     border-radius: 12px;
     background: rgba(24, 28, 38, 0.58);
     border: 1px solid rgba(255, 255, 255, 0.12);
@@ -241,7 +346,7 @@
   }
 
   .card-cta {
-    margin-top: 6px;
+    margin-top: 0.35rem;
     color: var(--text);
     font-size: 0.92rem;
     letter-spacing: 0.06em;
@@ -249,151 +354,178 @@
   }
 
   .section-copy {
-    margin-top: 26px;
-    padding: 24px;
+    margin-top: 1.625rem;
+    padding: clamp(1.25rem, 3vw, 1.5rem);
     border-radius: 24px;
     border: 1px solid var(--border);
-    background: rgba(24, 28, 38, 0.58);
+    background: rgba(24, 28, 38, 0.62);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   .section-copy h2 {
-    margin: 0 0 12px;
+    margin: 0 0 0.75rem;
     font-size: 1.2rem;
   }
 
   .section-copy p {
     margin: 0;
     color: var(--muted);
-    line-height: 1.8;
+    line-height: 1.75;
   }
 
-  @media (max-width: 800px) {
-    .shell {
-      width: min(100% - 24px, 1120px);
-      padding: 24px 0 40px;
-    }
-
-    .cards {
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    .hero { padding: 24px; border-radius: 22px; }
-
-    h1 { font-size: clamp(2.3rem, 12vw, 3.8rem); }
-
-    .hero p {
-      font-size: 0.98rem;
-      line-height: 1.75;
-    }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15.5rem), 1fr));
+    gap: 0.875rem;
+    margin-top: 1rem;
   }
 
-  @media (max-width: 560px) {
+  .topic-box {
+    padding: 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(14, 15, 20, 0.45);
+  }
+
+  .topic-box h3 {
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+    color: var(--text);
+  }
+
+  .topic-box p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  @media (pointer: coarse) {
+    .nav-pill, .card-cta { min-block-size: 44px; }
+  }
+
+  @media (max-width: 35em) {
     .shell {
-      width: calc(100% - 20px);
-      padding: 20px 0 32px;
+      width: calc(100% - 1.25rem);
+      padding-block: 1.25rem max(2.25rem, env(safe-area-inset-bottom, 0px));
     }
 
-    .hero {
-      padding: 20px;
-      border-radius: 20px;
-    }
-
-    .hero::after {
-      width: 220px;
-      height: 220px;
-    }
-
-    .hero-stats { gap: 10px; }
-
+    .hero { border-radius: 20px; }
+    .hero::after { width: 220px; height: 220px; }
     .hero-stat { width: 100%; }
+    .card { min-height: auto; padding: 1.125rem; border-radius: 20px; }
+    .section-copy { margin-top: 1.25rem; border-radius: 20px; }
+  }
 
-    .card {
-      min-height: auto;
-      padding: 18px;
-      border-radius: 20px;
-    }
-
-    .card h2 { font-size: 1.3rem; }
-
-    .chip { width: 100%; }
-
-    .section-copy {
-      margin-top: 20px;
-      padding: 20px;
-      border-radius: 20px;
-    }
+  @media (prefers-reduced-motion: reduce) {
+    .card, .nav-pill { transition: none; }
   }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
 <div class="shell">
+  <nav class="top-nav" aria-label="Primary">
+    <a class="nav-pill" href="./index.html" aria-current="page">Hub</a>
+    <a class="nav-pill" href="./interview-questions.html">Interview Questions</a>
+    <a class="nav-pill" href="./ai-product-engineer.html">AI Engineer Roadmap</a>
+    <a class="nav-pill" href="./backend.html">Backend Stack</a>
+    <a class="nav-pill" href="./auth.html">Auth Mastery</a>
+    <a class="nav-pill" href="./workout.html">Workout Program</a>
+  </nav>
+
   <header class="hero">
-    <div class="eyebrow">Quick Access Hub</div>
+    <div class="eyebrow">Engineering &amp; Training Hub</div>
     <h1>Pawel's interactive roadmaps, in one place.</h1>
-    <p>This landing page gathers every standalone HTML tracker into a single SEO-friendly hub, so visitors can jump straight into product engineering planning, authentication study, backend interview prep, or workout programming.</p>
+    <p>A fast, mobile-responsive hub connecting standalone study roadmaps, interview question banks, authentication security checklists, FastAPI and PostgreSQL backend plans, and recomposition training logs.</p>
     <div class="hero-stats">
-      <div class="hero-stat">4 linked HTML experiences</div>
-      <div class="hero-stat">Roadmaps, checklists, and progress trackers</div>
-      <div class="hero-stat">Fast navigation for people and search crawlers</div>
+      <div class="hero-stat">5 interactive HTML trackers</div>
+      <div class="hero-stat">JS, React, Python, FastAPI, PostgreSQL &amp; AI</div>
+      <div class="hero-stat">Local progress persistence &amp; mobile-ready UI</div>
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <section class="cards" aria-label="Quick links to HTML trackers">
+      <a class="card card-featured tone-emerald" href="./interview-questions.html">
+        <span class="card-tag">Interview Practice · Multi-Tech</span>
+        <h2>JavaScript, React, Python, PostgreSQL &amp; Applied AI Interview Questions</h2>
+        <p>Interactive coding and theory practice covering JavaScript closures, promises, and event-loop output drills, React hooks and reconciliation, frontend machine coding rounds, Blind 75 DSA patterns, Python &amp; FastAPI, PostgreSQL indexing, RAG pipelines, and system design.</p>
+        <div class="card-meta">
+          <span class="chip">JS &amp; React theory + output drills</span>
+          <span class="chip">Frontend machine coding &amp; DSA</span>
+          <span class="chip">Python, FastAPI, Postgres &amp; RAG</span>
+        </div>
+        <div class="card-cta">Open interview practice →</div>
+      </a>
+
       <a class="card tone-lime" href="./ai-product-engineer.html">
         <span class="card-tag">Career Roadmap</span>
         <h2>AI Product Engineer Roadmap</h2>
-        <p>A six-week startup-oriented plan that moves from skill-gap closure to shipping DevPulse, applying to companies, and interview preparation.</p>
+        <p>A six-week startup job-search and shipping plan that moves from FastAPI and Claude/OpenAI API foundations to deploying DevPulse, founder outreach, and interview prep.</p>
         <div class="card-meta">
           <span class="chip">42-day roadmap</span>
-          <span class="chip">Startup hiring focus</span>
-          <span class="chip">Product + backend + outreach</span>
+          <span class="chip">DevPulse AI project</span>
+          <span class="chip">Startup hiring &amp; outreach</span>
         </div>
-        <div class="card-cta">Open roadmap</div>
+        <div class="card-cta">Open roadmap →</div>
       </a>
 
       <a class="card tone-cyan" href="./auth.html">
         <span class="card-tag">Security Checklist</span>
         <h2>Auth Mastery Checklist</h2>
-        <p>A sectioned authentication guide covering JWT internals, password hashing, access and refresh token flows, and the production failures interviews tend to probe.</p>
+        <p>Authentication study guide covering JWT internals, bcrypt and Argon2 password hashing, refresh token rotation, httpOnly cookies, CSRF/XSS defenses, and production failure modes.</p>
         <div class="card-meta">
-          <span class="chip">4 learning sections</span>
-          <span class="chip">JWT + cookies + revocation</span>
-          <span class="chip">Interview-ready prompts</span>
+          <span class="chip">JWT + refresh rotation</span>
+          <span class="chip">httpOnly cookies + CSRF</span>
+          <span class="chip">Auth security interviews</span>
         </div>
-        <div class="card-cta">Open checklist</div>
+        <div class="card-cta">Open checklist →</div>
       </a>
 
       <a class="card tone-orange" href="./backend.html">
         <span class="card-tag">Backend Roadmap</span>
         <h2>Backend Stack Mastery</h2>
-        <p>A ten-week backend prep plan focused on FastAPI, PostgreSQL, testing, deployment, and a realistic capstone project built for interview credibility.</p>
+        <p>Ten-week backend interview roadmap focused on FastAPI production patterns, PostgreSQL SQL fluency, EXPLAIN ANALYZE indexing, SQLAlchemy 2.0, Alembic, Docker, and Next.js integration.</p>
         <div class="card-meta">
           <span class="chip">10-week curriculum</span>
-          <span class="chip">FastAPI + Postgres</span>
-          <span class="chip">Capstone delivery plan</span>
+          <span class="chip">FastAPI + PostgreSQL</span>
+          <span class="chip">Asyncpg + Docker + testing</span>
         </div>
-        <div class="card-cta">Open backend plan</div>
+        <div class="card-cta">Open backend plan →</div>
       </a>
 
       <a class="card tone-rose" href="./workout.html">
         <span class="card-tag">Training Tracker</span>
         <h2>Workout Program</h2>
-        <p>A weekly recomposition training log with day-by-day programming, exercise timing, rest timing, recovery checkpoints, and week history.</p>
+        <p>Seven-day body recomposition training log with chest, back, shoulders, and legs splits, built-in exercise stopwatches, rest countdown timers, RIR progression rules, and weekly history.</p>
         <div class="card-meta">
-          <span class="chip">7-day split</span>
-          <span class="chip">Timers and history</span>
-          <span class="chip">Recomposition focus</span>
+          <span class="chip">7-day strength split</span>
+          <span class="chip">Exercise &amp; rest timers</span>
+          <span class="chip">2 RIR recomposition log</span>
         </div>
-        <div class="card-cta">Open workout tracker</div>
+        <div class="card-cta">Open workout tracker →</div>
       </a>
     </section>
 
-    <section class="section-copy" aria-labelledby="why-this-hub">
-      <h2 id="why-this-hub">Why this landing page helps SEO</h2>
-      <p>The hub gives search engines a crawlable starting point with descriptive internal links, while each destination page now has clearer metadata, stronger section labeling, and better semantic structure around its content.</p>
+    <section class="section-copy" aria-labelledby="tech-coverage">
+      <h2 id="tech-coverage">Technologies and Interview Topics Covered</h2>
+      <p>Each tracker targets practical, interview-ready mastery across frontend, backend, authentication security, applied AI engineering, and strength training.</p>
+      <div class="topic-grid">
+        <article class="topic-box">
+          <h3>JavaScript &amp; React Frontend</h3>
+          <p>Closures, prototypes, event loop microtasks, Promise combinators, debounce/throttle polyfills, React hooks, stale closures, reconciliation keys, and timed machine coding UI challenges.</p>
+        </article>
+        <article class="topic-box">
+          <h3>Python, FastAPI &amp; PostgreSQL</h3>
+          <p>Async FastAPI dependency injection, Pydantic v2, SQLAlchemy 2.0, Alembic migrations, SQL joins and window functions, B-tree indexing, EXPLAIN ANALYZE, and cursor pagination.</p>
+        </article>
+        <article class="topic-box">
+          <h3>Authentication &amp; Applied AI</h3>
+          <p>Stateless vs stateful auth, JWT HS256/RS256 signing, refresh token revocation, RAG retrieval and reranking, LLM tool calling, evaluations, and startup product shipping.</p>
+        </article>
+      </div>
     </section>
   </main>
 </div>
