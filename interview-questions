@@ -1,0 +1,1976 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="A macOS Catalina-inspired JavaScript and React interview theory, applied concept practice, output quizzes and machine coding.">
+  <title>Interview Practice — Engineering Roadmap</title>
+  <style>
+    /*
+      PREMIUM GLASSMORPHISM ROADMAP · single-file standalone demo
+      Namespace: cr-
+    */
+    .cr-app {
+      /* Dark Theme (Default) */
+      --cr-bg: #09090b;
+      --cr-surface: rgba(24, 24, 27, 0.55);
+      --cr-sidebar: rgba(9, 9, 11, 0.65);
+      --cr-text: #f8fafc;
+      --cr-secondary: #a1a1aa;
+      --cr-accent: #3b82f6;
+      --cr-accent-glow: rgba(59, 130, 246, 0.35);
+      --cr-border: rgba(255, 255, 255, 0.08);
+      --cr-border-strong: rgba(255, 255, 255, 0.12);
+      --cr-elevated: rgba(39, 39, 42, 0.45);
+      --cr-subtle: rgba(255, 255, 255, 0.03);
+      --cr-hover: rgba(255, 255, 255, 0.06);
+      --cr-selected: rgba(59, 130, 246, 0.15);
+      --cr-input: rgba(0, 0, 0, 0.25);
+      --cr-shadow: 0 32px 64px -12px rgba(0,0,0,0.5), 0 16px 32px -8px rgba(0,0,0,0.4);
+      --cr-glass-inset: inset 0 1px 1px rgba(255,255,255,0.08);
+      --cr-track: rgba(255, 255, 255, 0.1);
+      --cr-good: #34d399;
+      --cr-wall-1: #4c1d95;
+      --cr-wall-2: #1e3a8a;
+      --cr-wall-3: #0f766e;
+      
+      box-sizing: border-box;
+      isolation: isolate;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100svh;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      padding: 32px;
+      color: var(--cr-text);
+      background: var(--cr-bg);
+      font: 400 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      color-scheme: dark;
+    }
+    
+    .cr-app[data-theme="light"] {
+      --cr-bg: #f1f5f9;
+      --cr-surface: rgba(255, 255, 255, 0.6);
+      --cr-sidebar: rgba(248, 250, 252, 0.5);
+      --cr-text: #0f172a;
+      --cr-secondary: #64748b;
+      --cr-accent: #2563eb;
+      --cr-accent-glow: rgba(37, 99, 235, 0.25);
+      --cr-border: rgba(0, 0, 0, 0.08);
+      --cr-border-strong: rgba(0, 0, 0, 0.15);
+      --cr-elevated: rgba(255, 255, 255, 0.7);
+      --cr-subtle: rgba(0, 0, 0, 0.02);
+      --cr-hover: rgba(0, 0, 0, 0.04);
+      --cr-selected: rgba(37, 99, 235, 0.1);
+      --cr-input: rgba(255, 255, 255, 0.5);
+      --cr-shadow: 0 32px 64px -12px rgba(0,0,0,0.1), 0 16px 32px -8px rgba(0,0,0,0.05);
+      --cr-glass-inset: inset 0 1px 1px rgba(255,255,255,0.7);
+      --cr-track: rgba(0, 0, 0, 0.08);
+      --cr-good: #059669;
+      --cr-wall-1: #e0e7ff;
+      --cr-wall-2: #fbcfe8;
+      --cr-wall-3: #cffafe;
+      color-scheme: light;
+    }
+
+    .cr-app *, .cr-app *::before, .cr-app *::after { box-sizing: border-box; }
+    .cr-app button, .cr-app input, .cr-app select, .cr-app textarea { font: inherit; }
+    .cr-app button { color: inherit; cursor: pointer; }
+    .cr-app a { color: var(--cr-accent); text-decoration: none; transition: color 150ms ease; }
+    .cr-app a:hover { color: var(--cr-text); }
+    .cr-app :focus-visible { outline: 2px solid var(--cr-accent); outline-offset: 2px; }
+    .cr-app svg { display: block; flex-shrink: 0; }
+    
+    .cr-svg-defs { position: absolute; width: 0; height: 0; pointer-events: none; overflow: hidden; }
+    .cr-ico { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; fill: none; }
+    .cr-ico--sm { width: 14px; height: 14px; }
+    .cr-ico--lg { width: 20px; height: 20px; }
+    
+    /* Mesh Gradient Wallpaper */
+    .cr-wallpaper {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background-color: var(--cr-bg);
+      background-image: 
+        radial-gradient(circle at 10% 20%, var(--cr-wall-1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, var(--cr-wall-2) 0%, transparent 45%),
+        radial-gradient(circle at 50% 100%, var(--cr-wall-3) 0%, transparent 50%);
+      filter: blur(80px) saturate(140%);
+      opacity: 0.85;
+    }
+    
+    .cr-glass {
+      background: var(--cr-elevated);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid var(--cr-border);
+      box-shadow: var(--cr-glass-inset), 0 4px 20px rgba(0,0,0,0.05);
+    }
+    
+    .cr-window {
+      display: flex;
+      width: min(1440px, 100%);
+      height: min(930px, calc(100svh - 64px));
+      min-height: 635px;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: var(--cr-shadow), var(--cr-glass-inset);
+      border: 1px solid var(--cr-border-strong);
+      background: var(--cr-surface);
+      backdrop-filter: blur(32px) saturate(180%);
+      -webkit-backdrop-filter: blur(32px) saturate(180%);
+    }
+    
+    .cr-sidebar {
+      display: flex; flex-direction: column; flex: 0 0 240px; min-width: 0;
+      overflow-y: auto; overflow-x: hidden;
+      background: var(--cr-sidebar);
+      border-right: 1px solid var(--cr-border);
+    }
+    
+    /* macOS Window Controls */
+    .cr-chrome { display: flex; align-items: center; gap: 8px; height: 56px; padding: 0 20px; flex-shrink: 0; }
+    .cr-dot { display: block; width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1); }
+    .cr-dot--red { background: #ff5f57; } .cr-dot--yellow { background: #febc2e; } .cr-dot--green { background: #28c840; }
+    
+    .cr-brand { display: flex; align-items: center; gap: 12px; padding: 8px 20px 24px; }
+    .cr-brand-logo { 
+      display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: white;
+      background: linear-gradient(135deg, #60a5fa, #2563eb);
+      box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 0 4px 12px rgba(37,99,235,0.4);
+    }
+    .cr-brand-title { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2; }
+    .cr-brand-sub { margin-top: 2px; font-size: 12px; color: var(--cr-secondary); font-weight: 400; }
+    
+    .cr-nav-label {
+      display: flex; align-items: center; justify-content: space-between; padding: 0 20px; margin: 16px 0 8px;
+      font-size: 11px; letter-spacing: 0.06em; color: var(--cr-secondary); font-weight: 600; text-transform: uppercase;
+    }
+    .cr-nav { display: grid; gap: 4px; padding: 0 12px; }
+    .cr-nav-item {
+      width: 100%; text-align: left; display: flex; align-items: center; gap: 10px;
+      border: 0; border-radius: 8px; background: transparent; padding: 8px 12px; min-height: 36px;
+      font-size: 13px; font-weight: 500; transition: all 200ms ease; color: var(--cr-text);
+    }
+    .cr-nav-item:hover { background: var(--cr-hover); }
+    .cr-nav-item[aria-current="page"] {
+      background: var(--cr-selected); color: var(--cr-accent); font-weight: 600;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .cr-nav-item .cr-trailing { margin-left: auto; font-size: 11px; color: var(--cr-secondary); font-variant-numeric: tabular-nums; font-weight: 500; }
+    
+    .cr-side-foot { margin-top: auto; padding: 24px 20px 20px; }
+    .cr-side-mini { border-top: 1px solid var(--cr-border); padding-top: 20px; }
+    .cr-side-mini-title { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 10px; color: var(--cr-text); }
+    .cr-side-mini-title strong { font-weight: 600; }
+    
+    .cr-progress { width: 100%; height: 6px; overflow: hidden; border-radius: 999px; background: var(--cr-track); box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); }
+    .cr-progress span { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cr-accent), #60a5fa); border-radius: 999px; transition: width 400ms cubic-bezier(0.4, 0, 0.2, 1); }
+    
+    .cr-side-caption { color: var(--cr-secondary); font-size: 12px; margin-top: 10px; line-height: 1.4; }
+    .cr-side-link {
+      display: inline-flex; gap: 6px; align-items: center; border: 0; background: transparent; padding: 16px 0 0;
+      font-size: 12px; color: var(--cr-secondary) !important; font-weight: 500; transition: color 150ms ease;
+    }
+    .cr-side-link:hover { color: var(--cr-text) !important; }
+    
+    .cr-main { flex: 1; display: flex; flex-direction: column; min-width: 0; background: transparent; }
+    
+    .cr-toolbar {
+      flex-shrink: 0; height: 56px; padding: 0 28px; display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; border-bottom: 1px solid var(--cr-border); background: var(--cr-sidebar);
+      backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+    .cr-toolbar-left, .cr-toolbar-right { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .cr-breadcrumb { font-size: 13px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cr-breadcrumb span { color: var(--cr-secondary); }
+    .cr-menu { display: none !important; }
+    .cr-toolbar-divider { width: 1px; height: 20px; background: var(--cr-border); }
+    
+    .cr-theme-toggle { display: flex; align-items: center; padding: 4px; border: 1px solid var(--cr-border); background: var(--cr-input); border-radius: 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
+    .cr-theme-toggle button { display: grid; place-items: center; width: 30px; height: 26px; border-radius: 6px; background: transparent; border: 0; color: var(--cr-secondary); transition: all 200ms ease; }
+    .cr-theme-toggle button:hover { color: var(--cr-text); }
+    .cr-theme-toggle button[aria-pressed="true"] { color: var(--cr-text); background: var(--cr-elevated); box-shadow: 0 2px 6px rgba(0,0,0,0.1), var(--cr-glass-inset); }
+    
+    .cr-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 32px; padding: 6px 14px; border-radius: 10px;
+      border: 1px solid var(--cr-border); background: var(--cr-elevated); font-size: 13px; font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05), var(--cr-glass-inset); transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap;
+    }
+    .cr-btn:hover { background: var(--cr-hover); transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.1), var(--cr-glass-inset); }
+    .cr-btn:active { transform: translateY(0); }
+    .cr-btn--primary {
+      background: linear-gradient(135deg, var(--cr-accent), #2563eb); border: 0; color: #fff !important;
+      box-shadow: 0 4px 12px var(--cr-accent-glow), inset 0 1px 1px rgba(255,255,255,0.25);
+    }
+    .cr-btn--primary:hover { background: linear-gradient(135deg, #4f8cf6, #1d4ed8); box-shadow: 0 6px 16px var(--cr-accent-glow), inset 0 1px 1px rgba(255,255,255,0.25); }
+    .cr-btn--quiet { background: transparent; box-shadow: none; border-color: transparent; }
+    
+    .cr-scroll {
+      flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+      scrollbar-color: var(--cr-secondary) transparent; scrollbar-width: thin;
+    }
+    .cr-content { width: min(1080px, 100%); padding: 40px 48px 64px; margin-inline: auto; }
+    
+    .cr-eyebrow { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; color: var(--cr-accent); margin: 0 0 12px; }
+    .cr-heading-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .cr-h1 { margin: 0; font-size: clamp(28px, 3vw, 34px); line-height: 1.15; letter-spacing: -0.02em; font-weight: 700; color: var(--cr-text); }
+    .cr-lead { color: var(--cr-secondary); margin: 12px 0 0; font-size: 15px; line-height: 1.6; max-width: 720px; font-weight: 400; }
+    .cr-heading-row .cr-btn { margin-top: 8px; }
+    
+    .cr-stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; margin-top: 32px; }
+    .cr-stat { padding: 20px; border-radius: 16px; min-width: 0; }
+    .cr-stat-label { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500; color: var(--cr-secondary); margin-bottom: 12px; white-space: nowrap; }
+    .cr-stat-number { font-size: 28px; line-height: 1.2; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+    .cr-stat-number small { font-size: 14px; font-weight: 500; color: var(--cr-secondary); margin-left: 2px; }
+    .cr-stat-note { font-size: 12px; color: var(--cr-secondary); margin-top: 4px; }
+    .cr-stat-note--accent { color: var(--cr-good); font-weight: 500; }
+    .cr-stat-progress { margin-top: 12px; }
+    
+    .cr-tracks-line { display: flex; align-items: center; gap: 16px; justify-content: space-between; margin-top: 40px; margin-bottom: 20px; }
+    .cr-h2 { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
+    .cr-small { margin-top: 4px; font-size: 13px; color: var(--cr-secondary); }
+    
+    .cr-segment { display: flex; align-items: center; padding: 4px; background: var(--cr-input); border: 1px solid var(--cr-border); border-radius: 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
+    .cr-segment button { min-height: 28px; background: transparent; border: 0; border-radius: 7px; padding: 4px 14px; font-size: 12px; font-weight: 500; color: var(--cr-secondary); transition: all 200ms ease; }
+    .cr-segment button[aria-selected="true"], .cr-segment button[aria-pressed="true"] {
+      color: var(--cr-text); background: var(--cr-elevated); font-weight: 600;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1), var(--cr-glass-inset);
+    }
+    .cr-segment button:hover:not([aria-selected="true"]):not([aria-pressed="true"]) { color: var(--cr-text); }
+    
+    .cr-format-bar { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; margin: 0 0 20px; }
+    .cr-format-bar[hidden] { display: none; }
+    .cr-review-note { flex: 1 1 200px; color: var(--cr-secondary); font-size: 13px; line-height: 1.5; }
+    
+    .cr-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
+    .cr-search {
+      display: flex; align-items: center; gap: 10px; min-width: 240px; flex: 1 1 280px; height: 38px; border: 1px solid var(--cr-border);
+      background: var(--cr-input); border-radius: 10px; padding: 0 14px; color: var(--cr-secondary); box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+      transition: all 200ms ease;
+    }
+    .cr-search:focus-within { border-color: var(--cr-accent); box-shadow: 0 0 0 3px var(--cr-selected); }
+    .cr-search input { width: 100%; min-width: 0; border: 0; background: none; color: var(--cr-text); outline: 0; font-size: 13px; }
+    .cr-search input::placeholder { color: var(--cr-secondary); }
+    
+    .cr-select {
+      height: 38px; padding: 0 32px 0 14px; color: var(--cr-text); border: 1px solid var(--cr-border); border-radius: 10px;
+      background-color: var(--cr-input); font-size: 13px; font-weight: 500; cursor: pointer;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); transition: all 200ms ease;
+    }
+    .cr-select:focus-visible { border-color: var(--cr-accent); outline: none; box-shadow: 0 0 0 3px var(--cr-selected); }
+    .cr-select option { background: var(--cr-bg); color: var(--cr-text); }
+    .cr-filter-note { font-size: 12px; font-weight: 500; color: var(--cr-secondary); margin-left: auto; }
+    
+    .cr-app .cr-filters[hidden], .cr-app .cr-module-stack[hidden], .cr-app #cr-next[hidden], .cr-app .cr-queue[hidden] { display: none; }
+    
+    .cr-module-stack { display: grid; gap: 16px; }
+    .cr-module { border-radius: 16px; overflow: hidden; background: var(--cr-surface); border: 1px solid var(--cr-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+    .cr-module-header { display: flex; align-items: center; gap: 16px; padding: 18px 20px; min-width: 0; background: transparent; }
+    .cr-module-icon { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 12px; background: var(--cr-selected); color: var(--cr-accent); flex: 0 0 auto; }
+    .cr-module-labels { flex: 1; min-width: 0; }
+    .cr-module-name { font-size: 15px; font-weight: 600; line-height: 1.3; }
+    .cr-module-desc { font-size: 13px; color: var(--cr-secondary); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cr-module-progress { width: 120px; flex-shrink: 0; }
+    .cr-module-count { color: var(--cr-secondary); font-size: 12px; font-weight: 500; font-variant-numeric: tabular-nums; text-align: right; margin-bottom: 8px; }
+    
+    .cr-icon-btn { display: grid; place-items: center; width: 32px; height: 32px; border: 0; background: transparent; border-radius: 8px; color: var(--cr-secondary) !important; transition: all 150ms ease; }
+    .cr-icon-btn:hover { background: var(--cr-hover); color: var(--cr-text) !important; }
+    .cr-icon-btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+    .cr-icon-btn svg { transition: transform 200ms ease; }
+    
+    .cr-question-list { border-top: 1px solid var(--cr-border); }
+    .cr-question + .cr-question { border-top: 1px solid var(--cr-border); }
+    .cr-question-row { display: flex; align-items: center; gap: 14px; padding: 14px 20px; min-height: 60px; transition: background 150ms ease; }
+    .cr-question-row:hover { background: var(--cr-subtle); }
+    
+    .cr-checkbox { display: inline-flex; align-items: center; justify-content: center; position: relative; width: 20px; height: 20px; flex-shrink: 0; cursor: pointer; }
+    .cr-checkbox input { position: absolute; inset: 0; margin: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .cr-check-ui { width: 18px; height: 18px; display: grid; place-items: center; border-radius: 6px; border: 1.5px solid var(--cr-secondary); background: var(--cr-input); transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); }
+    .cr-check-ui svg { width: 12px; height: 12px; opacity: 0; color: white; stroke-width: 3; }
+    .cr-checkbox input:checked + .cr-check-ui { background: var(--cr-accent); border-color: var(--cr-accent); box-shadow: 0 2px 8px var(--cr-accent-glow); }
+    .cr-checkbox input:checked + .cr-check-ui svg { opacity: 1; }
+    .cr-checkbox input:focus-visible + .cr-check-ui { outline: 2px solid var(--cr-accent); outline-offset: 3px; }
+    .cr-question .cr-checkbox[role="img"] { cursor: default; color: var(--cr-secondary); }
+    
+    .cr-question-main { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; text-align: left; background: transparent; border: 0; padding: 0; }
+    .cr-q-title { font-size: 14px; font-weight: 500; min-width: 0; overflow-wrap: anywhere; }
+    .cr-q-title.cr-completed { color: var(--cr-secondary); text-decoration: line-through; text-decoration-color: var(--cr-secondary); opacity: 0.8; }
+    .cr-q-meta { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; padding-left: 12px; white-space: nowrap; }
+    
+    .cr-tag { display: inline-flex; padding: 3px 8px; border-radius: 6px; background: var(--cr-elevated); border: 1px solid var(--cr-border); color: var(--cr-text); font-size: 11px; font-weight: 600; box-shadow: inset 0 1px 1px rgba(255,255,255,0.05); }
+    .cr-tag--p0 { background: var(--cr-selected); color: var(--cr-accent); border-color: transparent; }
+    .cr-q-chevron { color: var(--cr-secondary); margin-left: 6px; transition: transform 200ms ease; }
+    .cr-question[data-open="true"] .cr-q-chevron { transform: rotate(180deg); }
+    
+    .cr-q-details { border-top: 1px solid var(--cr-border); margin: 0 20px 0 54px; padding: 16px 0 20px; }
+    .cr-q-details[hidden] { display: none; }
+    .cr-q-details p { font-size: 13px; color: var(--cr-secondary); margin: 0; line-height: 1.6; }
+    
+    .cr-source-code { max-width: 100%; margin: 12px 0; padding: 14px 16px; overflow: auto; color: var(--cr-text);
+      background: var(--cr-input); border: 1px solid var(--cr-border); border-radius: 10px; font-size: 13px; line-height: 1.6; tab-size: 2; box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+    .cr-source-code code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    
+    .cr-answer { margin: 12px 0 0; border: 1px solid var(--cr-border); border-radius: 10px; background: var(--cr-subtle); overflow: hidden; }
+    .cr-answer summary { padding: 10px 14px; color: var(--cr-text); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 150ms ease; }
+    .cr-answer summary:hover { background: var(--cr-hover); }
+    .cr-answer[open] summary { border-bottom: 1px solid var(--cr-border); }
+    .cr-answer-body { padding: 14px; }
+    .cr-answer-body .cr-source-code { margin: 0 0 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .cr-answer-body .cr-follow { margin-top: 10px; }
+    
+    .cr-q-details-bottom { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 14px; }
+    .cr-ref-link { font-size: 12px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
+    .cr-ref-caption { font-size: 12px; font-weight: 500; color: var(--cr-secondary); }
+    
+    .cr-module-footer { border-top: 1px solid var(--cr-border); display: flex; align-items: center; gap: 10px; padding: 14px 20px; background: var(--cr-subtle); font-size: 12px; color: var(--cr-secondary); }
+    .cr-module-footer a { font-weight: 500; }
+    
+    .cr-empty { border-radius: 16px; padding: 60px 24px; text-align: center; }
+    .cr-empty-icon { width: 56px; height: 56px; border-radius: 16px; background: var(--cr-selected); display: grid; place-items: center; color: var(--cr-accent); margin: 0 auto 16px; box-shadow: inset 0 2px 4px rgba(255,255,255,0.1); }
+    .cr-empty-icon svg { width: 24px; height: 24px; }
+    .cr-empty h3 { font-size: 18px; font-weight: 600; margin: 0 0 8px; color: var(--cr-text); }
+    .cr-empty p { color: var(--cr-secondary); font-size: 14px; margin: 0 0 24px; }
+    
+    /* Queue specific */
+    .cr-queue { margin-top: 20px; padding: clamp(24px, 5vw, 40px); border-radius: 20px; min-width: 0; }
+    .cr-queue-header, .cr-queue-actions, .cr-queue-meta { display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center; }
+    .cr-queue-header { justify-content: space-between; margin-bottom: 16px; }
+    .cr-queue-count { margin: 0; color: var(--cr-secondary); font-size: 13px; font-weight: 500; font-variant-numeric: tabular-nums; }
+    .cr-queue-meta { margin: 24px 0 12px; }
+    .cr-queue h3 { margin: 10px 0; font-size: clamp(20px, 3vw, 24px); line-height: 1.3; font-weight: 600; }
+    .cr-queue-prompt { color: var(--cr-text); font-size: 15px; line-height: 1.6; margin: 0 0 24px; max-width: 80ch; }
+    .cr-queue label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+    .cr-queue textarea {
+      display: block; width: 100%; min-height: 140px; resize: vertical; padding: 14px 16px;
+      border: 1px solid var(--cr-border); border-radius: 12px; background: var(--cr-input);
+      color: var(--cr-text); font: inherit; font-size: 15px; line-height: 1.6; box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .cr-queue textarea:focus { outline: none; border-color: var(--cr-accent); box-shadow: 0 0 0 3px var(--cr-selected), inset 0 2px 6px rgba(0,0,0,0.05); }
+    .cr-queue textarea::placeholder { color: var(--cr-secondary); }
+    .cr-queue-save-status { min-height: 20px; font-size: 12px; font-weight: 500; color: var(--cr-secondary); margin: 8px 0 12px; }
+    .cr-queue .cr-btn { min-height: 40px; font-size: 13px; }
+    .cr-queue .cr-btn:disabled { cursor: not-allowed; color: var(--cr-secondary) !important; opacity: 0.6; }
+    .cr-queue .cr-btn:disabled:hover { background: var(--cr-elevated); transform: none; box-shadow: var(--cr-glass-inset); }
+    .cr-queue-feedback { margin-top: 24px; padding: 20px; border: 1px solid var(--cr-border); border-radius: 12px; background: var(--cr-subtle); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
+    .cr-queue-feedback h4 { margin: 0 0 10px; font-size: 16px; font-weight: 600; }
+    .cr-queue-feedback p { margin: 8px 0 12px; max-width: 80ch; font-size: 14px; line-height: 1.6; }
+    .cr-queue-feedback ul { padding-inline-start: 24px; margin: 8px 0 12px; font-size: 14px; line-height: 1.6; }
+    .cr-queue-nav { justify-content: space-between; margin-top: 24px; border-top: 1px solid var(--cr-border); padding-top: 20px; }
+    
+    .cr-bottom-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 32px 4px 0; color: var(--cr-secondary); font-size: 12px; font-weight: 500; }
+    .cr-bottom-info a { white-space: nowrap; }
+    
+    .cr-scrim { display: none; }
+    .cr-toast {
+      position: absolute; right: 28px; bottom: 28px; background: var(--cr-surface); border: 1px solid var(--cr-border);
+      backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.2), var(--cr-glass-inset); color: var(--cr-text); border-radius: 12px; padding: 12px 18px;
+      font-size: 13px; font-weight: 500; pointer-events: none; opacity: 0; transform: translateY(10px); transition: opacity 250ms ease, transform 250ms ease; z-index: 10;
+    }
+    .cr-toast[data-visible="true"] { opacity: 1; transform: translateY(0); }
+    
+    /* Layouts and Responsiveness */
+    .cr-app[data-layout="embedded"] { display: block; padding: 0; min-height: 0; background: transparent; overflow: visible; }
+    .cr-app[data-layout="embedded"] .cr-wallpaper, .cr-app[data-layout="embedded"] .cr-sidebar, .cr-app[data-layout="embedded"] .cr-toolbar, .cr-app[data-layout="embedded"] .cr-scrim { display: none !important; }
+    .cr-app[data-layout="embedded"] .cr-window { display: block; width: 100%; height: auto; min-height: 0; box-shadow: none; border: 0; background: transparent; backdrop-filter: none; border-radius: 0; overflow: visible; }
+    .cr-app[data-layout="embedded"] .cr-main { display: block; background: transparent; }
+    .cr-app[data-layout="embedded"] .cr-scroll { overflow: visible; }
+    .cr-app[data-layout="embedded"] .cr-content { max-width: 100%; padding: 0; }
+    
+    @media (max-width: 1100px) {
+      .cr-sidebar { flex-basis: 220px; }
+      .cr-content { padding-inline: 32px; }
+      .cr-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    @media (max-width: 768px) {
+      .cr-app { padding: 0; }
+      .cr-window { height: 100svh; min-height: 0; width: 100%; border: 0; border-radius: 0; }
+      .cr-sidebar { position: absolute; left: 0; top: 0; bottom: 0; z-index: 6; width: min(300px, 85vw); transform: translateX(-105%); transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 16px 0 40px rgba(0,0,0,0.2); }
+      .cr-app[data-sidebar-open="true"] .cr-sidebar { transform: translateX(0); }
+      .cr-scrim { position: absolute; z-index: 5; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
+      .cr-app[data-sidebar-open="true"] .cr-scrim { display: block; }
+      .cr-menu { display: inline-flex !important; }
+      .cr-toolbar { padding: 0 20px; }
+      .cr-toolbar-left { gap: 12px; }
+      .cr-content { padding: 32px 24px 56px; }
+      .cr-heading-row { gap: 12px; }
+      .cr-heading-row .cr-btn { font-size: 0; gap: 0; width: 36px; height: 36px; padding: 0; }
+      .cr-heading-row .cr-btn svg { width: 18px; height: 18px; }
+      .cr-tracks-line { align-items: flex-start; gap: 12px; }
+      .cr-q-meta { padding-left: 0; }
+      .cr-module-progress { width: 80px; }
+    }
+    @media (max-width: 480px) {
+      .cr-stats { gap: 12px; }
+      .cr-stat { padding: 16px; }
+      .cr-stat-number { font-size: 24px; }
+      .cr-stat-label { font-size: 11px; white-space: normal; }
+      .cr-h1 { font-size: 26px; }
+      .cr-toolbar-right { gap: 8px; }
+      .cr-toolbar-right .cr-btn { font-size: 0; width: 32px; padding: 0; }
+      .cr-breadcrumb { font-size: 12px; }
+      .cr-tracks-line { flex-wrap: wrap; }
+      .cr-filters { gap: 8px; }
+      .cr-filter-note { width: 100%; margin-left: 0; }
+      .cr-select { flex: 1; }
+      .cr-module-header { gap: 12px; padding: 16px 14px; }
+      .cr-module-icon { width: 32px; height: 32px; }
+      .cr-module-progress { width: 60px; }
+      .cr-module-desc { font-size: 12px; }
+      .cr-question-row { padding: 12px 14px; }
+      .cr-q-details { margin-left: 42px; }
+      .cr-q-title { font-size: 13px; }
+      .cr-q-meta { margin-left: 0; }
+      .cr-format-bar .cr-segment button { padding-inline: 10px; }
+      .cr-bottom-info { flex-wrap: wrap; }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .cr-app .cr-glass, .cr-app .cr-window, .cr-app .cr-sidebar, .cr-app .cr-toolbar, .cr-app .cr-toast { backdrop-filter: none; -webkit-backdrop-filter: none; }
+      .cr-app[data-theme="dark"] { --cr-surface: #18181b; --cr-sidebar: #09090b; --cr-elevated: #27272a; --cr-input: #000000; }
+      .cr-app[data-theme="light"] { --cr-surface: #ffffff; --cr-sidebar: #f8fafc; --cr-elevated: #f1f5f9; --cr-input: #e2e8f0; }
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .cr-app[data-theme="dark"] { --cr-surface: #18181b; --cr-sidebar: #09090b; }
+      .cr-app[data-theme="light"] { --cr-surface: #ffffff; --cr-sidebar: #f8fafc; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cr-app *, .cr-app *::before, .cr-app *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body style="margin:0">
+<section class="cr-app" id="cr-app" data-theme="dark" data-layout="standalone" aria-label="Engineering coding practice roadmap">
+  <svg class="cr-svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs>
+    <symbol id="cr-i-code" viewBox="0 0 24 24"><path d="m8 17-5-5 5-5m8 0 5 5-5 5m-5 4 2-18"/></symbol>
+    <symbol id="cr-i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+    <symbol id="cr-i-layers" viewBox="0 0 24 24"><path d="m12 2 9 5-9 5-9-5 9-5Zm-9 10 9 5 9-5M3 17l9 5 9-5"/></symbol>
+    <symbol id="cr-i-terminal" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="3"/><path d="m6 8 4 4-4 4m7 0h5"/></symbol>
+    <symbol id="cr-i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/></symbol>
+    <symbol id="cr-i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+    <symbol id="cr-i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="cr-i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></symbol>
+    <symbol id="cr-i-check" viewBox="0 0 24 24"><path d="m5 12 5 5L20 7"/></symbol>
+    <symbol id="cr-i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+    <symbol id="cr-i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
+    <symbol id="cr-i-moon" viewBox="0 0 24 24"><path d="M20.9 13.1A9 9 0 0 1 10.9 3.1 9 9 0 1 0 20.9 13.1Z"/></symbol>
+    <symbol id="cr-i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="15" rx="3"/><path d="M8 22h8m-4-4v4"/></symbol>
+    <symbol id="cr-i-export" viewBox="0 0 24 24"><path d="M12 16V2m-5 5 5-5 5 5M4 14v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></symbol>
+    <symbol id="cr-i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="cr-i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M10 14 20 4M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="cr-i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="cr-i-reset" viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2.6 6.4M3 4v7h7"/></symbol>
+    <symbol id="cr-i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  </defs></svg>
+  
+  <div class="cr-wallpaper" aria-hidden="true"></div>
+  
+  <div class="cr-window">
+    <aside class="cr-sidebar" id="cr-sidebar" aria-label="Roadmap navigation">
+      <div class="cr-chrome" aria-hidden="true"><span class="cr-dot cr-dot--red"></span><span class="cr-dot cr-dot--yellow"></span><span class="cr-dot cr-dot--green"></span></div>
+      <div class="cr-brand">
+        <div class="cr-brand-logo"><svg class="cr-ico cr-ico--lg"><use href="#cr-i-code"/></svg></div>
+        <div><div class="cr-brand-title">Engineering Roadmap</div><div class="cr-brand-sub">Interview readiness</div></div>
+      </div>
+      <div class="cr-nav-label">My roadmap</div>
+      <nav class="cr-nav" aria-label="Roadmap tracks">
+        <button class="cr-nav-item" data-track="short" aria-current="page"><svg class="cr-ico"><use href="#cr-i-target"/></svg> Short-term track <span class="cr-trailing">2026</span></button>
+        <button class="cr-nav-item" data-track="long"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> Long-term track</button>
+      </nav>
+      <div class="cr-nav-label">Practice library</div>
+      <nav class="cr-nav" aria-label="Interview practice categories">
+        <button class="cr-nav-item" data-category="all"><svg class="cr-ico"><use href="#cr-i-grid"/></svg> All exercises <span class="cr-trailing" id="cr-nav-all">—</span></button>
+        <button class="cr-nav-item" data-category="javascript"><svg class="cr-ico"><use href="#cr-i-code"/></svg> JavaScript</button>
+        <button class="cr-nav-item" data-category="react"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> React</button>
+        <button class="cr-nav-item" data-category="machine"><svg class="cr-ico"><use href="#cr-i-terminal"/></svg> Machine coding</button>
+        <button class="cr-nav-item" data-category="dsa"><svg class="cr-ico"><use href="#cr-i-book"/></svg> DSA patterns</button>
+      </nav>
+      <div class="cr-side-foot">
+        <div class="cr-side-mini">
+          <div class="cr-side-mini-title"><strong>Overall progress</strong><span id="cr-sidebar-pct">0%</span></div>
+          <div class="cr-progress"><span id="cr-sidebar-bar"></span></div>
+          <div class="cr-side-caption" id="cr-sidebar-count">Your progress is saved locally</div>
+          <button type="button" class="cr-side-link" id="cr-reset"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-reset"/></svg> Reset completed items</button>
+        </div>
+      </div>
+    </aside>
+    
+    <div class="cr-scrim" id="cr-scrim" aria-hidden="true"></div>
+    
+    <main class="cr-main">
+      <header class="cr-toolbar">
+        <div class="cr-toolbar-left"><button class="cr-icon-btn cr-menu" id="cr-menu" type="button" aria-label="Open sidebar" aria-expanded="false" aria-controls="cr-sidebar"><svg class="cr-ico cr-ico--lg"><use href="#cr-i-menu"/></svg></button><div class="cr-breadcrumb"><span>Workspace</span> &nbsp;/&nbsp; <strong id="cr-crumb">Coding Practice</strong></div></div>
+        <div class="cr-toolbar-right">
+          <div class="cr-theme-toggle" role="group" aria-label="Appearance"><button type="button" data-theme-choice="light" title="Light appearance" aria-label="Light appearance"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-sun"/></svg></button><button type="button" data-theme-choice="system" title="Follow system appearance" aria-label="System appearance"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-monitor"/></svg></button><button type="button" data-theme-choice="dark" title="Dark appearance" aria-label="Dark appearance"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-moon"/></svg></button></div>
+          <div class="cr-toolbar-divider"></div>
+          <button type="button" class="cr-btn" id="cr-export"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-export"/></svg> Export checklist</button>
+        </div>
+      </header>
+      <div class="cr-scroll" id="cr-scroll"><div class="cr-content">
+        <div class="cr-intro">
+          <p class="cr-eyebrow" id="cr-eyebrow">Short-term · Interview readiness</p>
+          <div class="cr-heading-row">
+            <div>
+              <h1 class="cr-h1" id="cr-title">JavaScript &amp; React Interviews</h1>
+              <p class="cr-lead" id="cr-lead">Build your fundamentals with theory and output drills, then apply them in coding exercises and timed machine-coding rounds.</p>
+            </div>
+            <button class="cr-btn cr-btn--primary" id="cr-next"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-arrow"/></svg> Practice next</button>
+          </div>
+        </div>
+        
+        <div class="cr-stats" aria-label="Roadmap progress summary">
+          <div class="cr-stat cr-glass"><div class="cr-stat-label"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-grid"/></svg> Total exercises</div><div class="cr-stat-number" id="cr-stat-total">—</div><div class="cr-stat-note">Curated interview practice</div></div>
+          <div class="cr-stat cr-glass"><div class="cr-stat-label"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-check"/></svg> Completed</div><div class="cr-stat-number" id="cr-stat-done">—</div><div class="cr-stat-note cr-stat-note--accent" id="cr-stat-percent">0% complete</div></div>
+          <div class="cr-stat cr-glass"><div class="cr-stat-label"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-target"/></svg> Essential remaining</div><div class="cr-stat-number" id="cr-stat-p0">—</div><div class="cr-stat-note">P0 priority questions</div></div>
+          <div class="cr-stat cr-glass"><div class="cr-stat-label"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-activity"/></svg> Overall completion</div><div class="cr-stat-number" id="cr-stat-rate">0<small>%</small></div><div class="cr-stat-progress cr-progress"><span id="cr-total-bar"></span></div></div>
+        </div>
+        
+        <div class="cr-tracks-line">
+          <div><h2 class="cr-h2" id="cr-section-heading">Practice library</h2><p class="cr-small" id="cr-section-desc">Choose a practice format or search across the library.</p></div>
+          <div class="cr-segment" role="tablist" aria-label="Roadmap horizon"><button id="cr-tab-short" role="tab" aria-selected="true" data-track="short">Short term</button><button id="cr-tab-long" role="tab" aria-selected="false" data-track="long">Long term</button></div>
+        </div>
+        
+        <div class="cr-format-bar" id="cr-format-bar">
+          <div class="cr-segment" role="group" aria-label="Practice format">
+            <button type="button" data-format="all" aria-pressed="true">All</button>
+            <button type="button" data-format="theory" aria-pressed="false">Theory</button>
+            <button type="button" data-format="concept" aria-pressed="false" aria-controls="cr-concept-queue">Concept queue</button>
+            <button type="button" data-format="output" aria-pressed="false">Predict output</button>
+            <button type="button" data-format="coding" aria-pressed="false">Coding</button>
+          </div>
+          <div class="cr-review-note" id="cr-review-note">Try explaining the rule or predicting the result before revealing the answer.</div>
+        </div>
+        
+        <div class="cr-filters" id="cr-library-filters">
+          <label class="cr-search"><svg class="cr-ico"><use href="#cr-i-search"/></svg><input type="search" id="cr-search" placeholder="Search questions and topics…" aria-label="Search exercises" autocomplete="off"></label>
+          <select class="cr-select" id="cr-priority" aria-label="Filter priority"><option value="all">All priorities</option><option value="P0">P0 · Essential</option><option value="P1">P1 · Important</option><option value="P2">P2 · Advanced</option></select>
+          <select class="cr-select" id="cr-status" aria-label="Filter completion status"><option value="all">All status</option><option value="todo">To do</option><option value="done">Completed</option></select>
+          <span class="cr-filter-note" id="cr-match-count" aria-live="polite"></span>
+        </div>
+        
+        <div class="cr-module-stack" id="cr-module-stack" aria-label="Coding modules"></div>
+        <section class="cr-queue cr-glass" id="cr-concept-queue" aria-label="Concept practice queue" hidden></section>
+        
+        <div class="cr-bottom-info">
+          <span>Progress is saved in this browser. Priorities reflect practice value, not measured interview frequency.</span>
+          <a href="https://www.greatfrontend.com/" target="_blank" rel="noopener noreferrer">Interview question bank ↗</a>
+        </div>
+      </div></div>
+    </main>
+  </div>
+  
+  <div class="cr-toast" id="cr-toast" role="status" aria-live="polite"></div>
+</section>
+
+<script>
+(() => {
+  "use strict";
+  const root = document.getElementById("cr-app");
+  if (!root || root.dataset.initialized) return;
+  root.dataset.initialized = "true";
+  const $ = (selector) => root.querySelector(selector);
+  const $$ = (selector) => [...root.querySelectorAll(selector)];
+  const icon = (name, small = false) => `<svg class="cr-ico${small ? " cr-ico--sm" : ""}" aria-hidden="true"><use href="#cr-i-${name}"></use></svg>`;
+  const storage = {
+    get(key, fallback) { try { const v = localStorage.getItem(key); return v === null ? fallback : JSON.parse(v); } catch { return fallback; } },
+    set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); return true; } catch { return false; } }
+  };
+  const KEY_PROGRESS = "cr-roadmap-checks-v1";
+  const KEY_THEME = "cr-roadmap-theme-v1";
+  const q = (id, title, priority, difficulty, brief) => ({ id, title, priority, difficulty, brief });
+
+  const modules = [
+    { id:"js-core", track:"short", category:"javascript", name:"JavaScript · Core utilities", description:"Polyfills, closures, functions and object utilities", ref:"https://www.greatfrontend.com/questions/formats/javascript-functions", refLabel:"GreatFrontEnd · JS functions", items:[
+      q("js-map", "Implement Array.prototype.map", "P0", "Easy", "Recreate map using callbacks. Handle callback arguments, sparse arrays and the returned array correctly."),
+      q("js-filter", "Implement Array.prototype.filter", "P0", "Easy", "Preserve original element values, support thisArg and consider sparse array behavior."),
+      q("js-reduce", "Implement Array.prototype.reduce", "P0", "Medium", "Handle optional initialValue, empty arrays, callback indices and accumulated results."),
+      q("js-debounce", "Implement debounce()", "P0", "Medium", "Delay repeated calls, preserve this/arguments, and support cancellation. Stretch: leading/trailing options."),
+      q("js-throttle", "Implement throttle()", "P0", "Medium", "Limit invocation frequency without losing this. Explain leading/trailing behavior and pending executions."),
+      q("js-bind", "Polyfill Function.prototype.bind", "P0", "Medium", "Bind this and partial arguments; address constructor invocation in a robust implementation."),
+      q("js-flatten", "Flatten a deeply nested array", "P0", "Medium", "Support arbitrary nesting and optionally a maximum flattening depth. Discuss recursion versus iteration."),
+      q("js-clone", "Implement deepClone()", "P0", "Medium", "Deep-copy nested arrays and objects. Extend for Date, Map, Set and circular references."),
+      q("js-call", "Polyfill Function.prototype.call / apply", "P1", "Medium", "Invoke a function with an explicit this value and positional versus array-like arguments."),
+      q("js-curry", "Implement curry()", "P1", "Medium", "Allow collecting arguments over multiple calls until arity is satisfied, then execute the original function."),
+      q("js-memo", "Implement memoize()", "P1", "Medium", "Cache repeat calls; decide how argument keys are derived and when the cache becomes invalid."),
+      q("js-once", "Implement once()", "P1", "Easy", "Ensure a function runs once, while subsequent calls return the first result."),
+      q("js-group", "Implement groupBy()", "P1", "Medium", "Group values by a callback or property and handle missing keys predictably."),
+      q("js-compose", "Implement compose() and pipe()", "P1", "Easy", "Combine unary functions in right-to-left and left-to-right order; test with multiple functions."),
+      q("js-equal", "Implement deepEqual()", "P1", "Medium", "Compare nested values recursively. Consider arrays, object keys, null, Date and circular structures."),
+      q("js-emitter", "Implement EventEmitter / Pub-Sub", "P1", "Medium", "Implement subscribe, publish and unsubscribe; support multiple listeners and safe removal.")
+    ]},
+    { id:"js-async", track:"short", category:"javascript", name:"JavaScript · Promises & async", description:"Concurrency, cancellation, queues and the event loop", ref:"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise", refLabel:"MDN · Promises", items:[
+      q("js-all", "Implement Promise.all()", "P0", "Medium", "Resolve input values in order, allow parallel progress, reject on the first rejection and support an empty iterable."),
+      q("js-allsettled", "Implement Promise.allSettled()", "P0", "Medium", "Return ordered fulfilled/rejected outcome objects without short-circuiting on rejection."),
+      q("js-eventloop", "Event-loop output prediction", "P0", "Medium", "Predict the order of synchronous code, promise microtasks, queueMicrotask and timer callbacks; explain why."),
+      q("js-retry", "Retry an async operation", "P0", "Medium", "Retry failures up to a maximum count, stop on success, and optionally introduce backoff."),
+      q("js-race", "Implement Promise.race()", "P1", "Easy", "Settle on the first settled input and handle resolved values and empty iterables."),
+      q("js-any", "Implement Promise.any()", "P1", "Medium", "Resolve on the first fulfillment and reject with AggregateError only when every input rejects."),
+      q("js-pool", "Promise pool with concurrency limit", "P1", "Hard", "Run N async tasks with at most K active tasks, preserving results and handling failures deliberately."),
+      q("js-sequence", "Execute async functions in sequence", "P1", "Medium", "Process an array of async tasks one by one, preserving order and clearly propagating errors."),
+      q("js-timeout", "Add timeout to a Promise", "P1", "Medium", "Reject after a deadline, clear the timer on settlement and distinguish timeout from cancellation."),
+      q("js-batch", "Batch async requests", "P1", "Medium", "Group task execution into batches and avoid uncontrolled concurrency."),
+      q("js-abort", "Cancel fetch with AbortController", "P1", "Medium", "Cancel in-flight requests, handle AbortError and prevent stale results from updating UI."),
+      q("js-promise", "Implement a basic Promise abstraction", "P2", "Hard", "Explore state transitions, then/catch chaining, thenable assimilation and asynchronous handler scheduling.")
+    ]},
+    { id:"js-data", track:"short", category:"javascript", name:"JavaScript · Data & DOM", description:"Transformations, nested structures and DOM events", ref:"https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model", refLabel:"MDN · DOM", items:[
+      q("js-transform", "Transform and deduplicate object arrays", "P0", "Easy", "Filter, map, group and deduplicate arrays of records without mutating the source."),
+      q("js-immutable", "Update nested state immutably", "P0", "Medium", "Update one deep field while preserving references to untouched branches."),
+      q("js-tree", "Convert a flat list into a tree", "P1", "Medium", "Build parent-child relationships efficiently from id/parentId pairs; handle root nodes and missing parents."),
+      q("js-merge", "Implement deepMerge()", "P1", "Medium", "Define behavior for objects, arrays, conflicting scalar values and null, then merge recursively."),
+      q("js-path", "Implement get(object, path)", "P1", "Medium", "Read nested paths such as user.profile[0].name, with a default for missing properties."),
+      q("js-dom", "Implement DOM subtree search", "P1", "Medium", "Traverse descendants using DOM APIs and explain the cost of tree traversal."),
+      q("js-delegation", "Implement event delegation", "P1", "Medium", "Handle clicks on dynamically inserted items using a stable ancestor and closest()."),
+      q("js-lru", "Implement an LRU cache", "P2", "Hard", "Support get/put with constant-time average operations using a Map or linked structure.")
+    ]},
+    { id:"react-hooks", track:"short", category:"react", name:"React · Custom hooks", description:"Effects, stale closures, cleanup and reusable behavior", ref:"https://react.dev/reference/react", refLabel:"React · API reference", items:[
+      q("r-debounce", "Implement useDebounce()", "P0", "Medium", "Debounce a changing value or callback; clean up timers when inputs change and on unmount."),
+      q("r-fetch", "Implement useFetch() / useQuery()", "P0", "Medium", "Represent loading, data and error states; handle cancellation and stale results."),
+      q("r-storage", "Implement useLocalStorage()", "P0", "Medium", "Initialize from storage, serialize updates, guard errors, and consider cross-tab changes."),
+      q("r-previous", "Implement usePrevious()", "P0", "Easy", "Remember the previous rendered value using refs and effects; explain initial render behavior."),
+      q("r-outside", "Implement useOutsideClick()", "P0", "Medium", "Detect events outside a referenced element, clean up listeners and handle nested interactive elements."),
+      q("r-throttle", "Implement useThrottle()", "P1", "Medium", "Throttle values or handlers without stale closures or dangling timers."),
+      q("r-interval", "Implement useInterval()", "P1", "Medium", "Support changing callbacks and delays without resetting unrelated state or leaking intervals."),
+      q("r-window", "Implement useWindowSize()", "P1", "Easy", "Track window dimensions, subscribe and unsubscribe correctly, and consider server rendering."),
+      q("r-media", "Implement useMediaQuery()", "P1", "Medium", "Subscribe to matchMedia change events and expose the current query result."),
+      q("r-intersect", "Implement useIntersectionObserver()", "P1", "Medium", "Observe a DOM node, handle threshold/options changes and disconnect on cleanup."),
+      q("r-undo", "Implement useUndoRedo()", "P1", "Medium", "Maintain past/present/future values and invalidate redo history on new edits."),
+      q("r-async", "Implement useAsync()", "P1", "Medium", "Model request execution, resetting and racing results; document the callback dependency policy.")
+    ]},
+    { id:"react-components", track:"short", category:"react", name:"React · Components & state", description:"Composition, state modeling, performance and data fetching", ref:"https://react.dev/learn", refLabel:"React · Learn", items:[
+      q("r-form", "Build a controlled form with validation", "P0", "Medium", "Manage field values and errors; validate on submit and expose accessible feedback."),
+      q("r-modal", "Build a reusable modal with a portal", "P0", "Medium", "Handle opening, closing, escape, outside clicks, focus restoration and accessible labelling."),
+      q("r-tabs", "Build accessible reusable Tabs", "P0", "Medium", "Support controlled/uncontrolled selection and keyboard navigation between tabs."),
+      q("r-todo", "Build a Todo app with filters", "P0", "Easy", "Add, edit, delete, complete and filter tasks with stable keys and predictable state."),
+      q("r-api", "Fetch and display API data", "P0", "Medium", "Render loading, error, empty and success states while avoiding stale async updates."),
+      q("r-render", "Debug unnecessary re-renders", "P0", "Medium", "Identify state ownership, unstable props and unnecessary effects before applying memoization."),
+      q("r-pagination", "Build paginated results", "P1", "Medium", "Keep page selection and async data in sync; handle navigation and race conditions."),
+      q("r-multiform", "Build a multi-step form", "P1", "Medium", "Preserve field values across steps, validate boundaries and allow back navigation."),
+      q("r-context", "Build Context + useReducer state", "P1", "Medium", "Model actions and state transitions; separate state shape from rendering components."),
+      q("r-virtual", "Build a virtualized list", "P1", "Hard", "Render only the visible subset of a large list while preserving correct scroll height and positions.")
+    ]},
+    { id:"machine-essential", track:"short", category:"machine", name:"Machine coding · Essentials", description:"High-return UI questions for 45–90-minute rounds", ref:"https://www.greatfrontend.com/questions/user-interface", refLabel:"GreatFrontEnd · UI coding", items:[
+      q("m-auto", "Autocomplete / Typeahead", "P0", "Hard", "Search a remote source with debounce, loading states, caching, keyboard navigation and out-of-order response handling."),
+      q("m-table", "Data Table", "P0", "Hard", "Implement client-side sorting, text filtering, pagination, row selection and understandable state handling."),
+      q("m-explorer", "File Explorer", "P0", "Hard", "Render recursive folders, expand/collapse, create/rename/delete and update deeply nested structures."),
+      q("m-check", "Nested Checkboxes", "P0", "Hard", "Model parent-child selection, indeterminate states, propagation and partly selected subtrees."),
+      q("m-todo", "Todo App", "P0", "Medium", "Complete CRUD, filters, editing and persistent localStorage state within the allotted time."),
+      q("m-infinite", "Infinite Scrolling", "P0", "Medium", "Fetch pages on intersection, avoid duplicate requests and handle loading/empty/error/end-of-list states."),
+      q("m-toast", "Toast Notification System", "P0", "Hard", "Queue multiple notifications, auto-dismiss, remove individually and clean up timers correctly."),
+      q("m-carousel", "Image Carousel", "P0", "Medium", "Implement next/previous, indicators, autoplay, wraparound and timer cleanup."),
+      q("m-modal", "Modal Dialog", "P0", "Medium", "Support portal, keyboard escape, focus management and the close button; prevent click propagation bugs."),
+      q("m-accordion", "Accordion", "P0", "Easy", "Implement independently expanding or single-open sections with accessible buttons and state."),
+      q("m-tabs", "Tabs", "P0", "Easy", "Implement tab selection and matching panels, including keyboard navigation and ARIA roles."),
+      q("m-otp", "OTP Input", "P0", "Medium", "Implement individual digits, paste distribution, focus movement and backspace semantics."),
+      q("m-pagination", "Pagination", "P0", "Medium", "Implement variable page count, current selection, boundaries and ellipses when necessary."),
+      q("m-rating", "Star Rating", "P0", "Easy", "Render hover and committed selection, expose keyboard support and reset state."),
+      q("m-progress", "Progress Bars", "P0", "Medium", "Animate concurrent or queued progress bars, handle completion and avoid timing bugs.")
+    ]},
+    { id:"machine-intermediate", track:"short", category:"machine", name:"Machine coding · Intermediate", description:"Common application workflows and more involved state", ref:"https://github.com/anuj-webdev/frontend-machine-coding-interview-questions-reactjs", refLabel:"GitHub · Machine coding collection", items:[
+      q("m-step", "Multi-step Form", "P1", "Medium", "Compose multiple validated steps with saved answers and back/next controls."),
+      q("m-comments", "Nested Comments", "P1", "Hard", "Support recursive replies, editing, deletion and stable tree updates."),
+      q("m-cart", "Shopping Cart", "P1", "Medium", "Manage line items, quantities, totals and persistence with derived state."),
+      q("m-ttt", "Tic-Tac-Toe", "P1", "Easy", "Detect winner or draw, prevent invalid moves and provide reset."),
+      q("m-timer", "Stopwatch / Countdown", "P1", "Medium", "Use actual timestamps to avoid drift and support start, pause, resume and reset."),
+      q("m-kanban", "Kanban Board", "P1", "Hard", "Support moving cards across columns with consistent order and state updates."),
+      q("m-select", "Searchable Multi-select", "P1", "Hard", "Handle options, chips, outside click, keyboard focus and filtering."),
+      q("m-transfer", "Transfer List", "P1", "Medium", "Support moving selected items between two lists and preserving order."),
+      q("m-feed", "Job Board / API Feed", "P1", "Medium", "Fetch content incrementally and provide loading, error and empty-state UI."),
+      q("m-calendar", "Calendar / Date Picker", "P1", "Hard", "Generate a month grid, handle date selection, disabled dates and navigation."),
+      q("m-context", "Context Menu", "P1", "Medium", "Position a menu near pointer or target while respecting viewport bounds and keyboard dismissal."),
+      q("m-nav", "Responsive Navigation", "P1", "Medium", "Build accessible desktop navigation and mobile nested menu interactions.")
+    ]},
+    { id:"machine-advanced", track:"short", category:"machine", name:"Machine coding · Advanced LLD", description:"Reusable components, performance and complex interactions", ref:"https://www.greatfrontend.com/questions/user-interface", refLabel:"GreatFrontEnd · UI coding", items:[
+      q("m-virtual", "Virtualized List", "P1", "Hard", "Render only visible rows and calculate offsets correctly for large datasets."),
+      q("m-gentable", "Reusable Generic Data Table", "P1", "Hard", "Design a configurable columns API with sorting, selection, customizable rendering and pagination."),
+      q("m-undo", "Undo / Redo Editor", "P1", "Hard", "Represent history, ensure undo/redo consistency and handle new edits after undo."),
+      q("m-treeselect", "Tree Select Component", "P1", "Hard", "Handle recursive options, search, parent/child rules and indeterminate selection."),
+      q("m-sheet", "Spreadsheet-like Grid", "P2", "Hard", "Create editable cells, basic navigation, selection and controlled rendering."),
+      q("m-chat", "Chat UI with streaming", "P2", "Hard", "Handle partial messages, request cancellation, scroll anchoring and error states."),
+      q("m-rich", "Rich Text Editor", "P2", "Hard", "Implement basic formatting while preserving selection and handling contentEditable edge cases."),
+      q("m-dashboard", "Drag-and-drop Dashboard", "P2", "Hard", "Support rearranging panels, keyboard alternatives and persistence."),
+      q("m-builder", "Schema-driven Form Builder", "P2", "Hard", "Define a field schema, render controls dynamically and perform validation.")
+    ]},
+    { id:"dsa-patterns", track:"short", category:"dsa", name:"DSA · JavaScript practice", description:"Core interview patterns for full-stack engineering roles", ref:"https://leetcode.com/problem-list/xi4ci4ig/", refLabel:"LeetCode · Blind 75", items:[
+      q("d-arrays", "Arrays & hashing · Two Sum / Group Anagrams", "P0", "Easy", "Use maps and sets for constant-time lookups; clearly state time and space complexity."),
+      q("d-two", "Two pointers · Valid Palindrome / 3Sum", "P0", "Medium", "Use ordered pointers to reduce brute-force complexity and handle duplicates."),
+      q("d-window", "Sliding window · Longest Unique Substring", "P0", "Medium", "Maintain a movable window with a Map/Set and explain the invariant."),
+      q("d-binary", "Binary search · Rotated Sorted Array", "P1", "Medium", "Preserve boundaries and derive the elimination condition."),
+      q("d-stack", "Stacks · Valid Parentheses / Daily Temperatures", "P1", "Medium", "Choose an appropriate stack invariant and avoid unnecessary passes."),
+      q("d-list", "Linked lists · Reverse / Cycle Detection", "P1", "Medium", "Handle pointer changes, head/tail cases and fast/slow pointers."),
+      q("d-trees", "Trees · BFS / DFS / Validate BST", "P1", "Medium", "Traverse trees iteratively and recursively; reason about bounds and complexity."),
+      q("d-interval", "Intervals · Merge Intervals", "P1", "Medium", "Sort and merge overlapping ranges with clear boundary assumptions."),
+      q("d-graphs", "Graphs · Number of Islands", "P1", "Medium", "Model a grid as a graph, traverse with BFS/DFS and track visited nodes."),
+      q("d-dp", "Dynamic Programming · House Robber", "P2", "Medium", "Express recurrence and base cases before optimizing the DP space.")
+    ]},
+    { id:"lt-python", track:"long", category:"python", name:"Python · Language & APIs", description:"Production Python and FastAPI foundations", ref:"https://docs.python.org/3/tutorial/", refLabel:"Python · Official tutorial", items:[
+      q("l-python", "Python data model, typing and iterators", "P0", "Medium", "Understand generators, context managers, typing, dataclasses and object protocols."),
+      q("l-async", "asyncio, concurrency and the GIL", "P0", "Hard", "Explain cooperative async, thread/process tradeoffs and how to avoid blocking the event loop."),
+      q("l-fastapi", "FastAPI dependencies, middleware and validation", "P0", "Medium", "Build well-typed routes using dependency injection, models, exception handlers and middleware."),
+      q("l-auth", "Auth, permissions and secure API design", "P1", "Hard", "Build token- or session-based auth and enforce authorization at the resource boundary."),
+      q("l-testing", "pytest, integration tests and observability", "P1", "Medium", "Test database dependencies, write meaningful assertions and add structured logs.")
+    ]},
+    { id:"lt-database", track:"long", category:"database", name:"PostgreSQL · Data engineering", description:"SQL, performance, consistency and real-world schema design", ref:"https://www.postgresql.org/docs/current/", refLabel:"PostgreSQL · Documentation", items:[
+      q("l-sql", "Joins, subqueries and window functions", "P0", "Medium", "Write relational queries and explain the appropriate choice of join and window functions."),
+      q("l-index", "Indexes and EXPLAIN ANALYZE", "P0", "Hard", "Read query plans and choose indexes based on selectivity and query shape."),
+      q("l-txn", "Transactions, MVCC and isolation", "P0", "Hard", "Explain anomalies, isolation levels, locking and transaction boundaries."),
+      q("l-schema", "Schema design, constraints and migrations", "P1", "Medium", "Model relationships and use integrity constraints with safe schema evolution."),
+      q("l-redis", "Redis caching and invalidation", "P1", "Medium", "Choose cache patterns and TTLs, reason about stale results and failure modes.")
+    ]},
+    { id:"lt-ai", track:"long", category:"ai", name:"Applied AI · GenAI engineering", description:"LLM-backed applications, evaluation and deployment", ref:"https://huggingface.co/learn", refLabel:"Hugging Face · Learn", items:[
+      q("l-ml", "ML foundations and model evaluation", "P0", "Medium", "Understand train/validation/test splits, overfitting and meaningful task metrics."),
+      q("l-llm", "LLMs, tokens, embeddings and context windows", "P0", "Medium", "Explain embeddings, attention at a high level, sampling and context limits."),
+      q("l-rag", "Build and evaluate a RAG pipeline", "P0", "Hard", "Ingest documents, chunk, retrieve, rerank and evaluate answer grounding."),
+      q("l-tools", "Tool calling, workflows and reliability", "P1", "Hard", "Validate model outputs, handle tool errors and design bounded workflows."),
+      q("l-evals", "AI evaluation, safety and cost", "P1", "Hard", "Define test sets, monitor failure cases, track latency/cost and guard sensitive data.")
+    ]},
+    { id:"lt-systems", track:"long", category:"systems", name:"Systems · Architecture & scale", description:"Advanced system design and operating production software", ref:"https://github.com/donnemartin/system-design-primer", refLabel:"GitHub · System Design Primer", items:[
+      q("l-design", "API and service boundary design", "P0", "Medium", "Choose contracts, ownership boundaries, failure modes and idempotent endpoints."),
+      q("l-queues", "Queues, background workers and event-driven systems", "P1", "Hard", "Understand delivery guarantees, retries, deduplication and dead-letter queues."),
+      q("l-distributed", "Distributed systems and consistency", "P1", "Hard", "Reason about replication, consistency models, availability and partitions."),
+      q("l-observe", "Observability, tracing and SLOs", "P1", "Medium", "Define signals, instrument request paths and use SLOs for incident response."),
+      q("l-architecture", "Design and deploy a scalable production app", "P1", "Hard", "Explain caching, storage, rate limits, deployment and operational tradeoffs.")
+    ]}
+  ];
+  // Additions are data-only. Existing IDs and browser storage keys are unchanged.
+  modules.push(...[
+  {
+    "id": "js-theory-core",
+    "track": "short",
+    "category": "javascript",
+    "kind": "theory",
+    "name": "JavaScript · Language theory",
+    "description": "Explain scope, closures, this, prototypes, equality and references",
+    "ref": "https://www.greatfrontend.com/questions/javascript-interview-questions/quiz",
+    "refLabel": "GreatFrontEnd · JavaScript interview questions",
+    "items": [
+      {
+        "id": "jt-scope",
+        "title": "var, let, const and the temporal dead zone",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Compare scope, reassignment and how each declaration behaves when read before its declaration is evaluated.",
+        "answer": "var is function-scoped inside a function and initialized to undefined before its declaration executes. let and const are block-scoped and cannot be accessed before initialization (the temporal dead zone). const requires an initializer and prevents rebinding, not mutation of the value it refers to.",
+        "follow": "Can typeof throw for a name declared later in the same block?",
+        "ref": "https://javascript.info/closure"
+      },
+      {
+        "id": "jt-hoist",
+        "title": "Hoisting · function declarations vs expressions",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Why can you call a function declaration early but not a function expression assigned to a const?",
+        "answer": "A function declaration’s binding is initialized with the function before ordinary statements in its scope execute. A function expression produces a function when the expression is evaluated. With const or let, early access hits the TDZ. With var, the early value is undefined, so invoking it throws TypeError.",
+        "follow": "Explain the difference between the binding existing and being initialized.",
+        "ref": "https://javascript.info/function-expressions"
+      },
+      {
+        "id": "jt-closure",
+        "title": "Closures and lexical scope",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Define a closure using a counter factory, then explain why separate counters do not share state.",
+        "answer": "A function retains access to bindings in the lexical environment where it was created. Each factory call creates a separate environment, so two returned counters can retain separate state. A closure captures access to bindings, not a frozen copy of every value.",
+        "follow": "Why can an event listener keep otherwise unused data alive?",
+        "ref": "https://javascript.info/closure"
+      },
+      {
+        "id": "jt-this",
+        "title": "this, arrow functions, call, apply and bind",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Compare method calls, detached calls, explicit binding and arrow functions. Give one example of a callback losing its receiver.",
+        "answer": "For an ordinary method call obj.fn(), this is obj. A plain strict-mode call supplies undefined. call and apply invoke immediately, with positional arguments for call and an array-like list for apply. bind creates a new function with a fixed receiver for ordinary calls. Arrows use surrounding this, so call, apply and bind cannot change their this.",
+        "follow": "Does destructuring a method preserve its original receiver?",
+        "ref": "https://javascript.info/bind"
+      },
+      {
+        "id": "jt-prototype",
+        "title": "Prototype chain and property lookup",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Explain what happens when you read a missing own property. Distinguish an object's prototype from a constructor's .prototype.",
+        "answer": "Lookup checks own properties, then follows prototype links until a match or null. Object.getPrototypeOf(value) returns an object's actual prototype. For an ordinary constructor called with new, its .prototype normally becomes the new instance's prototype. Object.hasOwn tests own properties, while in checks the chain too.",
+        "follow": "If an object shadows an inherited data property, what can deleting the own property reveal?",
+        "ref": "https://javascript.info/prototype-inheritance"
+      },
+      {
+        "id": "jt-equality",
+        "title": "Equality · ==, === and Object.is",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "How do these three equality operations differ? Explain NaN and signed zero.",
+        "answer": "== can convert operands before comparing. === does not coerce and compares objects by identity. Object.is treats NaN as equal to itself and distinguishes +0 from -0. === does the opposite for those two cases. Use strict equality by default unless you deliberately need other semantics.",
+        "follow": "Why does NaN work as a key in a Map?",
+        "ref": "https://javascript.info/comparison"
+      },
+      {
+        "id": "jt-nullish",
+        "title": "null, undefined, undeclared and default values",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Distinguish the three cases, then decide when to use ?? instead of ||.",
+        "answer": "undefined often represents an absent value or an unprovided argument. null is often used for intentional absence. Reading an undeclared identifier throws ReferenceError, although typeof an unresolvable name returns 'undefined'. ?? falls back only for null and undefined, while || falls back for any falsy value.",
+        "follow": "What happens to 0, an empty string and false under each operator?",
+        "ref": "https://javascript.info/nullish-coalescing-operator"
+      },
+      {
+        "id": "jt-copy",
+        "title": "Reference identity and shallow vs deep copies",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Why does changing a nested property in a spread copy sometimes modify the original? How would you update it immutably?",
+        "answer": "Assignment copies the object reference value. An object spread copies own enumerable properties into a new outer object, but nested object values still reference the same objects. For an immutable update, copy each object along the changed path. structuredClone can deeply copy many data types, but it cannot clone functions.",
+        "follow": "When is sharing the untouched branches desirable?",
+        "ref": "https://javascript.info/object-copy"
+      },
+      {
+        "id": "jt-iteration",
+        "title": "for…in vs for…of and array iteration",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Which loop yields keys, which yields values, and why is for…in a poor default for arrays?",
+        "answer": "for…in yields enumerable string property keys, including inherited keys. for…of consumes an iterable’s values, such as array elements. Plain objects are not iterable by default. Use Object.entries for their own enumerable string-keyed entries, or for…of for array values.",
+        "follow": "How do a sparse slot and an extra named array property behave under each loop?",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of"
+      },
+      {
+        "id": "jt-arrays",
+        "title": "map, filter, reduce and forEach",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Pick the right method for transforming, selecting, aggregating or performing a side effect. When does reduce need an initial value?",
+        "answer": "map transforms items, filter retains matching items, reduce accumulates a result, and forEach calls a callback for side effects and returns undefined. Without an initial accumulator, reduce uses the first present element and throws if no present element exists. Use an explicit initial value when the accumulator type differs or input may be empty.",
+        "follow": "Why does awaiting forEach(async callback) not wait for its callbacks?",
+        "ref": "https://javascript.info/array-methods"
+      }
+    ]
+  },
+  {
+    "id": "js-theory-runtime",
+    "track": "short",
+    "category": "javascript",
+    "kind": "theory",
+    "name": "JavaScript · Runtime & browser theory",
+    "description": "Explain the event loop, promises, rate limiting and DOM event flow",
+    "ref": "https://www.greatfrontend.com/questions/javascript-interview-questions/quiz",
+    "refLabel": "GreatFrontEnd · JavaScript interview questions",
+    "items": [
+      {
+        "id": "jt-event",
+        "title": "Browser event loop · tasks and microtasks",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Describe the order of synchronous code, Promise reactions, queueMicrotask and a zero-delay timer in a browser.",
+        "answer": "The current synchronous work runs to completion. At a microtask checkpoint the browser drains the microtask queue, including newly queued microtasks, before starting the next task. Promise reactions and queueMicrotask are microtasks. Timers schedule tasks and a zero delay is not a guarantee of immediate execution.",
+        "follow": "How can a long chain of microtasks delay the next timer or rendering opportunity?",
+        "ref": "https://javascript.info/event-loop"
+      },
+      {
+        "id": "jt-chain",
+        "title": "Promise chains, error propagation and finally",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "What happens when then returns a value, returns a promise or throws? What does finally preserve?",
+        "answer": "Each then returns a new promise. A returned ordinary value fulfills it, a returned promise or thenable is adopted, and a thrown error rejects it. catch can recover by returning a value or propagate by throwing. A successful finally cleanup preserves the prior outcome, but throwing or returning a rejected promise in finally replaces it.",
+        "follow": "Why can forgetting return inside a then handler let the next step run too early?",
+        "ref": "https://javascript.info/promise-chaining"
+      },
+      {
+        "id": "jt-combine",
+        "title": "Promise.all vs allSettled vs any vs race",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Choose a combinator for all required results, partial results, first success and first settlement. Does any combinator cancel work?",
+        "answer": "all fulfills with input-ordered results or rejects when an input rejects. allSettled reports every outcome in input order. any fulfills on the first fulfillment or rejects with AggregateError if none fulfill. race follows the first settlement. None cancels the underlying operations.",
+        "follow": "How do these four methods behave with an empty iterable?",
+        "ref": "https://javascript.info/promise-api"
+      },
+      {
+        "id": "jt-await",
+        "title": "async/await, concurrency and errors",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "What does an async function return? When do awaits serialize work, and when can operations run concurrently?",
+        "answer": "An async function always returns a promise. await suspends that function’s continuation, not the thread. Starting a second operation only after awaiting the first serializes them. Independent operations can be started together, then awaited with Promise.all or another appropriate combinator. An awaited rejection is thrown at the await expression.",
+        "follow": "Why can return await matter inside a local try/catch?",
+        "ref": "https://javascript.info/async-await"
+      },
+      {
+        "id": "jt-debounce",
+        "title": "Debounce vs throttle",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Explain which you would use for a server-backed search input versus repeated scroll events. What do leading and trailing mean?",
+        "answer": "A trailing debounce waits for a quiet period, useful for search. A throttle limits invocation frequency while calls continue, which can suit scroll work. Leading runs at the start of a burst or interval and trailing may run after the delay. State your exact contract, including cancellation and which arguments are used.",
+        "follow": "Why can debouncing alone still allow a stale search response to win?",
+        "ref": "https://javascript.info/call-apply-decorators"
+      },
+      {
+        "id": "jt-delegate",
+        "title": "DOM event phases and delegation",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Distinguish target and currentTarget. Explain how a parent can handle clicks on items inserted later.",
+        "answer": "An event travels through capture toward the target, then through bubbling for events that bubble. target identifies where it originated in an ordinary DOM tree and currentTarget is where the current listener was registered. A delegated parent can find the relevant child with closest and verify it belongs inside the boundary. stopPropagation and preventDefault solve different problems.",
+        "follow": "What changes for focus, which does not bubble?",
+        "ref": "https://javascript.info/event-delegation"
+      }
+    ]
+  },
+  {
+    "id": "react-theory",
+    "track": "short",
+    "category": "react",
+    "kind": "theory",
+    "name": "React · Rendering & hooks theory",
+    "description": "Explain renders, reconciliation, keys, state, effects and performance",
+    "ref": "https://www.greatfrontend.com/react-interview-playbook/introduction",
+    "refLabel": "GreatFrontEnd · React interview playbook",
+    "items": [
+      {
+        "id": "rt-render",
+        "title": "Render vs commit and why components re-render",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "When does React call a component, and does every render change the DOM?",
+        "answer": "Rendering calls components to compute the next UI. Updates can be driven by a component’s state, a parent rendering or subscribed context. Committing applies the necessary DOM changes. A render does not imply the DOM changes, and render code should stay pure.",
+        "follow": "What would you measure before optimizing re-renders?",
+        "ref": "https://react.dev/learn/render-and-commit"
+      },
+      {
+        "id": "rt-snapshot",
+        "title": "State snapshots, batching and functional updates",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Why might several setCount(count + 1) calls in one handler increment only once? How would you increment three times?",
+        "answer": "The handler closes over one render’s count. Those calls queue the same replacement value, and React batches the event updates. Passing prev => prev + 1 queues updaters that each receive the preceding pending value, so three such updates add three.",
+        "follow": "What happens if the final queued update is a fixed replacement?",
+        "ref": "https://react.dev/learn/queueing-a-series-of-state-updates"
+      },
+      {
+        "id": "rt-keys",
+        "title": "Keys, reconciliation and component identity",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "How does React decide which state belongs to a list item? Why can index keys be wrong?",
+        "answer": "React uses element type and position within the parent, with keys identifying children among their siblings. Stable item IDs preserve state with an item across reordering. Index keys can attach local state to the wrong item after insertion or sorting. Changing a key intentionally resets that subtree.",
+        "follow": "Give a case where a changing key is the right way to reset a form.",
+        "ref": "https://react.dev/learn/preserving-and-resetting-state"
+      },
+      {
+        "id": "rt-hooks",
+        "title": "Rules of Hooks and custom hooks",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Why should useState and useEffect not be called conditionally? Does using one custom hook twice share its local state?",
+        "answer": "Ordinary Hooks must be called in a stable order at the top level of a function component or custom Hook, so React can match calls to state. A custom Hook shares stateful logic, not the state of separate calls. React’s special use API has different call-order rules.",
+        "follow": "How would you move a condition into an effect without conditionally calling the hook?",
+        "ref": "https://react.dev/reference/rules/rules-of-hooks"
+      },
+      {
+        "id": "rt-effects",
+        "title": "Effects, dependencies and cleanup",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Compare an omitted dependency list, [], and [id]. When should cleanup run?",
+        "answer": "An omitted list lets the effect run after every commit of the component. [] represents no reactive dependencies. [id] runs on mount and then when id changes by Object.is comparison. React cleans up the old setup before re-running it with new dependencies, and on unmount. Root Strict Mode adds a development-only setup/cleanup check.",
+        "follow": "What causes an object created during render to retrigger an effect?",
+        "ref": "https://react.dev/reference/react/useEffect"
+      },
+      {
+        "id": "rt-stale",
+        "title": "Stale closures and effect-driven fetches",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "How can a callback see old state, and how can an earlier fetch overwrite a newer result?",
+        "answer": "A callback captures the bindings from the render where it was created. Missing reactive dependencies can leave it using old data. For state based on prior state, a functional updater can help. For requests, cancel the old request or ignore stale results in cleanup so only the current request can update the UI.",
+        "follow": "Why is adding a debounce not sufficient to eliminate out-of-order responses?",
+        "ref": "https://react.dev/learn/synchronizing-with-effects"
+      },
+      {
+        "id": "rt-form",
+        "title": "Controlled vs uncontrolled inputs",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Who owns the current input value in each pattern? Which would you choose for live validation?",
+        "answer": "A controlled input reads its value from React and updates it synchronously in an onChange handler. An uncontrolled input keeps its current value in the DOM and can be initialized with defaultValue or defaultChecked. Controlled input state is convenient for live validation or value-dependent rendering.",
+        "follow": "Why should a text input not switch from undefined value to a string mid-lifecycle?",
+        "ref": "https://react.dev/reference/react-dom/components/input"
+      },
+      {
+        "id": "rt-ref",
+        "title": "useRef vs useState",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Choose between state and a ref for an on-screen counter, a timer ID and a DOM node.",
+        "answer": "State is for values that affect rendering. A ref object persists across renders and setting current does not request a render. Use a ref for an imperative value such as a timer ID or DOM node. Don’t use ref mutations as a hidden rendering input.",
+        "follow": "How would you clear a timer on unmount without making the timer ID state?",
+        "ref": "https://react.dev/reference/react/useRef"
+      },
+      {
+        "id": "rt-memo",
+        "title": "React.memo vs useMemo vs useCallback",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "What does each memoization tool cache or skip? Why might an inline object prop defeat memo?",
+        "answer": "memo can skip a component render due to unchanged props. By default it compares each prop with Object.is. useMemo caches a calculation result and useCallback caches a function identity while dependencies are unchanged. A newly created object has a new identity. Update correctness should not depend on memoization.",
+        "follow": "Can a memoized child still render when its own state or subscribed context changes?",
+        "ref": "https://react.dev/reference/react/memo"
+      },
+      {
+        "id": "rt-derived",
+        "title": "Derived state, lifting state and useReducer",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "Where should shared state live? Should a filtered list derived from props and a query be stored in state?",
+        "answer": "Place shared state at the closest common owner that needs to coordinate it. Derive the filtered list during render to avoid two sources of truth. useReducer can centralize related transitions when explicit actions make complex updates clearer. Context can pass data to descendants but does not replace the state model.",
+        "follow": "When would you intentionally initialize local draft state from a prop?",
+        "ref": "https://react.dev/learn/choosing-the-state-structure"
+      }
+    ]
+  },
+  {
+    "id": "js-output-core",
+    "track": "short",
+    "category": "javascript",
+    "kind": "output",
+    "name": "JavaScript · Language output drills",
+    "description": "Trace closures, receivers, prototypes, coercion and array edge cases",
+    "ref": "https://bigfrontend.dev/quiz",
+    "refLabel": "BFE.dev · JavaScript quizzes",
+    "items": [
+      {
+        "id": "jo-loops",
+        "title": "Loop callbacks and captured bindings",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Predict both lines and the number of bindings each loop creates for the callbacks.",
+        "code": "const first = [], second = [];\nfor (var i = 1; i <= 3; i++) first.push(() => i * 2);\nfor (let j = 1; j <= 3; j++) second.push(() => j * 2);\nconsole.log(first.map(fn => fn()).join(\" \"));\nconsole.log(second.map(fn => fn()).join(\" \"));",
+        "output": "8 8 8\n2 4 6",
+        "answer": "The first group shares i, which is 4 after its loop. The let loop gives each callback a different per-iteration binding.",
+        "ref": "https://javascript.info/closure"
+      },
+      {
+        "id": "jo-tdz",
+        "title": "Three typeof checks",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Predict each line. For the last check, name the error type if there is one.",
+        "code": "const value = \"outer\";\nfunction probe() {\n  console.log(typeof spare);\n  var spare = 7;\n  console.log(typeof notDeclaredHere);\n  try {\n    console.log(typeof value);\n    const value = 9;\n  } catch (error) {\n    console.log(error.name);\n  }\n}\nprobe();",
+        "output": "undefined\nundefined\nReferenceError",
+        "answer": "spare already exists with value undefined. typeof safely handles the missing name, but the inner value shadows the outer value and is still uninitialized. The first two printed values are strings.",
+        "ref": "https://javascript.info/closure"
+      },
+      {
+        "id": "jo-receiver",
+        "title": "Detached method vs explicit call",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Use strict-mode receiver rules. What does each invocation read?",
+        "code": "\"use strict\";\nconst profile = { name: \"Ada\", read() { return this?.name; } };\nconst read = profile.read;\nconst other = { name: \"Lin\", read };\nconsole.log(profile.read(), read(), other.read());\nconsole.log(read.call({ name: \"Kai\" }));",
+        "output": "Ada undefined Lin\nKai",
+        "answer": "The receiver is determined by the call site. The plain call gives undefined in strict mode, optional chaining returns undefined, and call supplies Kai’s object explicitly.",
+        "ref": "https://javascript.info/object-methods"
+      },
+      {
+        "id": "jo-arrow",
+        "title": "Arrow receiver vs a bound normal function",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Trace which call controls this in each case.",
+        "code": "function makeReaders() {\n  const arrow = () => this.city;\n  const normal = function () { return this.city; };\n  return [arrow, normal.bind({ city: \"Pune\" })];\n}\nconst [a, b] = makeReaders.call({ city: \"Nagpur\" });\nconsole.log(a.call({ city: \"Delhi\" }));\nconsole.log(b.call({ city: \"Delhi\" }));",
+        "output": "Nagpur\nPune",
+        "answer": "The arrow uses the this of makeReaders. The normal function’s bound receiver wins over a later explicit receiver supplied to the bound wrapper.",
+        "ref": "https://javascript.info/bind"
+      },
+      {
+        "id": "jo-iteration",
+        "title": "Array holes, named keys and inherited keys",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Predict both lines without treating for…in as an index loop.",
+        "code": "const list = [10, , 30];\nlist.note = \"extra\";\nconst proto = Object.create(Array.prototype);\nproto.inherited = \"parent\";\nObject.setPrototypeOf(list, proto);\nconst keys = [], values = [];\nfor (const key in list) keys.push(key);\nfor (const value of list) values.push(String(value));\nconsole.log(keys.join(\" \"));\nconsole.log(values.join(\" \"));",
+        "output": "0 2 note inherited\n10 undefined 30",
+        "answer": "for…in sees enumerable string keys up the prototype chain, but not absent indices or non-enumerable length. The array iterator reads numeric positions from zero through length minus one, yielding undefined for the missing index here.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in"
+      },
+      {
+        "id": "jo-spread",
+        "title": "Nested mutation after object spread",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "What values survive the mutation and subsequent replacement?",
+        "code": "const original = { prefs: { volume: 3 } };\nconst copy = { ...original };\ncopy.prefs.volume++;\ncopy.prefs = { ...copy.prefs, volume: 9 };\nconsole.log(original.prefs.volume, copy.prefs.volume);\nconsole.log(original.prefs === copy.prefs);",
+        "output": "4 9\nfalse",
+        "answer": "The first mutation uses the shared nested object. The later spread assigns a different nested object to copy only.",
+        "ref": "https://javascript.info/object-copy"
+      },
+      {
+        "id": "jo-defaults",
+        "title": "Nullish checks and destructuring defaults",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Predict which fallback applies to 0, null and a missing property.",
+        "code": "const source = { retries: 0, delay: null };\nconst { retries = 2, delay = 100, timeout = 200 } = source;\nconsole.log(retries, delay, timeout);\nconsole.log(retries || 5, retries ?? 5, delay ?? 5);",
+        "output": "0 null 200\n5 0 5",
+        "answer": "Destructuring defaults apply only to undefined, including a missing property. || falls back on a falsy value, while ?? falls back only on null or undefined.",
+        "ref": "https://javascript.info/destructuring-assignment"
+      },
+      {
+        "id": "jo-json",
+        "title": "JSON.stringify · object vs array",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Predict the serialized strings and the type of the top-level result.",
+        "code": "const sample = { keep: null, omit: undefined };\nconsole.log(JSON.stringify(sample));\nconsole.log(JSON.stringify([sample.omit, , sample.keep]));\nconsole.log(typeof JSON.stringify(sample.omit));",
+        "output": "{\"keep\":null}\n[null,null,null]\nundefined",
+        "answer": "Undefined object property values are omitted, while holes and undefined array entries serialize as null. Stringifying top-level undefined returns actual undefined rather than a JSON string.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify"
+      },
+      {
+        "id": "jo-sparse",
+        "title": "Sparse slots vs explicit undefined",
+        "priority": "P1",
+        "difficulty": "Hard",
+        "brief": "Predict the callback count, the slot test and the comparison after spreading.",
+        "code": "const list = [, undefined, 5];\nlet calls = 0;\nconst mapped = list.map(x => { calls++; return x ?? 0; });\nconsole.log(calls, 0 in mapped, 1 in mapped);\nconst spread = [...list];\nconsole.log(0 in spread, spread[0] === spread[1]);",
+        "output": "2 false true\ntrue true",
+        "answer": "map skips the absent slot and preserves the hole. Spreading an array consumes its iterator and writes undefined into the new array at index 0.",
+        "ref": "https://javascript.info/array-methods"
+      },
+      {
+        "id": "jo-parse",
+        "title": "When map supplies more than one argument",
+        "priority": "P1",
+        "difficulty": "Hard",
+        "brief": "Predict the line and identify which argument causes the surprise.",
+        "code": "const parts = [\"11\", \"11\", \"11\", \"11\"];\nconsole.log(parts.map(parseInt).join(\" \"));\nconsole.log(parts.map(part => parseInt(part, 10)).join(\" \"));",
+        "output": "11 NaN 3 4\n11 11 11 11",
+        "answer": "map passes (value, index, array). parseInt uses the index as its radix: 0 triggers radix inference, 1 is invalid, and the remaining values use base 2 and base 3.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map"
+      },
+      {
+        "id": "jo-equality",
+        "title": "Coercion, NaN and signed zero",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Predict both lines. Explain why the equality operations disagree.",
+        "code": "console.log(\"0\" == false, \"0\" === false, null == undefined);\nconsole.log(Object.is(NaN, NaN), NaN === NaN, Object.is(0, -0), 0 === -0);",
+        "output": "true false true\ntrue false false true",
+        "answer": "Loose equality converts false to numeric zero in the first comparison and has a specific null/undefined rule. Strict equality does not coerce. Object.is treats NaN as equal to itself and distinguishes the signs of zero.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness"
+      },
+      {
+        "id": "jo-map-keys",
+        "title": "Object keys vs Map keys",
+        "priority": "P1",
+        "difficulty": "Hard",
+        "brief": "Predict the lookup results and the Map size.",
+        "code": "const first = { id: 1 }, second = { id: 1 };\nconst dictionary = { [first]: \"A\", [second]: \"B\" };\nconst map = new Map([[first, \"A\"], [second, \"B\"], [NaN, \"C\"]]);\nconsole.log(dictionary[first], Object.keys(dictionary).length);\nconsole.log(map.get(first), map.get({ id: 1 }), map.get(NaN), map.size);",
+        "output": "B 1\nA undefined C 3",
+        "answer": "Both ordinary objects convert to the same property key string here. Map compares objects by identity, but it treats NaN as equal to NaN for key lookup.",
+        "ref": "https://javascript.info/map-set"
+      }
+    ]
+  },
+  {
+    "id": "js-output-async",
+    "track": "short",
+    "category": "javascript",
+    "kind": "output",
+    "name": "JavaScript · Async output drills",
+    "description": "Trace microtasks, promise identity, thenables and error recovery",
+    "ref": "https://bigfrontend.dev/quiz",
+    "refLabel": "BFE.dev · JavaScript quizzes",
+    "items": [
+      {
+        "id": "jo-event",
+        "title": "Promise chain vs queued microtasks and timer",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Assume a single browser task. Write each log in order.",
+        "code": "console.log(\"start\");\nsetTimeout(() => console.log(\"timer\"), 0);\nconst ready = new Promise(resolve => {\n  console.log(\"executor\");\n  resolve();\n});\nready.then(() => {\n  console.log(\"then 1\");\n  queueMicrotask(() => console.log(\"inner\"));\n}).then(() => console.log(\"then 2\"));\nqueueMicrotask(() => console.log(\"outer\"));\nconsole.log(\"end\");",
+        "output": "start\nexecutor\nend\nthen 1\nouter\ninner\nthen 2\ntimer",
+        "answer": "The executor runs inline. then 1 queues inner before the chained then 2 becomes eligible, but outer is already waiting ahead of both. The timer runs after the microtask queue drains.",
+        "ref": "https://javascript.info/event-loop",
+        "related": "https://bigfrontend.dev/quiz/1-promise-order"
+      },
+      {
+        "id": "jo-identity",
+        "title": "Async return vs Promise.resolve identity",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Predict all booleans. Compare object identity, not fulfillment values.",
+        "code": "const source = Promise.resolve(\"ok\");\nfunction direct() { return source; }\nasync function adopted() { return direct(); }\nasync function awaited() { return await direct(); }\nconsole.log(direct() === source, Promise.resolve(source) === source);\nconsole.log(adopted() === source, awaited() === source);\nconsole.log(adopted() === awaited(), adopted() === adopted());",
+        "output": "true true\nfalse false\nfalse false",
+        "answer": "The ordinary function returns the exact instance. Promise.resolve reuses this native promise with the same constructor. Every async-function call returns a fresh promise, even when it adopts the same outcome.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function",
+        "related": "https://bigfrontend.dev/quiz/async"
+      },
+      {
+        "id": "jo-thenable",
+        "title": "Thenable adoption vs queueMicrotask",
+        "priority": "P1",
+        "difficulty": "Hard",
+        "brief": "Assume modern browser scheduling. Which reaction is queued first?",
+        "code": "const thenable = {\n  then(resolve) {\n    console.log(\"adopt\");\n    resolve(7);\n  }\n};\nPromise.resolve(thenable).then(value => console.log(value));\nqueueMicrotask(() => console.log(\"microtask\"));\nconsole.log(\"sync\");",
+        "output": "sync\nadopt\nmicrotask\n7",
+        "answer": "The thenable’s then method runs in an adoption job. Fulfilling the promise there queues the reaction after the already queued microtask.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve"
+      },
+      {
+        "id": "jo-finally",
+        "title": "Recovery followed by a failing finally",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Predict what reaches the last catch. What does returning from the first catch do?",
+        "code": "Promise.reject(\"initial\")\n  .catch(reason => { console.log(reason); return \"recovered\"; })\n  .finally(() => { console.log(\"cleanup\"); throw new Error(\"late\"); })\n  .then(value => console.log(value))\n  .catch(error => console.log(error.message));",
+        "output": "initial\ncleanup\nlate",
+        "answer": "The first catch recovers with a fulfillment. The finally callback then throws, replacing that outcome with a rejection. The intervening fulfillment handler is skipped.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally"
+      },
+      {
+        "id": "jo-combine",
+        "title": "Promise.all result order vs completion",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "Assume a single browser task. Predict the logs and the order of all results.",
+        "code": "const slow = new Promise(resolve => setTimeout(() => {\n  console.log(\"slow finished\");\n  resolve(\"S\");\n}, 0));\nconst fast = Promise.resolve().then(() => {\n  console.log(\"fast finished\");\n  return \"F\";\n});\nPromise.all([slow, fast, 4]).then(items => console.log(items.join(\" \")));",
+        "output": "fast finished\nslow finished\nS F 4",
+        "answer": "The fast reaction is a microtask and runs before the timer. all accepts non-promises and places every fulfillment value in input order, not completion order.",
+        "ref": "https://javascript.info/promise-api"
+      },
+      {
+        "id": "jo-foreach",
+        "title": "Awaiting forEach with an async callback",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Promise.resolve() is already fulfilled. Predict the order without assuming that forEach waits.",
+        "code": "async function demo() {\n  await [1, 2].forEach(async id => {\n    await Promise.resolve();\n    console.log(\"item\", id);\n  });\n  console.log(\"after\");\n}\ndemo();\nconsole.log(\"end\");",
+        "output": "end\nitem 1\nitem 2\nafter",
+        "answer": "The two callback continuations happen to be queued before demo’s continuation. forEach still returns undefined, not the callbacks’ promises. If they wait on timers or network requests, after can appear first. Use for…of with await for sequential work or Promise.all with map for concurrency.",
+        "ref": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach"
+      }
+    ]
+  },
+  {
+    "id": "react-output",
+    "track": "short",
+    "category": "react",
+    "kind": "output",
+    "name": "React · Predict the behavior",
+    "description": "Trace state queues, stale snapshots, keys, effects and refs",
+    "ref": "https://react.dev/learn/state-as-a-snapshot",
+    "refLabel": "React · State as a snapshot",
+    "items": [
+      {
+        "id": "ro-queue",
+        "title": "Mixed state updates in one click",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Mount App, then click once. What logs during the handler, and what is the final button text?",
+        "code": "import { useState } from \"react\";\nexport default function App() {\n  const [n, setN] = useState(2);\n  return <button onClick={() => {\n    setN(n + 4);\n    setN(x => x * 3);\n    setN(n - 1);\n    setN(x => x + 8);\n    console.log(n);\n  }}>{n}<\/button>;\n}",
+        "output": "Console: 2\nButton: 9",
+        "answer": "The handler’s n stays 2. React applies the queue as replace with 6, multiply to 18, replace with 1, then add 8.",
+        "ref": "https://react.dev/learn/queueing-a-series-of-state-updates"
+      },
+      {
+        "id": "ro-snapshot",
+        "title": "A saved callback after a re-render",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Click Save and increment. Wait for the button to say 1, then click Replay. Predict the console output and final first-button text.",
+        "code": "import { useRef, useState } from \"react\";\nexport default function App() {\n  const [n, setN] = useState(0);\n  const saved = useRef(null);\n  return <>\n    <button onClick={() => {\n      saved.current = () => console.log(n);\n      setN(x => x + 1);\n    }}>Save and increment: {n}<\/button>\n    <button onClick={() => saved.current?.()}>Replay<\/button>\n  <\/>;\n}",
+        "output": "Console: 0\nFirst button: Save and increment: 1",
+        "answer": "The ref preserves the saved function, and that function closes over n from the earlier render. The state update does not rewrite the saved closure.",
+        "ref": "https://react.dev/learn/state-as-a-snapshot"
+      },
+      {
+        "id": "ro-key",
+        "title": "Changing a prop with or without a changing key",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Click A: 0 to increment it, then click Switch. Compare the first button if the marked key is removed and the same steps are repeated after a fresh mount.",
+        "code": "import { useState } from \"react\";\nfunction Counter({ label }) {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(x => x + 1)}>{label}: {n}<\/button>;\n}\nexport default function App() {\n  const [label, setLabel] = useState(\"A\");\n  return <>\n    <Counter key={label} label={label} />\n    <button onClick={() => setLabel(\"B\")}>Switch<\/button>\n  <\/>;\n}",
+        "output": "With key: B: 0\nWithout key: B: 1",
+        "answer": "A different key means a different component identity. Without key, the same type occupies the same position after the prop changes, so its state survives.",
+        "ref": "https://react.dev/learn/preserving-and-resetting-state"
+      },
+      {
+        "id": "ro-index",
+        "title": "Index keys after list reordering",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Click the first row, then Reverse. Predict the two row labels in order. What changes if you use key={item} instead?",
+        "code": "import { useState } from \"react\";\nfunction Row({ item }) {\n  const [n, setN] = useState(0);\n  return <button onClick={() => setN(x => x + 1)}>{item}: {n}<\/button>;\n}\nexport default function App() {\n  const [reverse, setReverse] = useState(false);\n  const items = reverse ? [\"B\", \"A\"] : [\"A\", \"B\"];\n  return <>\n    {items.map((item, i) => <Row key={i} item={item} />)}\n    <button onClick={() => setReverse(x => !x)}>Reverse<\/button>\n  <\/>;\n}",
+        "output": "Index keys: B: 1, A: 0\nItem keys: B: 0, A: 1",
+        "answer": "With index keys the count belongs to position identity, so B inherits the first row’s count. Item keys let state follow the items as they move.",
+        "ref": "https://react.dev/learn/rendering-lists"
+      },
+      {
+        "id": "ro-cleanup",
+        "title": "Effect setup and cleanup across commits",
+        "priority": "P0",
+        "difficulty": "Hard",
+        "brief": "Without development Strict Mode, mount, wait for effects, click Switch, wait for effects, then click Remove. List the console logs.",
+        "code": "import { useEffect, useState } from \"react\";\nfunction Room({ id }) {\n  useEffect(() => {\n    console.log(\"connect\", id);\n    return () => console.log(\"disconnect\", id);\n  }, [id]);\n  return <p>{id}<\/p>;\n}\nexport default function App() {\n  const [id, setId] = useState(\"A\");\n  const [show, setShow] = useState(true);\n  return <>\n    {show && <Room id={id} />}\n    <button onClick={() => setId(\"B\")}>Switch<\/button>\n    <button onClick={() => setShow(false)}>Remove<\/button>\n  <\/>;\n}",
+        "output": "connect A\ndisconnect A\nconnect B\ndisconnect B",
+        "answer": "The old cleanup closes over A and runs before the new B setup. Unmount then runs B’s cleanup.",
+        "ref": "https://react.dev/learn/synchronizing-with-effects"
+      },
+      {
+        "id": "ro-ref",
+        "title": "Ref changes without a render request",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "Click Count twice, then Show. What does the console print, and when does the Show button’s label change?",
+        "code": "import { useRef, useState } from \"react\";\nexport default function App() {\n  const hits = useRef(0);\n  const [shown, setShown] = useState(0);\n  return <>\n    <button onClick={() => console.log(++hits.current)}>Count<\/button>\n    <button onClick={() => setShown(hits.current)}>Show: {shown}<\/button>\n  <\/>;\n}",
+        "output": "Console: 1, then 2\nShow label: Show: 0 until Show is clicked, then Show: 2",
+        "answer": "Ref writes persist but do not request rendering. Show reads the current ref in an event handler and copies it into state, which updates the UI.",
+        "ref": "https://react.dev/reference/react/useRef"
+      }
+    ]
+  }
+]);
+  modules.push(...[
+  {
+    "id": "js-concepts",
+    "track": "short",
+    "category": "javascript",
+    "kind": "concept",
+    "name": "JavaScript · Applied concepts",
+    "description": "Debug real scenarios and explain the rule behind each fix.",
+    "ref": "https://javascript.info/",
+    "refLabel": "JavaScript.info",
+    "items": [
+      {
+        "id": "jc-receiver",
+        "title": "A callback works until you pass it",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "cart.checkout() works, but passing cart.checkout to a button’s click listener makes it read the wrong cart ID. Explain why the two invocations behave differently. Propose a fix that also lets you remove the listener later.",
+        "answer": "The direct call uses cart as its receiver. Passing cart.checkout passes only the function, not that receiver. A DOM event listener does not call it as cart.checkout(). Register a named wrapper that calls cart.checkout(), or bind the function once and store the result. To remove it, pass the same listener reference and capture setting.",
+        "points": [
+          "Identify which call controls this.",
+          "Preserve the receiver and keep the same function reference for removal."
+        ],
+        "follow": "Why won’t calling bind again inside removeEventListener remove the original listener?",
+        "ref": "https://javascript.info/bind"
+      },
+      {
+        "id": "jc-undo",
+        "title": "Undo snapshots that change retroactively",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A settings editor stores { ...settings } in an undo stack before editing settings.notifications.email. Undo restores the old outer object but not the old email preference. Explain what went wrong and how to update the setting without breaking history.",
+        "answer": "Spreading creates a new outer object, but settings.notifications is still shared. Mutating it changes what the history entry observes. Create a new settings object and a new notifications object with the changed email value. Reuse branches that were not changed and keep them immutable.",
+        "points": [
+          "Explain shallow copying and identify the shared nested reference.",
+          "Copy the changed path instead of blindly cloning every branch."
+        ],
+        "follow": "How would you test that the old history entry is unaffected?",
+        "ref": "https://javascript.info/object-copy"
+      },
+      {
+        "id": "jc-yield",
+        "title": "A loading spinner never paints",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A click handler shows a spinner and processes a large array in many small chunks. Each chunk uses queueMicrotask to schedule the next chunk. The spinner still doesn’t paint until processing ends. Why? Suggest one way to keep the UI responsive.",
+        "answer": "The browser drains queued microtasks, including new ones they enqueue, before it can move on to the next task or take a rendering opportunity. Repeated microtasks do not yield to rendering. Split the work across tasks with bounded chunks, or move heavy CPU work into a Web Worker and leave the main thread free for the UI.",
+        "points": [
+          "Distinguish yielding within a microtask checkpoint from yielding to a new task.",
+          "Offer a fix that lets the browser render and handle input."
+        ],
+        "follow": "Would replacing queueMicrotask with await Promise.resolve() fix this? Why?",
+        "ref": "https://javascript.info/event-loop"
+      },
+      {
+        "id": "jc-optional",
+        "title": "One failed widget blanks an entire dashboard",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A dashboard loads three independent widgets. If any request fails, a single catch around Promise.all replaces the entire dashboard with an error. Some widgets are optional. What would you change, what order would you expect the results in, and what happens to the other requests when one rejects?",
+        "answer": "Use Promise.allSettled and render from each result’s status, or handle optional failures per request while keeping required failures fatal. Both all and allSettled return results in input order when they fulfill. Rejecting the aggregate from all does not cancel the remaining operations. Explicit cancellation, if appropriate, is a separate choice.",
+        "points": [
+          "Choose an approach that preserves successful results.",
+          "Separate ordered results from settlement timing and cancellation."
+        ],
+        "follow": "How would you keep a per-widget Retry button from reloading every widget?",
+        "ref": "https://javascript.info/promise-api"
+      },
+      {
+        "id": "jc-catch",
+        "title": "The catch block that never catches",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "An async function wraps return loadAccount() in try/catch. Assume loadAccount returns a promise that rejects asynchronously. The caller sees a rejection instead of the fallback in catch. Explain why and how you would fix it.",
+        "answer": "Returning the promise lets the async function adopt its eventual rejection, but no exception is thrown while executing that try block. Write return await loadAccount() inside try so the rejection is thrown at the await expression and caught locally. A synchronous throw while calling loadAccount would already be caught by the original code.",
+        "points": [
+          "Distinguish a rejected promise from a synchronous throw.",
+          "Explain why awaiting inside the try lets the local catch run."
+        ],
+        "follow": "Where should the error be handled if only the caller knows the appropriate fallback?",
+        "ref": "https://javascript.info/async-await"
+      },
+      {
+        "id": "jc-delegate",
+        "title": "Clicking an icon does nothing",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A list uses one parent click listener. Its handler checks whether event.target matches button[data-row-id]. Clicking button text works, but clicking the SVG icon inside the same button does not. Explain the bug and propose a fix that also works when new rows are appended.",
+        "answer": "event.target may be a descendant like the SVG, while event.currentTarget is the parent with the delegated listener. For an Element target, use closest('button[data-row-id]'), then check that the matched button belongs to the intended parent. The same parent listener handles new rows through bubbling.",
+        "points": [
+          "Distinguish the original event target from the listener’s element.",
+          "Find the nearest matching button and check its boundary."
+        ],
+        "follow": "Why would stopping propagation in a nested widget affect this delegation?",
+        "ref": "https://javascript.info/event-delegation"
+      },
+      {
+        "id": "jc-cache",
+        "title": "A cache returns another object’s result",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "A memoization helper puts results in a plain object using input objects as keys. Different input objects keep overwriting one another. When would you use a Map, and when would you prefer a stable ID as the key?",
+        "answer": "The plain object coerces the keys into property keys. Ordinary objects commonly produce the same string key. A Map can key directly by object identity, so separate objects stay separate even if their fields match. A stable ID is a better key when distinct objects represent the same entity, provided that the ID captures all inputs relevant to the cached result or the cache is invalidated appropriately.",
+        "points": [
+          "Explain key coercion in a plain object.",
+          "Choose the key based on identity versus domain equivalence."
+        ],
+        "follow": "What changes if the input object is mutated after its result is cached?",
+        "ref": "https://javascript.info/map-set"
+      },
+      {
+        "id": "jc-debounce",
+        "title": "A debounced search still floods the API",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "A handler creates a new debounced function on every keystroke and immediately calls it. Each call eventually makes a request. Why didn’t debouncing help, and what would you do with the pending timer when the input disappears?",
+        "answer": "Every wrapper has its own timer state, so the wrappers do not cancel each other. Create one stable wrapper for the intended lifetime, pass the latest input as an argument, and cancel any pending invocation at teardown. Handle already-started requests separately if they can race or must be aborted.",
+        "points": [
+          "Identify one shared timer per debounced wrapper.",
+          "Distinguish cancelling a timer from cancelling in-flight requests."
+        ],
+        "follow": "When might throttling be a better fit than debouncing?",
+        "ref": "https://javascript.info/call-apply-decorators"
+      }
+    ]
+  },
+  {
+    "id": "react-concepts",
+    "track": "short",
+    "category": "react",
+    "kind": "concept",
+    "name": "React · Applied concepts",
+    "description": "Explain the state, identity and effect bugs behind real UI behavior.",
+    "ref": "https://react.dev/learn/",
+    "refLabel": "React · Learn",
+    "items": [
+      {
+        "id": "rc-derived",
+        "title": "Search results are always one render behind",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A list component keeps filteredRows in state and updates it in an effect whenever props.rows or query changes. The filter is fast and synchronous. Explain why a render can show the previous results and what you would change.",
+        "answer": "The component first renders using the old filteredRows, then the effect runs after commit and schedules another render. The filtered list is a pure function of rows and query, so compute it in render instead of storing a second source of truth. Consider memoizing only if the calculation is measurably expensive.",
+        "points": [
+          "Identify the extra render caused by storing derived state.",
+          "Keep rows and query as inputs and calculate the list during render."
+        ],
+        "follow": "Would a user-editable draft initialized from props be the same situation?",
+        "ref": "https://react.dev/learn/you-might-not-need-an-effect"
+      },
+      {
+        "id": "rc-updater",
+        "title": "Two increments become one",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "An event handler calls setCount(count + 1) twice. Product expects the count to go up by two. Explain why it goes up by one and how you would change the handler without forcing another render between updates.",
+        "answer": "Both calls read count from the same render snapshot and queue the same replacement value. Functional updates, setCount(n => n + 1) twice, queue two transformations that run in order on the pending state. Batching does not prevent multiple changes from composing when they are expressed as updaters.",
+        "points": [
+          "Explain the render snapshot and replacement updates.",
+          "Use functional updaters and explain why they compose."
+        ],
+        "follow": "If you queue a fixed value after both updaters, which update determines the result?",
+        "ref": "https://react.dev/learn/queueing-a-series-of-state-updates"
+      },
+      {
+        "id": "rc-keys",
+        "title": "A draft leaks into a different conversation",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A ChatPane holds its input draft in local state. Switching from Alice to Bob changes the recipient prop, but Alice’s unsent draft remains in the input. Explain why. How would you implement a fresh draft on switch? What if the product instead wants to preserve a separate draft for each recipient?",
+        "answer": "The same component type remains at the same tree position with the same identity, so changing a prop does not reset its local state. Use key={recipientId} on ChatPane to intentionally remount and reset it. For distinct retained drafts, lift draft state to a parent map keyed by recipient ID or store it elsewhere with the same identity.",
+        "points": [
+          "Explain how React preserves state across prop changes.",
+          "Distinguish resetting a subtree from retaining state by recipient."
+        ],
+        "follow": "Which other local state would a key change reset?",
+        "ref": "https://react.dev/learn/preserving-and-resetting-state"
+      },
+      {
+        "id": "rc-effect",
+        "title": "The wrong room keeps receiving updates",
+        "priority": "P0",
+        "difficulty": "Medium",
+        "brief": "A ChatRoom subscribes to a room in an effect. After switching from room A to B, the UI still receives messages for A. Walk through the expected subscription lifecycle and explain how you would check that the fix works in development.",
+        "answer": "Make the effect depend on the room ID and any other reactive subscription inputs. Return cleanup that unsubscribes the exact subscription created for that run. On a room change React cleans up the previous setup before running the new one, and cleans up on unmount. At the root, development Strict Mode can run an extra setup/cleanup cycle, so verify there is exactly one active subscription after mounting and switching.",
+        "points": [
+          "Use current dependencies and clean up the subscription that was actually created.",
+          "Test lifecycle behavior after setup, room changes and unmount."
+        ],
+        "follow": "How would you guard against an already-queued message from the room that was just closed?",
+        "ref": "https://react.dev/learn/synchronizing-with-effects"
+      },
+      {
+        "id": "rc-memo",
+        "title": "A memoized chart still re-renders",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "A memoized Chart receives options={{ theme }} and an inline callback from its parent. The parent re-renders while theme stays the same. Assume no React Compiler. Explain why prop memoization can miss, how you would confirm the cost, and how you might fix it.",
+        "answer": "The object and callback are new references on each parent render. By default memo compares each prop using Object.is. Measure with the React Profiler before optimizing. If it matters, pass simpler primitive props, move stable definitions out of the component, or stabilize values with useMemo and useCallback using their real dependencies.",
+        "points": [
+          "Explain referential equality rather than comparing object contents.",
+          "Propose a measured fix without hiding real prop changes."
+        ],
+        "follow": "Can Chart still re-render when its own state or subscribed context changes?",
+        "ref": "https://react.dev/reference/react/memo"
+      },
+      {
+        "id": "rc-selection",
+        "title": "A saved selection points to an outdated object",
+        "priority": "P1",
+        "difficulty": "Medium",
+        "brief": "A table stores selectedRow as an object in state. The data refreshes and the same row ID still exists, but its name changed. The detail pane shows the old name. What would you store instead, and what should happen if the row disappears entirely?",
+        "answer": "Store selectedId and look up the selected row in the current rows during render. That keeps the identity while displaying the latest data. Choose an explicit missing-row behavior, such as no detail pane or an unavailable message. If product wants permanent deselection when a row disappears, clear the ID with that data transition rather than silently resurrecting it later.",
+        "points": [
+          "Avoid duplicating a mutable snapshot of the current data.",
+          "Make the missing-row behavior intentional."
+        ],
+        "follow": "When would keeping the old snapshot be a legitimate product requirement?",
+        "ref": "https://react.dev/learn/choosing-the-state-structure"
+      }
+    ]
+  }
+]);
+  const moduleKind = mod => mod.kind || (mod.track === "short" ? "coding" : "study");
+  const allQuestions = modules.flatMap(m => m.items.map(item => ({...item, moduleId:m.id, track:m.track, category:m.category, kind:moduleKind(m)})));
+  const validIds = new Set(allQuestions.map(question => question.id));
+  const saved = storage.get(KEY_PROGRESS, {});
+  let checks = saved && typeof saved === "object" && !Array.isArray(saved) ? Object.fromEntries(Object.entries(saved).filter(([id,value]) => validIds.has(id) && value === true)) : {};
+  let track = "short";
+  let category = "all";
+  let format = "all";
+  let priority = "all";
+  let status = "all";
+  let search = "";
+  const openModules = new Set(["js-core", "machine-essential", "lt-python"]);
+  const openQuestions = new Set();
+  const revealed = new Set();
+  let toastTimer;
+  const querySystemTheme = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  let themePreference = storage.get(KEY_THEME, "dark");
+  if (!["light", "dark", "system"].includes(themePreference)) themePreference = "dark";
+  function applyTheme() {
+    const resolved = themePreference === "system" ? (querySystemTheme?.matches ? "dark" : "light") : themePreference;
+    root.dataset.theme = resolved;
+    $$('[data-theme-choice]').forEach(button => button.setAttribute("aria-pressed", String(button.dataset.themeChoice === themePreference)));
+  }
+  applyTheme();
+  querySystemTheme?.addEventListener?.("change", () => { if (themePreference === "system") applyTheme(); });
+  const escapeText = (s) => String(s).replace(/[&<>"']/g, x => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[x]));
+  const pct = (done, total) => total ? Math.round(done / total * 100) : 0;
+  const trackedQuestions = () => allQuestions.filter(q => q.track === track);
+  const filteredItems = m => m.items.filter(item => {
+    if (priority !== "all" && item.priority !== priority) return false;
+    if (status === "done" && !checks[item.id]) return false;
+    if (status === "todo" && checks[item.id]) return false;
+    const s = search.trim().toLowerCase();
+    const searchable = [item.title, item.brief, item.code, m.name, m.description].filter(Boolean).join(" ").toLowerCase();
+    return !s || s.split(/\s+/).every(term => searchable.includes(term));
+  });
+  function toast(message) {
+    const node = $("#cr-toast"); node.textContent = message; node.dataset.visible = "true";
+    clearTimeout(toastTimer); toastTimer = setTimeout(() => { node.dataset.visible = "false"; }, 2300);
+  }
+  function renderStats() {
+    const trackQuestions = trackedQuestions();
+    const done = trackQuestions.filter(item => checks[item.id]).length;
+    const essentialRemaining = trackQuestions.filter(item => item.priority === "P0" && !checks[item.id]).length;
+    $("#cr-stat-total").textContent = trackQuestions.length;
+    $("#cr-stat-done").textContent = done;
+    $("#cr-stat-p0").textContent = essentialRemaining;
+    $("#cr-stat-percent").textContent = `${pct(done, trackQuestions.length)}% complete`;
+    $("#cr-stat-rate").innerHTML = `${pct(done, trackQuestions.length)}<small>%</small>`;
+    $("#cr-total-bar").style.width = `${pct(done, trackQuestions.length)}%`;
+    $("#cr-sidebar-pct").textContent = `${pct(done, trackQuestions.length)}%`;
+    $("#cr-sidebar-bar").style.width = `${pct(done, trackQuestions.length)}%`;
+    $("#cr-sidebar-count").textContent = `${done} of ${trackQuestions.length} exercises completed`;
+    $("#cr-nav-all").textContent = allQuestions.filter(item => item.track === "short").length;
+  }
+  const queueBank = allQuestions.filter(item => item.kind === "concept");
+  const queueIds = new Set(queueBank.map(item => item.id));
+  const queueKey = "cr-roadmap-concept-queue-v1";
+  const storedQueue = storage.get(queueKey, {});
+  const scopeNames = ["all","javascript","react"];
+  const MAX_ANSWER = 8000;
+  const queueDrafts = Object.create(null);
+  const queueSubmitted = Object.create(null);
+  const queuePositions = Object.create(null);
+  let queueStatusTimer;
+  for (const item of queueBank) {
+    const draft = storedQueue?.drafts?.[item.id];
+    const submitted = storedQueue?.submitted?.[item.id];
+    if (typeof draft === "string") queueDrafts[item.id] = draft.slice(0,MAX_ANSWER);
+    if (typeof submitted === "string" && submitted.trim()) queueSubmitted[item.id] = submitted.slice(0,MAX_ANSWER);
+  }
+  for (const scope of scopeNames) {
+    const id = storedQueue?.positions?.[scope];
+    if (id === "summary" || queueIds.has(id)) queuePositions[scope] = id;
+  }
+  function queueItems() { return queueBank.filter(item => category === "all" || item.category === category); }
+  function queueItem(items = queueItems()) {
+    if (queuePositions[category] === "summary") return null;
+    return items.find(item => item.id === queuePositions[category]) || items.find(item => !queueSubmitted[item.id]) || items[0];
+  }
+  function storeQueue() {
+    return storage.set(queueKey, { drafts:queueDrafts, submitted:queueSubmitted, positions:queuePositions });
+  }
+  function showQueue(id) {
+    queuePositions[category] = id;
+    storeQueue();
+    renderQueue();
+    $("#cr-queue-title")?.focus();
+  }
+  function openQuestionInQueue(id) {
+    if (!queueIds.has(id)) return;
+    format = "concept";
+    queuePositions[category] = id;
+    storeQueue();
+    render();
+    $("#cr-queue-title")?.focus();
+  }
+  function renderQueue() {
+    clearTimeout(queueStatusTimer);
+    const node = $("#cr-concept-queue");
+    const items = queueItems();
+    const current = queueItem(items);
+    const answered = items.filter(item => queueSubmitted[item.id]).length;
+    const reviewed = items.filter(item => checks[item.id]).length;
+    const progress = `<div class="cr-queue-header"><p class="cr-queue-count">${answered} of ${items.length} answered · ${reviewed} reviewed</p></div>
+      <div class="cr-progress" role="progressbar" aria-label="Concept questions answered" aria-valuemin="0" aria-valuemax="${items.length}" aria-valuenow="${answered}"><span style="width:${pct(answered,items.length)}%"></span></div>`;
+    if (!current) {
+      node.innerHTML = `${progress}<h3 id="cr-queue-title" tabindex="-1">${answered === items.length ? "Round complete" : "End of the queue"}</h3>
+        <p class="cr-queue-prompt">${answered === items.length ? "You answered every question in this queue. You can still review or revise any answer." : "Skipped questions are still unanswered. Go back to them or revisit your earlier answers."}</p>
+        <div class="cr-queue-actions">${answered < items.length ? '<button type="button" class="cr-btn cr-btn--primary" data-queue-action="unanswered">Go to first unanswered</button>' : ""}
+        <button type="button" class="cr-btn" data-queue-action="first">Back to first question</button>
+        <button type="button" class="cr-btn" data-queue-action="prev">Previous question</button></div>`;
+      return;
+    }
+    const idx = items.indexOf(current);
+    const submitted = Boolean(queueSubmitted[current.id]);
+    const draft = queueDrafts[current.id] ?? queueSubmitted[current.id] ?? "";
+    const feedback = submitted ? `<section class="cr-queue-feedback" aria-labelledby="cr-queue-feedback-title">
+        <h4 id="cr-queue-feedback-title" tabindex="-1">Compare with a model answer</h4>
+        <p>${escapeText(current.answer)}</p>
+        <strong>What a strong answer covers</strong>
+        <ul>${current.points.map(point=>`<li>${escapeText(point)}</li>`).join("")}</ul>
+        <p><strong>Follow-up</strong> · ${escapeText(current.follow)}</p>
+        <div class="cr-queue-actions">
+          <a class="cr-ref-link" href="${escapeText(current.ref)}" rel="noopener noreferrer" target="_blank">Read the reference ${icon("external",true)}</a>
+          <button type="button" class="cr-btn" data-queue-action="review" aria-pressed="${Boolean(checks[current.id])}">${checks[current.id] ? "Reviewed · undo" : "Mark reviewed"}</button>
+        </div>
+      </section>` : "";
+    node.innerHTML = `${progress}
+      <div class="cr-queue-meta">
+        <span class="cr-tag">${current.category === "react" ? "React" : "JavaScript"}</span>
+        <span class="cr-tag ${current.priority === "P0" ? "cr-tag--p0" : ""}">${current.priority}</span>
+        <span class="cr-queue-count">Question ${idx+1} of ${items.length}</span>
+      </div>
+      <h3 id="cr-queue-title" tabindex="-1">${escapeText(current.title)}</h3>
+      <p class="cr-queue-prompt">${escapeText(current.brief)}</p>
+      <form id="cr-queue-form">
+        <label for="cr-queue-answer">Your answer</label>
+        <textarea id="cr-queue-answer" rows="5" maxlength="${MAX_ANSWER}" aria-describedby="cr-queue-save" placeholder="Explain what happens, why it happens, and how you would fix it."></textarea>
+        <p class="cr-queue-save-status" id="cr-queue-save" role="status"></p>
+        <div class="cr-queue-actions">
+          <button type="submit" class="cr-btn cr-btn--primary">${submitted ? "Save revised answer" : "Submit & compare"}</button>
+        </div>
+      </form>
+      ${feedback}
+      <div class="cr-queue-actions cr-queue-nav">
+        <button type="button" class="cr-btn" data-queue-action="prev" ${idx === 0 ? "disabled" : ""}>Previous</button>
+        <button type="button" class="cr-btn" data-queue-action="next">${submitted ? (idx === items.length-1 ? "View summary" : "Next question") : (idx === items.length-1 ? "Skip to summary" : "Skip for now")}</button>
+      </div>`;
+    $("#cr-queue-answer").value = draft;
+    $("#cr-queue-save").textContent = submitted && draft === queueSubmitted[current.id]
+      ? "Submitted for self-review. You can edit your answer."
+      : (draft ? "Draft restored." : "Your draft stays in this browser when local storage is available.");
+  }
+
+  $("#cr-concept-queue").addEventListener("input", event => {
+    if (event.target.id !== "cr-queue-answer") return;
+    const current = queueItem();
+    if (!current) return;
+    queueDrafts[current.id] = event.target.value.slice(0,MAX_ANSWER);
+    const saved = storeQueue();
+    clearTimeout(queueStatusTimer);
+    queueStatusTimer = setTimeout(() => {
+      const note = $("#cr-queue-save");
+      if (note) note.textContent = saved ? (queueSubmitted[current.id] ? "Revision saved as a draft." : "Draft saved.") : "Draft kept for this session only.";
+    }, 350);
+  });
+  $("#cr-concept-queue").addEventListener("submit", event => {
+    if (event.target.id !== "cr-queue-form") return;
+    event.preventDefault();
+    const current = queueItem();
+    if (!current) return;
+    const field = $("#cr-queue-answer");
+    if (!field.value.trim()) {
+      $("#cr-queue-save").textContent = "Write an answer before submitting, or skip this question.";
+      field.focus();
+      return;
+    }
+    queueSubmitted[current.id] = field.value.slice(0,MAX_ANSWER);
+    queueDrafts[current.id] = queueSubmitted[current.id];
+    queuePositions[category] = current.id;
+    const saved = storeQueue();
+    renderQueue();
+    if (!saved) $("#cr-queue-save").textContent = "Answer kept for this session only.";
+    $("#cr-queue-feedback-title")?.focus();
+  });
+  $("#cr-concept-queue").addEventListener("click", event => {
+    const button = event.target.closest("button[data-queue-action]");
+    if (!button) return;
+    const items = queueItems();
+    const current = queueItem(items);
+    const idx = items.indexOf(current);
+    switch (button.dataset.queueAction) {
+      case "next": showQueue(items[idx+1]?.id || "summary"); break;
+      case "prev": {
+        const previous = items[current ? idx-1 : items.length-1];
+        if (previous) showQueue(previous.id);
+        break;
+      }
+      case "first": if (items[0]) showQueue(items[0].id); break;
+      case "unanswered": {
+        const first = items.find(item => !queueSubmitted[item.id]);
+        if (first) showQueue(first.id);
+        break;
+      }
+      case "review":
+        if (!current || !queueSubmitted[current.id]) return;
+        if (checks[current.id]) delete checks[current.id]; else checks[current.id] = true;
+        storage.set(KEY_PROGRESS,checks);
+        renderStats(); renderQueue();
+        $('[data-queue-action="review"]')?.focus();
+        break;
+    }
+  });
+
+  function renderNav() {
+    $$('[data-track]').forEach(button => {
+      const active = button.dataset.track === track;
+      if (button.getAttribute("role") === "tab") button.setAttribute("aria-selected", String(active));
+      else if (active) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    });
+    $$('button[data-category]').forEach(button => {
+      if (track === "short" && category === button.dataset.category) button.setAttribute("aria-current", "page");
+      else button.removeAttribute("aria-current");
+    });
+    const isLong = track === "long";
+    $("#cr-format-bar").hidden = isLong;
+    $$("button[data-format]").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.format === format)));
+    $("#cr-review-note").textContent = ({
+      all: "Try explaining the rule or predicting the result before revealing the answer.",
+      theory: "Answer aloud, give an example, then compare with the model answer.",
+      concept: "Explain what happens and why. Submit to compare your reasoning. No automatic grading.",
+      output: "Trace the exact log order, error or visible UI before revealing the answer.",
+      coding: "Implement the requirements first, then test edge cases without hints."
+    })[format];
+    $("#cr-title").textContent = isLong ? "Engineering Growth Roadmap" : "JavaScript & React Interviews";
+    $("#cr-eyebrow").textContent = isLong ? "Long-term · Engineering depth" : "Short-term · Interview readiness";
+    $("#cr-lead").textContent = isLong
+      ? "Build durable career capital through Python, backend engineering, applied AI, databases and advanced system design."
+      : "Build your fundamentals with theory and output drills, then apply them in coding exercises and timed machine-coding rounds.";
+    $("#cr-crumb").textContent = isLong ? "Long-term Roadmap" : "Interview Practice";
+    $("#cr-section-heading").textContent = isLong ? "Beyond interview preparation" : format === "concept" ? "Concept practice" : "Practice library";
+    $("#cr-section-desc").textContent = isLong ? "Progress through foundational concepts and production engineering skills." : format === "concept" ? "Work through one scenario at a time. Use the sidebar to focus on JavaScript or React." : "Choose a practice format or search across the library.";
+  }
+  function renderDetails(mod, item) {
+    if (mod.kind === "concept") return `<p>${escapeText(item.brief)}</p><div class="cr-q-details-bottom"><button type="button" class="cr-btn" data-open-queue="${item.id}">Answer in queue</button></div>`;
+    const ref = escapeText(item.ref || mod.ref);
+    const refText = escapeText(item.ref ? new URL(item.ref).hostname : mod.refLabel);
+    const hasCode = Boolean(item.code);
+    const runNote = mod.category === "react"
+      ? "React · JSX with createRoot and no React Compiler. Follow the stated actions."
+      : "JavaScript · Evaluate as a fresh script in a modern browser.";
+    const snippet = hasCode ? `<p class="cr-ref-caption">${runNote}</p><pre class="cr-source-code" tabindex="0" role="region" aria-label="Quiz code"><code>${escapeText(item.code)}</code></pre>` : "";
+    const answer = item.answer ? `<details class="cr-answer" data-answer="${item.id}" ${revealed.has(item.id) ? "open" : ""}>
+      <summary>${hasCode ? "Reveal output and explanation" : "Reveal model answer"}</summary>
+      <div class="cr-answer-body">
+        ${hasCode ? `<pre class="cr-source-code"><code>${escapeText(item.output)}</code></pre>` : ""}
+        <p>${escapeText(item.answer)}</p>
+        ${item.follow ? `<p class="cr-follow"><strong>Follow-up</strong> · ${escapeText(item.follow)}</p>` : ""}
+      </div>
+    </details>` : "";
+    return `<p>${escapeText(item.brief)}</p>${snippet}${answer}<div class="cr-q-details-bottom"><span class="cr-ref-caption">Suggested reference</span>
+      <a class="cr-ref-link" href="${ref}" target="_blank" rel="noopener noreferrer">${refText} ${icon("external", true)}</a>
+      ${item.related ? `<a class="cr-ref-link" href="${escapeText(item.related)}" target="_blank" rel="noopener noreferrer">Related BFE.dev quiz ${icon("external", true)}</a>` : ""}
+    </div>`;
+  }
+  function renderModule(mod, visibleItems) {
+    const total = mod.items.length;
+    const done = mod.items.filter(item => checks[item.id]).length;
+    const expanded = openModules.has(mod.id);
+    const rows = expanded ? `<div class="cr-question-list">${visibleItems.map(item => {
+      const isOpen = openQuestions.has(item.id);
+      return `<div class="cr-question" id="cr-q-${item.id}" data-open="${isOpen}">
+        <div class="cr-question-row">
+          ${mod.kind === "concept" ? `<span class="cr-checkbox" role="img" aria-label="${checks[item.id] ? "Reviewed" : "Concept question"}">${icon(checks[item.id] ? "check" : "book",true)}</span>` : `<label class="cr-checkbox"><input type="checkbox" data-check="${item.id}" aria-label="Mark ${escapeText(item.title)} completed" ${checks[item.id] ? "checked" : ""}><span class="cr-check-ui">${icon("check", true)}</span></label>`}
+          <button type="button" class="cr-question-main" data-detail="${item.id}" aria-expanded="${isOpen}" aria-controls="cr-detail-${item.id}"><span class="cr-q-title ${checks[item.id] ? "cr-completed" : ""}">${escapeText(item.title)}</span><span class="cr-q-meta"><span class="cr-tag ${item.priority === "P0" ? "cr-tag--p0" : ""}">${item.priority}</span><span class="cr-tag">${item.difficulty}</span></span><span class="cr-q-chevron">${icon("chevron", true)}</span></button>
+        </div>
+        <div class="cr-q-details" id="cr-detail-${item.id}" ${isOpen ? "" : "hidden"}>${isOpen ? renderDetails(mod,item) : ""}</div>
+      </div>`;
+    }).join("")}</div>` : "";
+    return `<article class="cr-module" data-module-id="${mod.id}">
+      <div class="cr-module-header"><div class="cr-module-icon">${icon(({javascript:"code",react:"layers",machine:"terminal",dsa:"book",python:"code",database:"grid",ai:"activity",systems:"layers"})[mod.category] || "grid")}</div>
+      <div class="cr-module-labels"><div class="cr-module-name">${escapeText(mod.name)}</div><div class="cr-module-desc">${escapeText(mod.description)}</div></div>
+      <div class="cr-module-progress"><div class="cr-module-count">${done}/${total} done</div><div class="cr-progress"><span style="width:${pct(done,total)}%"></span></div></div>
+      <button type="button" class="cr-icon-btn" data-toggle-module="${mod.id}" aria-expanded="${expanded}" aria-label="${expanded ? "Collapse" : "Expand"} ${escapeText(mod.name)}">${icon("chevron")}</button></div>
+      ${rows}${expanded ? `<div class="cr-module-footer">${icon("book", true)} <span>Reference:</span> <a href="${mod.ref}" target="_blank" rel="noopener noreferrer">${escapeText(mod.refLabel)}</a> ${icon("external", true)}</div>` : ""}
+    </article>`;
+  }
+  function visibleRows() {
+    return modules.filter(mod => mod.track === track &&
+      (category === "all" || mod.category === category) &&
+      (format === "all" || moduleKind(mod) === format))
+      .map(mod => ({mod, items:filteredItems(mod)})).filter(row => row.items.length);
+  }
+  function openVisibleModules() { visibleRows().forEach(({mod}) => openModules.add(mod.id)); }
+  function renderModules() {
+    const visible = visibleRows();
+    const shown = visible.reduce((n,row) => n + row.items.length, 0);
+    $("#cr-match-count").textContent = `${shown} ${shown === 1 ? "exercise" : "exercises"} shown`;
+    $("#cr-module-stack").innerHTML = visible.length ? visible.map(({mod,items}) => renderModule(mod,items)).join("") : `<div class="cr-empty cr-glass"><div class="cr-empty-icon">${icon("search")}</div><h3>No exercises found</h3><p>Try a different keyword, format, priority or status filter.</p><button type="button" class="cr-btn" data-clear-filters>Clear filters</button></div>`;
+  }
+  function render() {
+    renderStats(); renderNav();
+    const inQueue = track === "short" && format === "concept";
+    $("#cr-next").hidden = inQueue;
+    $("#cr-library-filters").hidden = inQueue;
+    $("#cr-module-stack").hidden = inQueue;
+    $("#cr-concept-queue").hidden = !inQueue;
+    if (inQueue) renderQueue(); else renderModules();
+  }
+  function chooseTrack(next) {
+    if (next !== "short" && next !== "long") return;
+    track = next; category = "all"; resetFilters(); render();
+    $("#cr-scroll").scrollTop = 0;
+    closeSidebar();
+  }
+  function resetFilters() {
+    priority = "all"; status = "all"; search = ""; format = "all";
+    $("#cr-priority").value = "all"; $("#cr-status").value = "all"; $("#cr-search").value = "";
+  }
+  function setCheck(id, checked) {
+    if (!validIds.has(id)) return;
+    if (checked) checks[id] = true; else delete checks[id];
+    storage.set(KEY_PROGRESS, checks); render();
+    const input = root.querySelector(`[data-check="${id}"]`);
+    (input || $(`[data-toggle-module="${allQuestions.find(item => item.id === id)?.moduleId}"]`) || $("#cr-search")).focus({ preventScroll:true });
+  }
+  function closeSidebar() { root.dataset.sidebarOpen = "false"; $("#cr-menu").setAttribute("aria-expanded", "false"); }
+  function downloadMarkdown() {
+    const lines = ["# Engineering Roadmap — Practice Checklist", "", "Exported from Interview Practice. Progress is stored locally in your browser.", ""];
+    for (const mod of modules) {
+      lines.push(`## ${mod.track === "short" ? "Short term" : "Long term"} — ${mod.name}`, "");
+      mod.items.forEach(item => lines.push(`- [${checks[item.id] ? "x" : " "}] **${item.priority}** ${item.title}`));
+      lines.push("", `Reference: ${mod.ref}`, "");
+    }
+    const blob = new Blob([lines.join("\n")], {type:"text/markdown;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = "engineering-roadmap-checklist.md";
+    document.body.append(anchor); anchor.click(); anchor.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    toast("Checklist exported as Markdown");
+  }
+  root.addEventListener("click", (event) => {
+    const themeButton = event.target.closest("[data-theme-choice]");
+    if (themeButton) { themePreference = themeButton.dataset.themeChoice; storage.set(KEY_THEME, themePreference); applyTheme(); return; }
+    const navTrack = event.target.closest("button[data-track]");
+    if (navTrack) { chooseTrack(navTrack.dataset.track); return; }
+    const formatButton = event.target.closest("button[data-format]");
+    if (formatButton) {
+      format = formatButton.dataset.format;
+      if (["theory","output","concept"].includes(format) && ["machine","dsa"].includes(category)) category = "all";
+      if (format !== "concept" && (format !== "all" || search.trim())) openVisibleModules();
+      render();
+      return;
+    }
+    const navCategory = event.target.closest("button[data-category]");
+    if (navCategory) {
+      const previousFormat = format;
+      track = "short"; category = navCategory.dataset.category; resetFilters();
+      if (["javascript","react","all"].includes(category)) format = previousFormat;
+      if (format !== "all" && format !== "concept") openVisibleModules();
+      render(); $("#cr-scroll").scrollTop = 0; closeSidebar(); return;
+    }
+    const queued = event.target.closest("[data-open-queue]");
+    if (queued) { openQuestionInQueue(queued.dataset.openQueue); return; }
+    const expandModule = event.target.closest("[data-toggle-module]");
+    if (expandModule) { const id = expandModule.dataset.toggleModule; openModules.has(id) ? openModules.delete(id) : openModules.add(id); renderModules(); root.querySelector(`[data-toggle-module="${id}"]`)?.focus({preventScroll:true}); return; }
+    const expandDetail = event.target.closest("[data-detail]");
+    if (expandDetail) { const id = expandDetail.dataset.detail; openQuestions.has(id) ? openQuestions.delete(id) : openQuestions.add(id); renderModules(); root.querySelector(`[data-detail="${id}"]`)?.focus({preventScroll:true}); return; }
+    if (event.target.closest("[data-clear-filters]")) { resetFilters(); render(); $("#cr-search").focus(); }
+  });
+  root.addEventListener("toggle", (event) => {
+    const details = event.target;
+    if (!details.matches?.("details[data-answer]") || !root.contains(details)) return;
+    if (details.open) revealed.add(details.dataset.answer);
+    else revealed.delete(details.dataset.answer);
+  }, true);
+  root.addEventListener("change", (event) => {
+    if (event.target.matches("input[data-check]")) setCheck(event.target.dataset.check, event.target.checked);
+  });
+  $("#cr-search").addEventListener("input", event => { search = event.target.value; if (search.trim()) openVisibleModules(); renderModules(); });
+  $("#cr-priority").addEventListener("change", event => { priority = event.target.value; renderModules(); });
+  $("#cr-status").addEventListener("change", event => { status = event.target.value; renderModules(); });
+  $("#cr-menu").addEventListener("click", () => { const isOpen = root.dataset.sidebarOpen === "true"; root.dataset.sidebarOpen = String(!isOpen); $("#cr-menu").setAttribute("aria-expanded", String(!isOpen)); });
+  $("#cr-scrim").addEventListener("click", closeSidebar);
+  root.addEventListener("keydown", event => { if (event.key === "Escape" && root.dataset.sidebarOpen === "true") { closeSidebar(); $("#cr-menu").focus(); } });
+  $("#cr-export").addEventListener("click", downloadMarkdown);
+  $("#cr-next").addEventListener("click", () => {
+    const nextItems = visibleRows().flatMap(({mod,items}) => items.filter(item => !checks[item.id]).map(item => ({...item,moduleId:mod.id})));
+    const next = nextItems.find(item => item.priority === "P0") || nextItems[0];
+    if (!next) { toast("No unfinished exercises in this view."); return; }
+    if (queueIds.has(next.id)) { openQuestionInQueue(next.id); return; }
+    openModules.add(next.moduleId); openQuestions.add(next.id); revealed.delete(next.id); renderModules();
+    root.querySelector(`#cr-q-${next.id}`)?.scrollIntoView({ behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center" });
+    root.querySelector(`[data-detail="${next.id}"]`)?.focus({preventScroll:true});
+  });
+  $("#cr-reset").addEventListener("click", () => {
+    if (!window.confirm("Reset all completed exercises in both tracks? This cannot be undone.")) return;
+    checks = {}; storage.set(KEY_PROGRESS, checks); render(); toast("Progress reset"); closeSidebar();
+  });
+  render();
+  // Lightweight integration API for the host roadmap shell.
+  window.CodingRoadmap = {
+    mount: () => root,
+    setTrack: chooseTrack,
+    setTheme: (choice) => { if (["light","dark","system"].includes(choice)) { themePreference = choice; storage.set(KEY_THEME,choice); applyTheme(); } },
+    setLayout: (layout) => { if (["embedded","standalone"].includes(layout)) root.dataset.layout = layout; },
+    getProgress: () => ({ completed: Object.keys(checks).length, total: allQuestions.length }),
+    getExercises: () => allQuestions.map(({id,title,track,category,kind,priority,difficulty}) => ({id,title,track,category,kind,priority,difficulty,completed:!!checks[id]}))
+  };
+})();
+</script>
+</body>
+</html>
