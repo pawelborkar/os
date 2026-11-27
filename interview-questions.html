@@ -3,9 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="text-scale" content="scale">
   <meta name="color-scheme" content="dark light">
-  <meta name="description" content="A macOS Catalina-inspired JavaScript and React interview theory, applied concept practice, output quizzes and machine coding.">
-  <title>Interview Practice — Engineering Roadmap</title>
+  <meta name="theme-color" content="#09090b">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>JavaScript, React, Python, PostgreSQL &amp; AI Interview Questions | Engineering Practice Roadmap</title>
+  <meta name="description" content="Interactive engineering interview practice for JavaScript closures, promises and event-loop output drills, React hooks, frontend machine coding, Blind 75 DSA, Python &amp; FastAPI, PostgreSQL indexing, Applied AI RAG, and system design.">
+  <meta name="keywords" content="JavaScript interview questions, React interview questions, frontend machine coding problems, JavaScript event loop output quiz, React hooks stale closure reconciliation, Blind 75 DSA JavaScript, Python asyncio GIL FastAPI interview, PostgreSQL EXPLAIN ANALYZE indexing MVCC, RAG LLM tool calling evaluation interview, distributed systems design interview roadmap">
+  <link rel="canonical" href="https://os.pawel.in/interview-questions.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pawel's Trackers Hub">
+  <meta property="og:url" content="https://os.pawel.in/interview-questions.html">
+  <meta property="og:title" content="JavaScript, React, Python, PostgreSQL &amp; AI Interview Practice">
+  <meta property="og:description" content="Short-term and long-term interview prep across JS theory, React output drills, machine coding UI challenges, DSA patterns, Python/FastAPI, PostgreSQL, RAG, and system design.">
+  <meta property="og:image" content="https://dummyimage.com/1200x630/09090b/f8fafc&amp;text=Interview+Practice+Roadmap">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://os.pawel.in/interview-questions.html">
+  <meta name="twitter:title" content="JavaScript, React, Python, PostgreSQL &amp; AI Interview Practice">
+  <meta name="twitter:description" content="Theory, concept queue, predict-the-output drills, and machine coding roadmap for full-stack and AI engineering interviews.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Engineering Interview Practice — JavaScript, React, Python, PostgreSQL & Applied AI",
+    "url": "https://os.pawel.in/interview-questions.html",
+    "description": "Interactive interview preparation tracker covering JavaScript, React, frontend machine coding, DSA patterns, Python, FastAPI, PostgreSQL, Redis, Applied AI/RAG, and distributed systems.",
+    "keywords": [
+      "JavaScript interview questions",
+      "React hooks and output drills",
+      "Frontend machine coding LLD",
+      "Blind 75 DSA patterns",
+      "Python FastAPI interview prep",
+      "PostgreSQL indexing and MVCC",
+      "Applied AI RAG evaluation",
+      "System design interview"
+    ],
+    "about": [
+      "JavaScript",
+      "React",
+      "Frontend Machine Coding",
+      "Data Structures and Algorithms",
+      "Python",
+      "FastAPI",
+      "PostgreSQL",
+      "Redis",
+      "Applied AI and RAG",
+      "System Design"
+    ],
+    "hasPart": [
+      {
+        "@type": "WebPageElement",
+        "name": "JavaScript Core Utilities, Async & Output Drills",
+        "description": "Polyfills (map, filter, reduce, bind, debounce, throttle, deepClone, Promise.all), closures, TDZ, prototypes, event loop microtasks, and output prediction quizzes."
+      },
+      {
+        "@type": "WebPageElement",
+        "name": "React Hooks, State, Reconciliation & Behavior Drills",
+        "description": "Custom hooks (useDebounce, useFetch, useLocalStorage, useIntersectionObserver), state batching, stale closures, keys, effects cleanup, and memoization."
+      },
+      {
+        "@type": "WebPageElement",
+        "name": "Frontend Machine Coding & DSA Patterns",
+        "description": "Timed UI challenges including autocomplete, data table, file explorer, nested checkboxes, kanban, virtualized list, plus Blind 75 DSA patterns."
+      },
+      {
+        "@type": "WebPageElement",
+        "name": "Long-Term Python, PostgreSQL, Applied AI & Systems Track",
+        "description": "Python asyncio and GIL, FastAPI dependency injection, PostgreSQL EXPLAIN ANALYZE, B-tree indexes, MVCC, Redis caching, RAG pipelines, LLM evals, and distributed system design."
+      }
+    ]
+  }
+  </script>
   <style>
     /*
       PREMIUM GLASSMORPHISM ROADMAP · single-file standalone demo
@@ -40,16 +108,17 @@
       position: relative;
       width: 100%;
       min-height: 100vh;
-      min-height: 100svh;
-      overflow: hidden;
+      min-height: 100dvh;
+      overflow-x: clip;
       display: grid;
       place-items: center;
-      padding: 32px;
+      padding: 2rem;
       color: var(--cr-text);
       background: var(--cr-bg);
       font: 400 13px/1.5 -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overflow-wrap: break-word;
       color-scheme: dark;
     }
     
@@ -81,7 +150,10 @@
     .cr-app *, .cr-app *::before, .cr-app *::after { box-sizing: border-box; }
     .cr-app button, .cr-app input, .cr-app select, .cr-app textarea { font: inherit; }
     .cr-app button { color: inherit; cursor: pointer; }
-    .cr-app a { color: var(--cr-accent); text-decoration: none; transition: color 150ms ease; }
+    .cr-app a { color: var(--cr-accent); text-decoration: none; transition: color 150ms ease; overflow-wrap: anywhere; }
+    .cr-app code { overflow-wrap: anywhere; }
+    .cr-app h1, .cr-app h2, .cr-app h3, .cr-app h4 { text-wrap: balance; }
+    .cr-app p, .cr-app li { text-wrap: pretty; }
     .cr-app a:hover { color: var(--cr-text); }
     .cr-app :focus-visible { outline: 2px solid var(--cr-accent); outline-offset: 2px; }
     .cr-app svg { display: block; flex-shrink: 0; }
@@ -235,8 +307,8 @@
     .cr-h2 { margin: 0; font-size: 20px; line-height: 1.3; font-weight: 600; letter-spacing: -0.01em; }
     .cr-small { margin-top: 4px; font-size: 13px; color: var(--cr-secondary); }
     
-    .cr-segment { display: flex; align-items: center; padding: 4px; background: var(--cr-input); border: 1px solid var(--cr-border); border-radius: 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); }
-    .cr-segment button { min-height: 28px; background: transparent; border: 0; border-radius: 7px; padding: 4px 14px; font-size: 12px; font-weight: 500; color: var(--cr-secondary); transition: all 200ms ease; }
+    .cr-segment { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding: 4px; background: var(--cr-input); border: 1px solid var(--cr-border); border-radius: 10px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); max-width: 100%; }
+    .cr-segment button { min-height: 30px; background: transparent; border: 0; border-radius: 7px; padding: 5px 12px; font-size: 12px; font-weight: 500; color: var(--cr-secondary); transition: all 200ms ease; }
     .cr-segment button[aria-selected="true"], .cr-segment button[aria-pressed="true"] {
       color: var(--cr-text); background: var(--cr-elevated); font-weight: 600;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1), var(--cr-glass-inset);
@@ -249,18 +321,18 @@
     
     .cr-filters { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin: 20px 0; }
     .cr-search {
-      display: flex; align-items: center; gap: 10px; min-width: 240px; flex: 1 1 280px; height: 38px; border: 1px solid var(--cr-border);
+      display: flex; align-items: center; gap: 10px; min-width: 0; flex: 1 1 240px; min-height: 40px; border: 1px solid var(--cr-border);
       background: var(--cr-input); border-radius: 10px; padding: 0 14px; color: var(--cr-secondary); box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
       transition: all 200ms ease;
     }
     .cr-search:focus-within { border-color: var(--cr-accent); box-shadow: 0 0 0 3px var(--cr-selected); }
-    .cr-search input { width: 100%; min-width: 0; border: 0; background: none; color: var(--cr-text); outline: 0; font-size: 13px; }
+    .cr-search input { width: 100%; min-width: 0; border: 0; background: none; color: var(--cr-text); outline: 0; font-size: 14px; }
     .cr-search input::placeholder { color: var(--cr-secondary); }
     
     .cr-select {
-      height: 38px; padding: 0 32px 0 14px; color: var(--cr-text); border: 1px solid var(--cr-border); border-radius: 10px;
+      min-height: 40px; padding: 0 32px 0 14px; color: var(--cr-text); border: 1px solid var(--cr-border); border-radius: 10px;
       background-color: var(--cr-input); font-size: 13px; font-weight: 500; cursor: pointer;
-      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); transition: all 200ms ease;
+      box-shadow: inset 0 1px 2px rgba(0,0,0,0.05); transition: all 200ms ease; max-width: 100%;
     }
     .cr-select:focus-visible { border-color: var(--cr-accent); outline: none; box-shadow: 0 0 0 3px var(--cr-selected); }
     .cr-select option { background: var(--cr-bg); color: var(--cr-text); }
@@ -363,12 +435,31 @@
     .cr-queue-feedback ul { padding-inline-start: 24px; margin: 8px 0 12px; font-size: 14px; line-height: 1.6; }
     .cr-queue-nav { justify-content: space-between; margin-top: 24px; border-top: 1px solid var(--cr-border); padding-top: 20px; }
     
-    .cr-bottom-info { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 32px 4px 0; color: var(--cr-secondary); font-size: 12px; font-weight: 500; }
+    .cr-tech-overview {
+      margin-top: 28px;
+      padding: 18px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--cr-border);
+      background: var(--cr-subtle);
+    }
+    .cr-tech-overview h3 { margin: 0 0 8px; font-size: 14px; font-weight: 600; color: var(--cr-text); }
+    .cr-tech-overview p { margin: 0 0 12px; font-size: 13px; line-height: 1.6; color: var(--cr-secondary); }
+    .cr-tech-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cr-side-hub { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 20px 12px; }
+    .cr-side-pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 5px 10px; border-radius: 999px;
+      border: 1px solid var(--cr-border); background: var(--cr-elevated); font-size: 12px; font-weight: 500;
+      color: var(--cr-text) !important;
+    }
+    .cr-side-pill:hover { border-color: var(--cr-accent); }
+
+    .cr-bottom-info { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 16px; align-items: center; padding: 24px 4px 0; color: var(--cr-secondary); font-size: 12px; font-weight: 500; }
     .cr-bottom-info a { white-space: nowrap; }
+    .cr-bottom-links { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
     
     .cr-scrim { display: none; }
     .cr-toast {
-      position: absolute; right: 28px; bottom: 28px; background: var(--cr-surface); border: 1px solid var(--cr-border);
+      position: absolute; right: 28px; bottom: max(28px, env(safe-area-inset-bottom, 0px)); background: var(--cr-surface); border: 1px solid var(--cr-border);
       backdrop-filter: blur(20px) saturate(180%); -webkit-backdrop-filter: blur(20px) saturate(180%);
       box-shadow: 0 12px 32px rgba(0,0,0,0.2), var(--cr-glass-inset); color: var(--cr-text); border-radius: 12px; padding: 12px 18px;
       font-size: 13px; font-weight: 500; pointer-events: none; opacity: 0; transform: translateY(10px); transition: opacity 250ms ease, transform 250ms ease; z-index: 10;
@@ -383,52 +474,64 @@
     .cr-app[data-layout="embedded"] .cr-scroll { overflow: visible; }
     .cr-app[data-layout="embedded"] .cr-content { max-width: 100%; padding: 0; }
     
+    @media (pointer: coarse) {
+      .cr-app :where(button, select, input[type="search"], .cr-nav-item, .cr-btn, .cr-icon-btn, .cr-side-pill) {
+        min-height: 44px;
+      }
+      .cr-checkbox { width: 28px; height: 28px; }
+      .cr-checkbox::after { content: ""; position: absolute; inset: -8px; }
+      .cr-search input, .cr-select, .cr-queue textarea { font-size: 16px; }
+    }
+
     @media (max-width: 1100px) {
       .cr-sidebar { flex-basis: 220px; }
-      .cr-content { padding-inline: 32px; }
+      .cr-content { padding-inline: 28px; }
       .cr-stats { grid-template-columns: repeat(2, minmax(0,1fr)); }
     }
     @media (max-width: 768px) {
       .cr-app { padding: 0; }
-      .cr-window { height: 100svh; min-height: 0; width: 100%; border: 0; border-radius: 0; }
-      .cr-sidebar { position: absolute; left: 0; top: 0; bottom: 0; z-index: 6; width: min(300px, 85vw); transform: translateX(-105%); transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 16px 0 40px rgba(0,0,0,0.2); }
+      .cr-window { height: 100svh; height: 100dvh; min-height: 0; width: 100%; border: 0; border-radius: 0; }
+      .cr-sidebar { position: absolute; left: 0; top: 0; bottom: 0; z-index: 6; width: min(300px, 85vw); transform: translateX(-105%); transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1); box-shadow: 16px 0 40px rgba(0,0,0,0.2); padding-bottom: env(safe-area-inset-bottom, 0px); }
       .cr-app[data-sidebar-open="true"] .cr-sidebar { transform: translateX(0); }
       .cr-scrim { position: absolute; z-index: 5; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); }
       .cr-app[data-sidebar-open="true"] .cr-scrim { display: block; }
       .cr-menu { display: inline-flex !important; }
-      .cr-toolbar { padding: 0 20px; }
-      .cr-toolbar-left { gap: 12px; }
-      .cr-content { padding: 32px 24px 56px; }
-      .cr-heading-row { gap: 12px; }
-      .cr-heading-row .cr-btn { font-size: 0; gap: 0; width: 36px; height: 36px; padding: 0; }
-      .cr-heading-row .cr-btn svg { width: 18px; height: 18px; }
-      .cr-tracks-line { align-items: flex-start; gap: 12px; }
+      .cr-toolbar { padding: 0 16px; }
+      .cr-toolbar-left { gap: 10px; }
+      .cr-content { padding: 24px 18px max(48px, env(safe-area-inset-bottom, 0px)); }
+      .cr-heading-row { flex-wrap: wrap; gap: 12px; }
+      .cr-heading-row .cr-btn { margin-top: 0; }
+      .cr-tracks-line { flex-wrap: wrap; align-items: flex-start; gap: 12px; }
       .cr-q-meta { padding-left: 0; }
-      .cr-module-progress { width: 80px; }
+      .cr-module-progress { width: 84px; }
+      .cr-module-desc { white-space: normal; overflow: visible; text-overflow: clip; }
     }
     @media (max-width: 480px) {
-      .cr-stats { gap: 12px; }
-      .cr-stat { padding: 16px; }
+      .cr-stats { gap: 10px; }
+      .cr-stat { padding: 14px; }
       .cr-stat-number { font-size: 24px; }
       .cr-stat-label { font-size: 11px; white-space: normal; }
       .cr-h1 { font-size: 26px; }
-      .cr-toolbar-right { gap: 8px; }
-      .cr-toolbar-right .cr-btn { font-size: 0; width: 32px; padding: 0; }
+      .cr-content { padding: 20px 14px max(44px, env(safe-area-inset-bottom, 0px)); }
+      .cr-toolbar { padding: 0 12px; }
+      .cr-toolbar-right { gap: 6px; }
+      .cr-toolbar-right .cr-btn { font-size: 0; min-width: 40px; min-height: 40px; padding: 0; }
       .cr-breadcrumb { font-size: 12px; }
-      .cr-tracks-line { flex-wrap: wrap; }
       .cr-filters { gap: 8px; }
+      .cr-search { flex: 1 1 100%; }
       .cr-filter-note { width: 100%; margin-left: 0; }
-      .cr-select { flex: 1; }
-      .cr-module-header { gap: 12px; padding: 16px 14px; }
+      .cr-select { flex: 1 1 45%; min-width: 0; }
+      .cr-module-header { gap: 10px; padding: 14px 12px; }
       .cr-module-icon { width: 32px; height: 32px; }
-      .cr-module-progress { width: 60px; }
+      .cr-module-progress { width: 64px; }
       .cr-module-desc { font-size: 12px; }
-      .cr-question-row { padding: 12px 14px; }
-      .cr-q-details { margin-left: 42px; }
+      .cr-question-row { padding: 12px; gap: 10px; }
+      .cr-q-details { margin: 0 12px; padding: 14px 0 16px; }
       .cr-q-title { font-size: 13px; }
       .cr-q-meta { margin-left: 0; }
-      .cr-format-bar .cr-segment button { padding-inline: 10px; }
-      .cr-bottom-info { flex-wrap: wrap; }
+      .cr-format-bar .cr-segment { width: 100%; }
+      .cr-format-bar .cr-segment button { padding-inline: 10px; flex: 1 1 auto; }
+      .cr-toast { left: 12px; right: 12px; bottom: max(14px, env(safe-area-inset-bottom, 0px)); }
     }
     @media (prefers-reduced-transparency: reduce) {
       .cr-app .cr-glass, .cr-app .cr-window, .cr-app .cr-sidebar, .cr-app .cr-toolbar, .cr-app .cr-toast { backdrop-filter: none; -webkit-backdrop-filter: none; }
@@ -477,18 +580,21 @@
         <div class="cr-brand-logo"><svg class="cr-ico cr-ico--lg"><use href="#cr-i-code"/></svg></div>
         <div><div class="cr-brand-title">Engineering Roadmap</div><div class="cr-brand-sub">Interview readiness</div></div>
       </div>
+      <div class="cr-side-hub">
+        <a class="cr-side-pill" href="./index.html">← All Trackers</a>
+      </div>
       <div class="cr-nav-label">My roadmap</div>
       <nav class="cr-nav" aria-label="Roadmap tracks">
-        <button class="cr-nav-item" data-track="short" aria-current="page"><svg class="cr-ico"><use href="#cr-i-target"/></svg> Short-term track <span class="cr-trailing">2026</span></button>
-        <button class="cr-nav-item" data-track="long"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> Long-term track</button>
+        <button type="button" class="cr-nav-item" data-track="short" aria-current="page"><svg class="cr-ico"><use href="#cr-i-target"/></svg> Short-term track <span class="cr-trailing">2026</span></button>
+        <button type="button" class="cr-nav-item" data-track="long"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> Long-term track</button>
       </nav>
       <div class="cr-nav-label">Practice library</div>
       <nav class="cr-nav" aria-label="Interview practice categories">
-        <button class="cr-nav-item" data-category="all"><svg class="cr-ico"><use href="#cr-i-grid"/></svg> All exercises <span class="cr-trailing" id="cr-nav-all">—</span></button>
-        <button class="cr-nav-item" data-category="javascript"><svg class="cr-ico"><use href="#cr-i-code"/></svg> JavaScript</button>
-        <button class="cr-nav-item" data-category="react"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> React</button>
-        <button class="cr-nav-item" data-category="machine"><svg class="cr-ico"><use href="#cr-i-terminal"/></svg> Machine coding</button>
-        <button class="cr-nav-item" data-category="dsa"><svg class="cr-ico"><use href="#cr-i-book"/></svg> DSA patterns</button>
+        <button type="button" class="cr-nav-item" data-category="all"><svg class="cr-ico"><use href="#cr-i-grid"/></svg> All exercises <span class="cr-trailing" id="cr-nav-all">—</span></button>
+        <button type="button" class="cr-nav-item" data-category="javascript"><svg class="cr-ico"><use href="#cr-i-code"/></svg> JavaScript</button>
+        <button type="button" class="cr-nav-item" data-category="react"><svg class="cr-ico"><use href="#cr-i-layers"/></svg> React</button>
+        <button type="button" class="cr-nav-item" data-category="machine"><svg class="cr-ico"><use href="#cr-i-terminal"/></svg> Machine coding</button>
+        <button type="button" class="cr-nav-item" data-category="dsa"><svg class="cr-ico"><use href="#cr-i-book"/></svg> DSA patterns</button>
       </nav>
       <div class="cr-side-foot">
         <div class="cr-side-mini">
@@ -519,7 +625,7 @@
               <h1 class="cr-h1" id="cr-title">JavaScript &amp; React Interviews</h1>
               <p class="cr-lead" id="cr-lead">Build your fundamentals with theory and output drills, then apply them in coding exercises and timed machine-coding rounds.</p>
             </div>
-            <button class="cr-btn cr-btn--primary" id="cr-next"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-arrow"/></svg> Practice next</button>
+            <button type="button" class="cr-btn cr-btn--primary" id="cr-next"><svg class="cr-ico cr-ico--sm"><use href="#cr-i-arrow"/></svg> Practice next</button>
           </div>
         </div>
         
@@ -532,7 +638,7 @@
         
         <div class="cr-tracks-line">
           <div><h2 class="cr-h2" id="cr-section-heading">Practice library</h2><p class="cr-small" id="cr-section-desc">Choose a practice format or search across the library.</p></div>
-          <div class="cr-segment" role="tablist" aria-label="Roadmap horizon"><button id="cr-tab-short" role="tab" aria-selected="true" data-track="short">Short term</button><button id="cr-tab-long" role="tab" aria-selected="false" data-track="long">Long term</button></div>
+          <div class="cr-segment" role="tablist" aria-label="Roadmap horizon"><button type="button" id="cr-tab-short" role="tab" aria-selected="true" data-track="short">Short term</button><button type="button" id="cr-tab-long" role="tab" aria-selected="false" data-track="long">Long term</button></div>
         </div>
         
         <div class="cr-format-bar" id="cr-format-bar">
@@ -553,12 +659,41 @@
           <span class="cr-filter-note" id="cr-match-count" aria-live="polite"></span>
         </div>
         
-        <div class="cr-module-stack" id="cr-module-stack" aria-label="Coding modules"></div>
+        <div class="cr-module-stack" id="cr-module-stack" aria-label="Coding modules">
+          <noscript>
+            <article class="cr-tech-overview">
+              <h3>Interview Practice Curriculum</h3>
+              <p>Short-term interview track covers JavaScript polyfills (map, filter, reduce, debounce, throttle, bind, deepClone, Promise.all, event loop, closures, TDZ), React custom hooks and reconciliation drills, frontend machine coding (autocomplete, data table, file explorer, nested checkboxes, kanban, virtualized list), and Blind 75 DSA patterns. Long-term engineering track covers Python asyncio and GIL, FastAPI, PostgreSQL indexing, EXPLAIN ANALYZE and MVCC, Redis caching, Applied AI RAG pipelines and evaluations, and distributed system design.</p>
+            </article>
+          </noscript>
+        </div>
         <section class="cr-queue cr-glass" id="cr-concept-queue" aria-label="Concept practice queue" hidden></section>
+
+        <section class="cr-tech-overview" aria-labelledby="cr-tech-heading">
+          <h3 id="cr-tech-heading">Technologies &amp; Interview Topics Covered</h3>
+          <p>Switch between the short-term interview track and long-term engineering depth track to practice JavaScript internals, React rendering and hooks, timed frontend machine coding UI challenges, Blind 75 DSA patterns, Python &amp; FastAPI APIs, PostgreSQL query optimization &amp; MVCC, Redis caching, Applied AI RAG pipelines &amp; evaluations, and distributed system design.</p>
+          <div class="cr-tech-tags">
+            <span class="cr-tag">JavaScript &amp; Event Loop</span>
+            <span class="cr-tag">React Hooks &amp; Reconciliation</span>
+            <span class="cr-tag">Machine Coding UI LLD</span>
+            <span class="cr-tag">DSA Blind 75</span>
+            <span class="cr-tag">Python &amp; FastAPI</span>
+            <span class="cr-tag">PostgreSQL &amp; EXPLAIN ANALYZE</span>
+            <span class="cr-tag">Redis Caching</span>
+            <span class="cr-tag">Applied AI, LLMs &amp; RAG</span>
+            <span class="cr-tag">System Design &amp; SLOs</span>
+          </div>
+        </section>
         
         <div class="cr-bottom-info">
           <span>Progress is saved in this browser. Priorities reflect practice value, not measured interview frequency.</span>
-          <a href="https://www.greatfrontend.com/" target="_blank" rel="noopener noreferrer">Interview question bank ↗</a>
+          <div class="cr-bottom-links">
+            <a href="./index.html">All Trackers</a>
+            <a href="./backend.html">Backend Stack</a>
+            <a href="./auth.html">Auth Mastery</a>
+            <a href="./ai-product-engineer.html">AI Engineer</a>
+            <a href="https://www.greatfrontend.com/" target="_blank" rel="noopener noreferrer">Interview question bank ↗</a>
+          </div>
         </div>
       </div></div>
     </main>
